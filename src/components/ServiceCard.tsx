@@ -1,19 +1,24 @@
+"use client"
+
 import Image from 'next/image'
 import React from 'react'
 import { Separator } from './ui/separator'
+import { useRouter } from 'next/navigation'
 
 interface ServiceCardProps {
-    name: string
+    title: string
     icon: string
+    name: string
     
 }
 
-const ServiceCard = ({name, icon}: ServiceCardProps) => {
+const ServiceCard = ({title, icon, name}: ServiceCardProps) => {
+  const router = useRouter()
   return (
-    <div className='bg-white w-[308px] h-[310px] flex flex-col items-start justify-center pl-[22px]'>
+    <div className='bg-white w-[250px] h-[260px] flex flex-col items-start justify-center pl-[22px] cursor-pointer' onClick={()=> router.push(`/services/${name}`)}>
         <Image src={icon} alt='icon' width={32} height={32}/>
         <Separator className='my-4 max-w-[260px]'/>
-        <p className='max-w-[213px] font-bold text-2xl'>{name}</p>
+        <p className='max-w-[213px] font-bold text-xl text-DarkBlue'>{title}</p>
     </div>
   )
 }
