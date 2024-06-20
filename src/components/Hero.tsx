@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 const Hero = () => {
   const containerStyle = {
     position: 'relative',
-    height: '880px',
+    height: '100vh',
     backgroundImage: "url('/arkan_bg.svg')",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
@@ -30,7 +30,7 @@ const Hero = () => {
   return (
     <div style={containerStyle}>
       <div style={overlayStyle}></div>
-      <div style={contentStyle} className='flex flex-col gap-5 w-1/2 items-left justify-center ml-[72px] h-[800px]'>
+      <div style={contentStyle} className='flex flex-col gap-5 w-1/2 items-left justify-center ml-[72px] h-full'>
         <h1 className='font-bold text-[48px] text-WhiteDefault max-w-[500px]'>
           Mais que um seguro, uma <span className='text-Yellow'>parceria.</span>
         </h1>

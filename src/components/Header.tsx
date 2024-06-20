@@ -2,6 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
+import { services } from '@/data/services'
+import { cn } from '@/lib/utils'
+import { NavigationMenuDemo } from './NavigationMenu'
 
 const Header = () => {
   return (
@@ -10,8 +13,8 @@ const Header = () => {
 
         <div className='flex justify-center items-center gap-[65px] pr-[48px]'>
             <Link className='font-medium text-xl' href='/'>Home</Link>
+            <NavigationMenuDemo/>
             <Link className='font-medium text-xl' href='/sobre'>Sobre</Link>
-            <Link className='font-medium text-xl' href=''>Serviços</Link>
             <Link className='font-medium text-xl' href='/contatos'>Contatos</Link>
         </div>
     </div>
