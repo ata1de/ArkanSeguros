@@ -19,6 +19,8 @@ const config = {
         'LightBlue': '#198391',
         'DarkBlueGradiente': 'linear-gradient(to bottom, #091B2F, #0A111B)',
         'DarkBlue': '#091929',
+        'MediumBlue': '#102843',
+        'LightGray': '#D3D3D3',
         fontFamily: {
           sans: ["var(--font-sans)", ...fontFamily.sans],
         },

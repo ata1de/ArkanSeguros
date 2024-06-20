@@ -2,6 +2,7 @@ import { CarouselLoop } from "@/components/Carousel";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
+import Testimonials from "@/components/Testimonials";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { services } from "@/data/services";
 import Image from "next/image";
@@ -43,6 +44,8 @@ export default function Home() {
       </div>
 
       <CarouselLoop/>
+
+      <Testimonials/>
 
 
     </>
