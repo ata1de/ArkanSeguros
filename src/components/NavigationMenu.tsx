@@ -23,7 +23,7 @@ export function NavigationMenuDemo() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Serviços</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-GrayBlue lg:text-DarkBlue">Serviços</NavigationMenuTrigger>
           <NavigationMenuContent >
             <ul className="grid w-[300px] h-[420px] max-[1024px]:overflow-scroll gap-3 p-4 md:h-[420px] md:w-[350px] md:grid-cols-2 lg:w-[420px] ">
               {services.map((service) => (

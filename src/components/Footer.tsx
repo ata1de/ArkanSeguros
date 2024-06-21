@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { Separator } from './ui/separator'
+import Link from 'next/link'
 
 const Footer = () => {
   return (
@@ -16,9 +17,15 @@ const Footer = () => {
                 </div>
                 <div>
                     <p className='font-bold text-center md:text-right text-WhiteDefault'>Redes Sociais</p>
-                    <p className='text-LightGray text-center md:text-right'>Instagram</p>
-                    <p className='text-LightGray text-center md:text-right'>Whatsapp</p>
-                    <p className='text-LightGray text-center md:text-right'>Linkedin</p>    
+                    <Link href='https://www.instagram.com/arkanseguros/' target='_blank' className='no-underline'>
+                        <p className='text-LightGray text-center md:text-right'>Instagram</p>
+                    </Link>
+                    <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline'>
+                        <p className='text-LightGray text-center md:text-right'>Whatsaap</p>
+                    </Link>
+                    <Link href='https://www.instagram.com/arkanseguros/' target='_blank' className='no-underline'>
+                        <p className='text-LightGray text-center md:text-right'>Linkedin</p>
+                    </Link>    
                 </div>
             </div>
         </div>

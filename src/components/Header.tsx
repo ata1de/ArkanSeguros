@@ -25,22 +25,22 @@ const Header = () => {
         <SheetTrigger asChild>
           <MenuIcon className='block lg:hidden cursor-pointer mr-[48px]' size={28} />
         </SheetTrigger>
-        <SheetContent className='bg-GrayBlue'>
+        <SheetContent className='bg-MediumBlue'>
           <SheetHeader>
-            <SheetTitle className='flex gap-2'>
-              <Image src="/arkan.svg" alt="Logo" width={153} height={54} />
-              <p className='uppercase text-2xl text-Yellow font-bold font-sans'>ARKAN</p>
+            <SheetTitle className='flex gap-2 items-center'>
+              <Image src="/arkan_logo_dark.svg" alt="Logo" width={100} height={54} />
+              {/* <p className='uppercase text-2xl text-Yellow font-bold font-sans'>ARKAN</p> */}
             </SheetTitle>
-            <SheetDescription>
+            <SheetDescription className='text-left'>
               Browse our site through this area.
             </SheetDescription>
             <Separator className='w-auto'/>
           </SheetHeader>
           <div className='justify-center flex flex-col my-5 gap-5'>
-            <Link className='font-medium text-xl' href='/'>Home</Link>
+            <Link className='font-medium text-xl text-GrayBlue' href='/'>Home</Link>
             <NavigationMenuDemo/>
-            <Link className='font-medium text-xl' href='/sobre'>Sobre</Link>
-            <Link className='font-medium text-xl' href='/contatos'>Contatos</Link>
+            <Link className='font-medium text-xl text-GrayBlue' href='/sobre'>Sobre</Link>
+            <Link className='font-medium text-xl text-GrayBlue' href='/contatos'>Contatos</Link>
           </div>
         </SheetContent>
     </Sheet>
