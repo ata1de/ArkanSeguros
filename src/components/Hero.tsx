@@ -4,7 +4,8 @@ import Link from 'next/link';
 
 interface HeroInterface {
   title: string,
-  lastWordSubTitle: string
+  lastWordSubTitle: string,
+  bgUrl: string
 }
 
 function findWord(service: string){
@@ -31,11 +32,12 @@ function findWord(service: string){
   }
 }
 
-const Hero = ({title, lastWordSubTitle }: HeroInterface) => {
+const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
+  console.log(bgUrl)
   const containerStyle = {
     position: 'relative',
     height: '100vh',
-    backgroundImage: "url('/arkan_bg.svg')",
+    backgroundImage: `url(${bgUrl})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

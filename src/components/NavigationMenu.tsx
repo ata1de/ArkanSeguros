@@ -30,7 +30,7 @@ export function NavigationMenuDemo() {
                 <ListItem
                   key={service.name}
                   title={service.title}
-                  href={`services/${service.name}`}
+                  href={`/services/${service.name}`}
                 >
                   {service.description}
                 </ListItem>

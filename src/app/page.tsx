@@ -22,7 +22,7 @@ export default function Home() {
     <>
       <Header/>
 
-      <Hero title="Mais que um seguro, uma parceria" lastWordSubTitle=""/>
+      <Hero title="Mais que um seguro, uma parceria" lastWordSubTitle="" bgUrl="/arkan_bg.svg"/>
 
       <div className="bg-WhiteDefault rounded-lg mb-7">
         <div id='sobre' className='flex items-center justify-start  min-[1550px]:justify-center gap-12 py-20 px-8 sm:px-24'>
