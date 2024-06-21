@@ -12,7 +12,9 @@ import { Separator } from './ui/separator'
 const Header = () => {
   return (
     <div className='flex justify-between items-center bg-WhiteDefault h-[112px]'>
-        <Image className='ml-[72px]' src="/arkan.svg" alt="Logo" width={153} height={54} />
+        <Link href='/'>
+          <Image className='ml-[72px]' src="/arkan.svg" alt="Logo" width={153} height={54} />
+        </Link>
 
         <div className='hidden lg:flex justify-center items-center gap-[65px] pr-[48px]'>
             <Link className='font-medium text-xl' href='/'>Home</Link>

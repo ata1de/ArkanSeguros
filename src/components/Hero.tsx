@@ -2,7 +2,36 @@ import React from 'react';
 import { Button } from './ui/button';
 import Link from 'next/link';
 
-const Hero = () => {
+interface HeroInterface {
+  title: string,
+  lastWordSubTitle: string
+}
+
+function findWord(service: string){
+  switch(service) {
+    case "plano-de-saude":
+      return 'sua saúde'
+    case "seguros-automotivos":
+      return 'seu automóvel'
+    case "plano-odontologico":
+      return 'seu sorriso'
+    case "certificados-digitais":
+      return 'seu certificado'
+    case "seguros-prediais":
+      return 'seu seguro'
+    case "seguro-de-vida":
+      return 'sua vida'
+    case "seguros-equipamentos-maquinas":
+      return 'seus ativos'
+    case "protecao-veicular":
+      return 'seu veiculo'
+
+    default:
+      return 'sua empresa'
+  }
+}
+
+const Hero = ({title, lastWordSubTitle }: HeroInterface) => {
   const containerStyle = {
     position: 'relative',
     height: '100vh',
@@ -27,15 +56,24 @@ const Hero = () => {
     zIndex: 2,
     color: 'white',
   };
+  // ####################################### titulo dinamico ##############################
+  const listTitle = title.split(' ')
+  const lenghtListTitle = listTitle.length
+  const lastWord = listTitle[lenghtListTitle -1]
+  const newTitleWithoutLastWord = listTitle.slice(0, lenghtListTitle-1).join(' ')
+  // ##########################################################################################
 
+  console.log(title)
+
+  const subTitleLastWord = findWord(lastWordSubTitle)
   return (
     <div style={containerStyle}>
       <div style={overlayStyle}></div>
       <div style={contentStyle} className='flex flex-col gap-5 w-1/2 items-left justify-center ml-[72px] h-full'>
         <h1 className='font-bold text-[48px] text-WhiteDefault max-w-[500px]'>
-          Mais que um seguro, uma <span className='text-Yellow'>parceria.</span>
+          {newTitleWithoutLastWord} <span className='text-Yellow'>{lastWord}.</span>
         </h1>
-        <p className='font-normal text-[24px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & a <span className='text-Yellow'>sua empresa.</span></p>
+        <p className='font-normal text-[24px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & <span className='text-Yellow'>{subTitleLastWord}.</span></p>
         <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline'>
           <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl'>Entrar em contato</Button>
         </Link>
