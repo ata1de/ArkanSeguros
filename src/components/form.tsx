@@ -32,11 +32,11 @@ const Forms = () => {
     }
 
   return (
-    <div className='bg-LightBlue h-[700px] flex flex-col justify-center items-center pt-[65px]'>
-        <p className='font-bold text-[72px] text-white mb-5'>Fale com a <span className='border-b-4 border-Yellow'>Arkan</span></p>
+    <div className='bg-LightBlue min-h-[700px] flex flex-col justify-center items-center pt-[65px]'>
+        <p className='font-bold text-[72px] text-white mb-5 max-[598px]:text-center'>Fale com a <span className='border-b-4 border-Yellow'>Arkan</span></p>
 
         <form onSubmit={handleSubmit(handleClient)} className='flex flex-col justify-center items-center gap-2 w-[210px] md:w-[310px] lg:w-[908px]'>
-                <div className='flex items-center justify-center gap-6 mb-8'>
+                <div className='flex max-[465px]:flex-col items-center justify-center gap-6 mb-8'>
                     <div className='flex flex-col items-center justify-center gap-8'>
                         <div className='flex flex-col gap-3 items-start'>
                             <Label className='text-white text-right'>Nome</Label>
@@ -78,13 +78,13 @@ const Forms = () => {
                 <div className='flex flex-col gap-3 items-start mb-6'>
                     <Label className='text-white'>Demanda</Label>
                     <Textarea
-                        className={`text-black resize-none h-[150px] w-[428px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500' : ''}`}
+                        className={`text-black resize-none h-[150px] w-[350px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500' : ''}`}
                         placeholder='Escreva o serviço que você deseja, detalhe o quanto puder.'
                         {...register('demand')}
                     />
                 </div>
     
-                <Button className='bg-Yellow w-[241px] ml-auto rounded-full' type='submit'>ENVIAR</Button>
+                <Button className='bg-Yellow w-[241px] ml-auto rounded-full max-[598px]:mb-5' type='submit'>ENVIAR</Button>
             </form>
             <div id="sonner-toaster">
                 <Toaster />

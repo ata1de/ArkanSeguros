@@ -35,7 +35,7 @@ export const services = [
     },
     {
         name: "seguros-equipamentos-maquinas",
-        title: "Seguros de Equipamentos e Máquinas",
+        title: "Seguros de Máquinas",
         subtitle: "Proteção para seus ativos",
         url_bg: "/assets/images/services/seguros-equipamentos-maquinas-bg.jpg",
         icon: "/icons/icon_teeth.svg",
