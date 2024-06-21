@@ -41,7 +41,7 @@ const Forms = () => {
                         <div className='flex flex-col gap-3 items-start'>
                             <Label className='text-white text-right'>Nome</Label>
                             <Input
-                                className={`text-black w-[100px] md:w-[150px] lg:w-[440px] ${errors.name ? 'border-red-500' : ''}`}
+                                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.name ? 'border-red-500' : ''}`}
                                 placeholder='Digite seu nome'
                                 {...register('name')}
                             />
@@ -49,7 +49,7 @@ const Forms = () => {
                         <div className='flex flex-col gap-3 items-start'>
                             <Label className='text-white text-right'>Email</Label>
                             <Input
-                                className={`text-black w-[100px] md:w-[150px] lg:w-[440px] ${errors.email ? 'border-red-500' : ''}`}
+                                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.email ? 'border-red-500' : ''}`}
                                 placeholder='Digite seu email'
                                 {...register('email')}
                             />
@@ -59,7 +59,7 @@ const Forms = () => {
                         <div className='flex flex-col gap-3 items-start'>
                             <Label className='text-white text-right'>Telefone</Label>
                             <Input
-                                className={`text-black w-[100px] md:w-[150px] lg:w-[440px] ${errors.phone ? 'border-red-500' : ''}`}
+                                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500' : ''}`}
                                 placeholder='(00) 00000-0000'
                                 {...register('phone')}
                             />
@@ -67,7 +67,7 @@ const Forms = () => {
                         
                         <div className='flex flex-col gap-3 items-start'>
                             <Label className='text-white text-right'>Pessoa Jurídica/Física</Label>
-                            <select className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[100px] md:w-[150px] lg:w-[440px] ${errors.phone ? 'border-red-500' : ''}`}>
+                            <select className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500' : ''}`}>
                                 <option  {...register('peopleType')} value='cpf'>Pessoa Física</option>
                                 <option {...register('peopleType')} value='cnpj'>Pessoa Juridica</option>
                                 {/* <option value='Pessoa Jurídica'>Pessoa Jurídica</option> */}
@@ -78,7 +78,7 @@ const Forms = () => {
                 <div className='flex flex-col gap-3 items-start mb-6'>
                     <Label className='text-white'>Demanda</Label>
                     <Textarea
-                        className={`text-black h-[150px] w-[908px] ${errors.demand ? 'border-red-500' : ''}`}
+                        className={`text-black resize-none h-[150px] w-[428px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500' : ''}`}
                         placeholder='Escreva o serviço que você deseja, detalhe o quanto puder.'
                         {...register('demand')}
                     />

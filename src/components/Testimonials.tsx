@@ -8,7 +8,7 @@ import { Button } from './ui/button'
 
 const Testimonials = () => {
   return (
-    <div style={{background: 'linear-gradient(to bottom, #091B2F, #0A111B)'}} className='back flex justify-center items-center gap-[50px] h-[600px]'>
+    <div style={{background: 'linear-gradient(to bottom, #091B2F, #0A111B)'}} className='back flex flex-col max-[1350px]:py-9 min-[1350px]:flex-row justify-center items-center gap-[50px] min-h-[600px]'>
         <div className='w-1/3 '>   
             <p className='font-bold text-[40px] text-white border-t-2 border-Yellow' >Clientes satisfeitos, histórias verdadeiras</p>
 

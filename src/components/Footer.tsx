@@ -5,7 +5,7 @@ import { Separator } from './ui/separator'
 const Footer = () => {
   return (
     <div className='bg-DarkBlue border-t-2 border-Yellow px-[83px] pt-[100px]  '>
-        <div className='flex justify-between items-center'>
+        <div className='flex flex-col gap-8 md:gap-0 md:flex-row justify-between items-center'>
             <Image src='/arkan_logo_dark.svg' width={358} height={289.5} alt='Logo Arkan'/>
 
             <div className='flex flex-col justify-center items-center md:items-end gap-4'>
@@ -25,7 +25,7 @@ const Footer = () => {
 
         <Separator className='my-4 bg-GrayBlue'/>
 
-        <p className='text-GrayBlue text-center pb-2'>Todos os direitos reservados © | Arkan Seguros</p>
+        <p className='text-GrayBlue text-center pb-3'>Todos os direitos reservados © | Arkan Seguros</p>
 
     </div>
   )

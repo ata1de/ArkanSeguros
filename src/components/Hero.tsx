@@ -35,7 +35,7 @@ const Hero = () => {
           Mais que um seguro, uma <span className='text-Yellow'>parceria.</span>
         </h1>
         <p className='font-normal text-[24px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & a <span className='text-Yellow'>sua empresa.</span></p>
-        <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl'>Saiba mais</Button>
+        <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl'>Entrar em contato</Button>
       </div>
     </div>
   );
