@@ -43,7 +43,7 @@ export const services = [
         titleHero: "Proteção para seus ativos",
         subtitleHero: "Conte conosco para proteger seus equipamentos.",
         url_bg: "/services/seguros-equipamentos-maquinas-bg.jpg",
-        icon: "/icons/icon_teeth.svg",
+        icon: "/icons/icon_machine.svg",
         description: "Proteja seus equipamentos e máquinas com nossos seguros especializados. Garantimos cobertura contra danos, roubo e paralisação de atividades, para que seu trabalho nunca pare.\n\nNossos planos são desenhados para atender as necessidades específicas do seu negócio, proporcionando segurança e suporte em momentos críticos. \n\nConte com a nossa experiência para proteger seus ativos valiosos e manter a produtividade da sua empresa, mesmo diante de imprevistos."
     },
     {
@@ -52,7 +52,7 @@ export const services = [
         titleHero: "Tranquilidade para você e sua família",
         subtitleHero: "Conte conosco para proteger sua família.",
         url_bg: "/services/seguro-de-vida-bg.jpg",
-        icon: "/icons/icon_teeth.svg",
+        icon: "/icons/icon_life.svg",
         description: "Nosso seguro de vida oferece proteção financeira para sua família em caso de imprevistos. Com planos flexíveis, garantimos que você possa escolher a cobertura que melhor se adapta às suas necessidades.\n\nO seguro de vida é uma forma de cuidar de quem você ama, garantindo que estarão amparados em momentos difíceis. Oferecemos assistência imediata e apoio em situações de emergência.\n\nCom o nosso seguro de vida, você tem a tranquilidade de saber que sua família estará segura e protegida, independentemente do que aconteça."
     },
     {
@@ -61,7 +61,7 @@ export const services = [
         titleHero: "Segurança para seu patrimônio",
         subtitleHero: "Conte conosco para proteger seu imóvel.",
         url_bg: "/services/seguros-prediais-bg.jpg",
-        icon: "/icons/icon_teeth.svg",
+        icon: "/icons/icon_builder.svg",
         description: "Os seguros prediais protegem seu imóvel contra uma variedade de riscos, como incêndios, roubos e desastres naturais. Nossa cobertura completa garante a preservação do seu patrimônio.\n\nOferecemos planos personalizados que atendem às necessidades específicas de cada cliente, seja residencial ou comercial. Contamos com uma equipe especializada para orientar você na escolha da melhor opção.\n\nProteja seu investimento com um seguro predial que proporciona segurança e tranquilidade, permitindo que você viva ou trabalhe sem preocupações."
     },
     {
@@ -70,7 +70,7 @@ export const services = [
         titleHero: "Segurança digital",
         subtitleHero: "Conte conosco para proteger suas transações online.",
         url_bg: "/services/certificados-digitais-bg.png",
-        icon: "/icons/icon_teeth.svg",
+        icon: "/icons/icon_certificate.svg",
         description: "Nossos certificados digitais garantem a segurança das suas transações eletrônicas. Com autenticação e criptografia de dados, protegemos suas informações contra acessos não autorizados.\n\nOferecemos uma gama de soluções para empresas e indivíduos, proporcionando um ambiente digital mais seguro. Nossos certificados são reconhecidos por sua confiabilidade e robustez.\n\nInvista na segurança digital com nossos certificados e tenha a certeza de que suas operações online estão protegidas contra fraudes e violações de privacidade."
     }
 ];

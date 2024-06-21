@@ -15,7 +15,7 @@ function findWord(service: string){
     case "seguros-automotivos":
       return 'seu automóvel'
     case "plano-odontologico":
-      return 'seu sorriso'
+      return 'sua felicidade'
     case "certificados-digitais":
       return 'seu certificado'
     case "seguros-prediais":
@@ -23,7 +23,7 @@ function findWord(service: string){
     case "seguro-de-vida":
       return 'sua vida'
     case "seguros-equipamentos-maquinas":
-      return 'seus ativos'
+      return 'seus equipamentos'
     case "protecao-veicular":
       return 'seu veiculo'
 
@@ -76,7 +76,7 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
           {newTitleWithoutLastWord} <span className='text-Yellow'>{lastWord}.</span>
         </h1>
         <p className='font-normal text-[24px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & <span className='text-Yellow'>{subTitleLastWord}.</span></p>
-        <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline'>
+        <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline w-[313px]'>
           <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl'>Entrar em contato</Button>
         </Link>
       </div>

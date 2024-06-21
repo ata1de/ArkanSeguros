@@ -12,7 +12,7 @@ const Footer = () => {
             <div className='flex flex-col justify-center items-center md:items-end gap-4'>
                 <div>
                     <p className='font-bold text-center md:text-right text-WhiteDefault'>Contato</p>
-                    <p className='text-LightGray text-center md:text-right'>98688-4201 | 988575153</p>
+                    <p className='text-LightGray text-center md:text-right'>98688-4201 | 98857-5153</p>
                     <p className='text-LightGray text-center md:text-right'>Contato@arkanseguros.com.br</p>
                 </div>
                 <div>

@@ -20,41 +20,53 @@ export function CarouselLoop() {
         className="w-full max-w-[90%]" 
       >
         <CarouselContent className="">
-          <CarouselItem className="basis-[200px]">
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
                 <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
                 <Image src='/providers/sulamerica.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
             <Image src='/providers/hapvida.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/mapfre.png' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
             <Image src='/providers/bradesco.png' alt='icon' width={130} height={130}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
-            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/allianz.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
-            <Image src='/providers/hapvida.png' alt='icon' width={100} height={100}/>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/odontoprev.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/porto-seguro.png' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
                 <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
-                <Image src='/providers/sulamerica.png' alt='icon' width={130} height={130}/>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+                <Image src='/providers/sulamerica.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
-            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/hapvida.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
-            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/mapfre.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
-          <CarouselItem className="basis-[200px]">
-            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px]">
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
             <Image src='/providers/bradesco.png' alt='icon' width={130} height={130}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/allianz.png' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/odontoprev.png' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px] flex items-center justify-center">
+            <Image src='/providers/porto-seguro.png' alt='icon' width={100} height={100}/>
           </CarouselItem>
         </CarouselContent>
       </Carousel>
