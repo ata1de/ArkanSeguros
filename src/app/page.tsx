@@ -1,4 +1,6 @@
 import { CarouselLoop } from "@/components/Carousel";
+import Footer from "@/components/Footer";
+import Forms from "@/components/form";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
@@ -47,6 +49,9 @@ export default function Home() {
 
       <Testimonials/>
 
+      <Forms/>
+
+      <Footer/>
 
     </>
   );

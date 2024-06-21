@@ -20,11 +20,42 @@ export function CarouselLoop() {
         className="w-full max-w-[90%]" 
       >
         <CarouselContent className="">
-          {Array.from({ length: 20 }).map((_, index) => (
-            <CarouselItem key={index} className="basis-[200px]">
-              <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
-            </CarouselItem>
-          ))}
+          <CarouselItem className="basis-[200px]">
+                <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+                <Image src='/providers/sulamerica.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+                <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+                <Image src='/providers/sulamerica.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
+          <CarouselItem className="basis-[200px]">
+            <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
+          </CarouselItem>
         </CarouselContent>
       </Carousel>
     </div>

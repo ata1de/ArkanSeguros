@@ -21,6 +21,7 @@ const config = {
         'DarkBlue': '#091929',
         'MediumBlue': '#102843',
         'LightGray': '#D3D3D3',
+        'GrayBlue': '#8298B1',
         fontFamily: {
           sans: ["var(--font-sans)", ...fontFamily.sans],
         },
