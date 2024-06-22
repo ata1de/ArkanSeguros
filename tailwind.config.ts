@@ -58,6 +58,9 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        screens: {
+          'xs': '465px', // Adiciona um novo breakpoint chamado 'xs' para 465px
+        },
       },
     },
   },

@@ -7,11 +7,11 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <div className='border-b-2 border-Yellow px-[72px] pb-[52px] bg-DarkBlue min-h-[739px] text-white'>
-      <p className='font-bold text-[72px] pt-[42px] mb-[32px]'>Contatos</p>
+    <div className='border-b-2 border-Yellow px-[32px] min-[465px]:px-[72px] pb-[52px] bg-DarkBlue min-h-[739px] text-white'>
+      <p className='font-bold text-5xl min-[465px]:text-7xl pt-[42px] mb-[32px]'>Contatos</p>
 
-      <div className='rounded-md border-4 border-LightBlue mb-4 bg-MediumBlue flex justify-between items-center p-6 text-WhiteDefault '>
-        <div className='flex flex-col justify-center items-start gap-[6px]'>
+      <div className='rounded-md border-4 border-LightBlue mb-4 bg-MediumBlue flex flex-col md:flex-row justify-between items-center p-3 text-WhiteDefault min-[465px]:p-6 '>
+        <div className='flex flex-col justify-center items-start gap-[6px] '>
           <p className='font-semibold text-2xl'>Arkan Seguros</p>
           <p className='text-slate-300'>R. Mearim, 614 - Estância, Recife - PE, 50771-450</p>
           <div className='flex justify-center items-center gap-3'>
@@ -24,7 +24,11 @@ const Contact = () => {
           </div>
         </div>
 
-        <Separator orientation="vertical" className="h-[150px] w-[2px] bg-GrayBlue" />
+        {/* Separator vertical, escondido em telas md e maiores */}
+        <Separator orientation="vertical" className=" hidden h-[150px] w-[2px] bg-GrayBlue md:block" />
+
+        {/* Separator horizontal, mostrado apenas em telas md e maiores */}
+        <Separator orientation="horizontal" className="block w-full h-[2px] bg-GrayBlue md:hidden max-[768px]:my-5" />
 
         <Image src="/icons/icon_localization.svg" alt="background" width={100} height={100} />
       </div>
