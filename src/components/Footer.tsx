@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 const Footer = () => {
   return (
-    <div className='bg-DarkBlue border-t-2 border-Yellow px-[83px] pt-[100px]  '>
+    <div className='bg-DarkBlue border-t-4 border-Yellow px-[83px] pt-[100px]  '>
         <div className='flex flex-col gap-8 md:gap-0 md:flex-row justify-between items-center'>
             <Image src='/arkan_logo_dark.svg' width={358} height={289.5} alt='Logo Arkan'/>
 

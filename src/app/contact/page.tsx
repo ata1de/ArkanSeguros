@@ -7,7 +7,7 @@ import React from 'react'
 
 const Contact = () => {
   return (
-    <div className='border-b-2 border-Yellow px-[32px] min-[465px]:px-[72px] pb-[52px] bg-DarkBlue min-h-[739px] text-white'>
+    <div className='border-t-4 border-Yellow px-[32px] min-[465px]:px-[72px] pb-[52px] bg-DarkBlue min-h-[739px] text-white'>
       <p className='font-bold text-5xl min-[465px]:text-7xl pt-[42px] mb-[32px]'>Contatos</p>
 
       <div className='rounded-md border-4 border-LightBlue mb-4 bg-MediumBlue flex flex-col md:flex-row justify-between items-center p-3 text-WhiteDefault min-[465px]:p-6 '>

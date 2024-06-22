@@ -70,12 +70,12 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
     <div style={containerStyle}>
       <div style={overlayStyle}></div>
       <div style={contentStyle} className='flex flex-col gap-5 w-1/2 items-left justify-center ml-[72px] h-full'>
-        <h1 className='font-bold text-[48px] text-WhiteDefault max-w-[500px]'>
+        <h1 className='font-bold text-[48px] max-[475px]:text-[36px] text-WhiteDefault max-w-[500px]'>
           {newTitleWithoutLastWord} <span className='text-Yellow'>{lastWord}.</span>
         </h1>
-        <p className='font-normal text-[24px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & <span className='text-Yellow'>{subTitleLastWord}.</span></p>
+        <p className='font-normal text-[24px] max-[475px]:text-[16px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & <span className='text-Yellow'>{subTitleLastWord}.</span></p>
         <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline w-[313px]'>
-          <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl'>Entrar em contato</Button>
+          <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl max-[475px]:text-xl max-[475px]:w-[230px]'>Entrar em contato</Button>
         </Link>
       </div>
     </div>
