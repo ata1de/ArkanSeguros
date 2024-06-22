@@ -23,7 +23,7 @@ const Testimonials = () => {
             {testimonials.slice(0, 4).map((testimonial, index) => (
                 <div key={index} className='bg-MediumBlue border-2 border-LightBlue max-[434px]:w-[340px] w-[387px] h-[214px] flex flex-col items-start justify-center rounded-md p-5 gap-2'>
                     <div className='flex justify-center items-center gap-5'>
-                        <Image className='rounded-full border-LightBlue border-2' src={testimonial.image} width={44} height={44} alt='quote'/>
+                        <Image className='rounded-full border-LightBlue border-2' src={testimonial.image} width={44} height={44} alt='icone das testemunhas'/>
                         <p className='font-bold text-xl text-white'>{testimonial.name}</p>
                     </div>
                     <p className='text-slate-400'>{testimonial.position}</p>

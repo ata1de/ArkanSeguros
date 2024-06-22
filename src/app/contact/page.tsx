@@ -15,11 +15,11 @@ const Contact = () => {
           <p className='font-semibold text-2xl'>Arkan Seguros</p>
           <p className='text-slate-300'>R. Mearim, 614 - Estância, Recife - PE, 50771-450</p>
           <div className='flex justify-center items-center gap-3'>
-            <Image src="/icons/icon_contact_phone.svg" alt="background" width={24} height={24} />
+            <Image src="/icons/icon_contact_phone.svg" alt="icon de celular" width={24} height={24} />
             <p className='text-slate-300'>(81) 98688-4201</p>
           </div>
           <div className='flex justify-center items-center gap-3'>
-            <Image src="/icons/icon_contact_email.svg" alt="background" width={24} height={24} />
+            <Image src="/icons/icon_contact_email.svg" alt="icon de email" width={24} height={24} />
             <p className='text-slate-300'>Contato@arkanseguros.com.br</p>
           </div>
         </div>
@@ -30,7 +30,7 @@ const Contact = () => {
         {/* Separator horizontal, mostrado apenas em telas md e maiores */}
         <Separator orientation="horizontal" className="block w-full h-[2px] bg-GrayBlue md:hidden max-[768px]:my-5" />
 
-        <Image src="/icons/icon_localization.svg" alt="background" width={100} height={100} />
+        <Image src="/icons/icon_localization.svg" alt="icone de localização" width={100} height={100} />
       </div>
 
       <div className="relative overflow-hidden" style={{ paddingBottom: '222px', position: 'relative'}}>

@@ -13,7 +13,7 @@ const CarouselProvider = ({ linkProvider, urlImage}: CarouselProvider) => {
     
         <CarouselItem className="basis-[200px] flex items-center justify-center">
             <Link href={linkProvider} target='_blank'>
-                <Image src={urlImage} alt='icon' width={100} height={100}/>
+                <Image src={urlImage} alt='icone dos provedores' width={100} height={100}/>
             </Link>
         </CarouselItem>
   )

@@ -37,7 +37,7 @@ const Header = () => {
     transition={{ duration: 0.35, ease: 'easeInOut'}}
     >
         <Link href='/'>
-          <Image className='ml-[72px]' src="/arkan.svg" alt="Logo" width={153} height={54} />
+          <Image className='ml-[72px]' src="/arkan.svg" alt="Logo da Arkan" width={153} height={54} />
         </Link>
 
         <div className='hidden lg:flex justify-center items-center gap-[65px] pr-[48px]'>
@@ -54,7 +54,7 @@ const Header = () => {
         <SheetContent className='bg-MediumBlue'>
           <SheetHeader>
             <SheetTitle className='flex gap-2 items-center'>
-              <Image src="/arkan_logo_dark.svg" alt="Logo" width={100} height={54} />
+              <Image src="/arkan_logo_dark.svg" alt="Logo da Arkan modo escuro" width={100} height={54} />
               {/* <p className='uppercase text-2xl text-Yellow font-bold font-sans'>ARKAN</p> */}
             </SheetTitle>
             <SheetDescription className='text-left'>

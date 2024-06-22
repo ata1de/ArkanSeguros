@@ -29,6 +29,7 @@ const Forms = () => {
   });
 
   const handleClient = async (data: ClientSchema) => {
+    reset();
     try {
       const emailConfig = {
         userName: data.name,
@@ -53,24 +54,25 @@ const Forms = () => {
 
       if (response.ok) {
         toast.success('Formulário enviado com sucesso!', {
-          style: { backgroundColor: 'green', color: 'white' },
-          duration: 2000 // O toast desaparecerá após alguns segundos
+          style: { backgroundColor: '#25D366', color: 'white' },
+          position: 'bottom-left',
+          duration: 2500 // O toast desaparecerá após alguns segundos
         });
       } else {
         toast.error('Falha ao enviar formulário. Tente novamente.', {
-          style: { backgroundColor: 'red', color: 'white' },
-          duration: 2000
+          style: { backgroundColor: '#EE1B22', color: 'white' },
+          position: 'bottom-left',
+          duration: 2500
         });
       }
     } catch (error) {
       console.log(error);
       toast.error('Erro ao enviar o e-mail. Tente novamente.', {
-        style: { backgroundColor: 'red', color: 'white' },
-        duration: 2000
+        style: { backgroundColor: '#EE1B22', color: 'white' },
+        position:'bottom-left', 
+        duration: 2500
       });
     }
-    
-    reset();
   };
 
   return (
