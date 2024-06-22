@@ -33,7 +33,6 @@ function findWord(service: string){
 }
 
 const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
-  console.log(bgUrl)
   const containerStyle = {
     position: 'relative',
     height: '100vh',
@@ -65,7 +64,6 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
   const newTitleWithoutLastWord = listTitle.slice(0, lenghtListTitle-1).join(' ')
   // ##########################################################################################
 
-  console.log(title)
 
   const subTitleLastWord = findWord(lastWordSubTitle)
   return (
