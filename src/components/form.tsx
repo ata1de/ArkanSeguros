@@ -29,8 +29,6 @@ const Forms = () => {
   });
 
   const handleClient = async (data: ClientSchema) => {
-    console.log(data);
-    reset();
     try {
       const emailConfig = {
         userName: data.name,
@@ -71,6 +69,8 @@ const Forms = () => {
         duration: 2000
       });
     }
+    
+    reset();
   };
 
   return (
