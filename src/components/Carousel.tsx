@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/carousel"
 import Image from "next/image"
 import Autoplay from "embla-carousel-autoplay"
+import CarouselProvider from "./CarouselItem"
 
 export function CarouselLoop() {
     const plugin = React.useRef(
@@ -16,58 +17,30 @@ export function CarouselLoop() {
   return (
     <div className="bg-Yellow h-[200px] flex justify-center items-center mt-12">
       <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
         plugins={[plugin.current]}
         className="w-full max-w-[90%]" 
       >
         <CarouselContent className="">
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-                <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-                <Image src='/providers/sulamerica.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/hapvida.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/mapfre.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/bradesco.png' alt='icon' width={130} height={130}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/allianz.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/odontoprev.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/porto-seguro.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-                <Image src='/providers/amil.svg' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-                <Image src='/providers/sulamerica.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/hapvida.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/mapfre.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/bradesco.png' alt='icon' width={130} height={130}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/allianz.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/odontoprev.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
-          <CarouselItem className="basis-[200px] flex items-center justify-center">
-            <Image src='/providers/porto-seguro.png' alt='icon' width={100} height={100}/>
-          </CarouselItem>
+          <CarouselProvider urlImage='/providers/amil.svg' linkProvider="https://institucional.amil.com.br/"/>
+          <CarouselProvider urlImage='/providers/sulamerica.png' linkProvider="https://portal.sulamericaseguros.com.br/home.htm"/>
+          <CarouselProvider urlImage="/providers/hapvida.png" linkProvider="https://www.hapvida.com.br/site/"/>
+          <CarouselProvider urlImage="/providers/mapfre.png" linkProvider="https://www.mapfre.com.br/para-voce/"/>
+          <CarouselProvider urlImage="/providers/bradesco.png" linkProvider="https://banco.bradesco/html/classic/index.shtm"/>
+          <CarouselProvider urlImage="/providers/allianz.png" linkProvider="https://www.allianz.com.br/"/>
+          <CarouselProvider urlImage="/providers/odontoprev.png" linkProvider="https://www.odontoprev.com.br/"/>
+          <CarouselProvider urlImage="/providers/porto-seguro.png" linkProvider="https://www.portoseguro.com.br/"/>
+          <CarouselProvider urlImage='/providers/amil.svg' linkProvider="https://institucional.amil.com.br/"/>
+          <CarouselProvider urlImage='/providers/sulamerica.png' linkProvider="https://portal.sulamericaseguros.com.br/home.htm"/>
+          <CarouselProvider urlImage="/providers/hapvida.png" linkProvider="https://www.hapvida.com.br/site/"/>
+          <CarouselProvider urlImage="/providers/mapfre.png" linkProvider="https://www.mapfre.com.br/para-voce/"/>
+          <CarouselProvider urlImage="/providers/bradesco.png" linkProvider="https://banco.bradesco/html/classic/index.shtm"/>
+          <CarouselProvider urlImage="/providers/allianz.png" linkProvider="https://www.allianz.com.br/"/>
+          <CarouselProvider urlImage="/providers/odontoprev.png" linkProvider="https://www.odontoprev.com.br/"/>
+          <CarouselProvider urlImage="/providers/porto-seguro.png" linkProvider="https://www.portoseguro.com.br/"/>
         </CarouselContent>
       </Carousel>
     </div>
