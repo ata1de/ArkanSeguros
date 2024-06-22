@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { services } from "@/data/services";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   const styleServices = {

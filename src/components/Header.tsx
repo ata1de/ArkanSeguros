@@ -1,6 +1,8 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from './ui/button'
 import { services } from '@/data/services'
 import { cn } from '@/lib/utils'
@@ -8,10 +10,32 @@ import { NavigationMenuDemo } from './NavigationMenu'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 import { MenuIcon } from 'lucide-react'
 import { Separator } from './ui/separator'
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
 
 const Header = () => {
+  const { scrollY} = useScroll()
+
+  const [hidden, setHidden] = useState(false)
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+
+    if (latest > previous && latest> 150) {
+      setHidden(true)
+    } else{
+      setHidden(false)
+    }
+  })
   return (
-    <div className='flex justify-between items-center bg-WhiteDefault h-[112px]'>
+    <motion.div 
+    className=' sticky top-0 z-50 flex justify-between items-center bg-WhiteDefault h-[112px]'
+    variants={{
+      visible: { y: 0},
+      hidden: { y: '-100%'}
+    }}
+    animate={hidden ? 'hidden' : 'visible'}
+    transition={{ duration: 0.35, ease: 'easeInOut'}}
+    >
         <Link href='/'>
           <Image className='ml-[72px]' src="/arkan.svg" alt="Logo" width={153} height={54} />
         </Link>
@@ -46,7 +70,7 @@ const Header = () => {
           </div>
         </SheetContent>
     </Sheet>
-    </div>
+    </motion.div>
 
     
   )
