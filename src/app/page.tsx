@@ -1,14 +1,12 @@
 import { CarouselLoop } from "@/components/Carousel";
 import Footer from "@/components/Footer";
 import Forms from "@/components/form";
-import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
 import Testimonials from "@/components/Testimonials";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { services } from "@/data/services";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   const styleServices = {
@@ -21,8 +19,6 @@ export default function Home() {
 
   return (
     <>
-      <Header/>
-
       <Hero title="Mais que um seguro, uma parceria" lastWordSubTitle="" bgUrl="/arkan_bg.svg"/>
 
       <div className="bg-WhiteDefault rounded-lg mb-7">
@@ -49,11 +45,6 @@ export default function Home() {
       <CarouselLoop/>
 
       <Testimonials/>
-
-      <Forms/>
-
-      <Footer/>
-
     </>
   );
 }

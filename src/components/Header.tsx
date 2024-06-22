@@ -41,10 +41,10 @@ const Header = () => {
         </Link>
 
         <div className='hidden lg:flex justify-center items-center gap-[65px] pr-[48px]'>
-            <Link className='font-medium text-xl' href='/'>Home</Link>
+            <Link className='font-medium text-xl transition relative no-underline hover:underline-after' href='/'>Home</Link>
             <NavigationMenuDemo/>
-            <Link className='font-medium text-xl' href='/sobre'>Sobre</Link>
-            <Link className='font-medium text-xl' href='/contatos'>Contatos</Link>
+            <Link className='font-medium text-xl transition relative no-underline hover:underline-after' href='/about'>Sobre</Link>
+            <Link className='font-medium text-xl transition relative no-underline hover:underline-after' href='/contact'>Contatos</Link>
         </div>
 
         <Sheet>
@@ -65,8 +65,8 @@ const Header = () => {
           <div className='justify-center flex flex-col my-5 gap-5'>
             <Link className='font-medium text-xl text-GrayBlue' href='/'>Home</Link>
             <NavigationMenuDemo/>
-            <Link className='font-medium text-xl text-GrayBlue' href='/sobre'>Sobre</Link>
-            <Link className='font-medium text-xl text-GrayBlue' href='/contatos'>Contatos</Link>
+            <Link className='font-medium text-xl text-GrayBlue' href='/about'>Sobre</Link>
+            <Link className='font-medium text-xl text-GrayBlue' href='/contact'>Contatos</Link>
           </div>
         </SheetContent>
     </Sheet>

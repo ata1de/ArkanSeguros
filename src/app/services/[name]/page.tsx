@@ -19,8 +19,6 @@ const DetailsService = () => {
 
   return (
     <div>
-        <Header/>
-    
         <Hero title={service?.titleHero ?? ''} lastWordSubTitle={name.toString()} bgUrl={service?.url_bg ?? ''}/>
         
         <div className='flex flex-col items-start justify-center gap-8 p-[72px]'>
@@ -32,10 +30,6 @@ const DetailsService = () => {
         </div>
 
         <Carousel/>
-
-        <Forms/>
-
-        <Footer/>
     </div>
 
 

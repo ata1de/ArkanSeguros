@@ -1,0 +1,46 @@
+"use client"
+
+import Header from '@/components/Header'
+import { Separator } from '@/components/ui/separator'
+import Image from 'next/image'
+import React from 'react'
+
+const Contact = () => {
+  return (
+    <div className='border-b-2 border-Yellow px-[72px] pb-[52px] bg-DarkBlue min-h-[739px] text-white'>
+      <p className='font-bold text-[72px] pt-[42px] mb-[32px]'>Contatos</p>
+
+      <div className='rounded-md border-4 border-LightBlue mb-4 bg-MediumBlue flex justify-between items-center p-6 text-WhiteDefault '>
+        <div className='flex flex-col justify-center items-start gap-[6px]'>
+          <p className='font-semibold text-2xl'>Arkan Seguros</p>
+          <p className='text-slate-300'>R. Mearim, 614 - Estância, Recife - PE, 50771-450</p>
+          <div className='flex justify-center items-center gap-3'>
+            <Image src="/icons/icon_contact_phone.svg" alt="background" width={24} height={24} />
+            <p className='text-slate-300'>(81) 98688-4201</p>
+          </div>
+          <div className='flex justify-center items-center gap-3'>
+            <Image src="/icons/icon_contact_email.svg" alt="background" width={24} height={24} />
+            <p className='text-slate-300'>Contato@arkanseguros.com.br</p>
+          </div>
+        </div>
+
+        <Separator orientation="vertical" className="h-[150px] w-[2px] bg-GrayBlue" />
+
+        <Image src="/icons/icon_localization.svg" alt="background" width={100} height={100} />
+      </div>
+
+      <div className="relative overflow-hidden" style={{ paddingBottom: '222px', position: 'relative'}}>
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3950.110574255994!2d-34.9277703!3d-8.0902051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7ab1eeab998b3a1%3A0x31ec5e9ee4f1cad7!2sR.%20Mearim%2C%20614%20-%20Est%C3%A2ncia%2C%20Recife%20-%20PE%2C%2050771-450!5e0!3m2!1spt-BR!2sbr!4v1719056638261!5m2!1spt-BR!2sbr" 
+          className="absolute top-0 left-0 w-full h-[222px]" 
+          style={{ border: 0 }} 
+          allowFullScreen={false}   
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  )
+}
+
+export default Contact
