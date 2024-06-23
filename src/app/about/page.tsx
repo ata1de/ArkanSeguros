@@ -35,7 +35,7 @@ const About = () => {
                 construindo um relacionamento duradouro com nossos clientes.
                 </p>
                 <div className='bg-DarkBlue text-bold w-auto rounded-xl flex justify-center items-center h-[140px]'>
-                    <p className='text-center text-[24px] text-Yellow max-w-[811px]'>A Arkan Seguros ficará à disposição para auxiliar no
+                    <p className='text-center text-[24px] text-Yellow max-w-[811px] max-[720px]:text-[18px] max-[590px]:text-[14px] max-[500px]:text-[12px]'>A Arkan Seguros ficará à disposição para auxiliar no
                     desenvolvimento da sua empresa</p>
                 </div>
             </div>

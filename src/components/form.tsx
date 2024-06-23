@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Textarea } from './ui/textarea';
 import { Input } from './ui/input';
 import { Toaster } from './ui/sonner';
@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from './ui/label';
+import { services } from '@/data/services';
 
 const clientSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -18,7 +19,9 @@ const clientSchema = z.object({
     .regex(/^\(?\d{2}\)?\s\d{5}-\d{4}$/, { message: "Phone number must be in the format (81) 99242-3427" })
     .min(1, { message: "Phone number is required" }),
   peopleType: z.string().min(1, { message: "Company name is required" }),
-  demand: z.string().min(1, { message: "Demand description is required" })
+  demand: z.string().min(1, { message: "Demand description is required" }),
+  service: z.string().min(1, {message: 'Service is required'}),
+  isClient: z.string().min(1, {message: 'Client history is required'}),
 });
 
 type ClientSchema = z.infer<typeof clientSchema>;
@@ -40,6 +43,8 @@ const Forms = () => {
                <p>Email: ${data.email}</p>\n\
                <p>Telefone: ${data.phone}</p>\n\
                <p>Tipo de Pessoa: ${data.peopleType}</p>\n\
+               <p>Tipo de serviço: ${data.service}</p>\n\
+               <p>Segurado: ${data.isClient}</p>\n\
                <p>Demanda: ${data.demand}</p>\n\
                --------------------------\n`
       };
@@ -76,8 +81,8 @@ const Forms = () => {
   };
 
   return (
-    <div className='bg-LightBlue min-h-[700px] flex flex-col justify-center items-center pt-[65px]'>
-      <p className='font-bold text-[72px] text-white mb-5 max-[598px]:text-center'>
+    <div className='bg-LightBlue min-h-[730px] flex flex-col justify-center items-center pt-[65px]'>
+      <p className='font-bold text-[72px] text-white mb-5 max-[400px]:text-[68px] max-[598px]:text-center'>
         Fale com a <span className='border-b-4 border-Yellow'>Arkan</span>
       </p>
 
@@ -87,7 +92,7 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Nome</Label>
               <Input
-                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.name ? 'border-red-500' : ''}`}
+                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.name ? 'border-red-500 border-4' : ''}`}
                 placeholder='Digite seu nome'
                 {...register('name')}
               />
@@ -95,26 +100,47 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Email</Label>
               <Input
-                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.email ? 'border-red-500' : ''}`}
+                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.email ? 'border-red-500 border-4' : ''}`}
                 placeholder='Digite seu email'
                 {...register('email')}
               />
             </div>
+            <div className='flex flex-col gap-3 items-start'>
+              <Label className='text-white text-right'>Como podemos te ajudar</Label>
+              <select
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
+                {...register('service')}
+              >
+                {services.map((service) => (
+                  <option value={service.title} key={service.name}>{service.title}</option>
+                ))}
+              </select>
+            </div>
           </div>
+          
           <div className='flex flex-col items-center justify-center gap-8'>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Telefone</Label>
               <Input
-                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500' : ''}`}
+                className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
                 placeholder='(00) 00000-0000'
                 {...register('phone')}
               />
             </div>
-
+            <div className='flex flex-col gap-3 items-start'>
+              <Label className='text-white text-right'>Segurado/Novo cliente</Label>
+              <select
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
+                {...register('isClient')}
+              >
+                <option value='Cliente da casa'>Segurado</option>
+                <option value='Novo cliente'>Novo Cliente</option>
+              </select>
+            </div>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Pessoa Jurídica/Física</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500' : ''}`}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
                 {...register('peopleType')}
               >
                 <option value='Pessoa Fisica'>Pessoa Física</option>
@@ -126,13 +152,13 @@ const Forms = () => {
         <div className='flex flex-col gap-3 items-start mb-6'>
           <Label className='text-white'>Demanda</Label>
           <Textarea
-            className={`text-black resize-none h-[150px] w-[350px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500' : ''}`}
+            className={`text-black resize-none h-[150px] w-[350px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500 border-4' : ''}`}
             placeholder='Escreva o serviço que você deseja, detalhe o quanto puder.'
             {...register('demand')}
           />
         </div>
 
-        <Button className='bg-Yellow w-[241px] ml-auto rounded-full max-[598px]:mb-5' type='submit'>
+        <Button className='bg-Yellow w-[241px] ml-auto rounded-full mb-5 max-[598px]:mb-5' type='submit'>
           ENVIAR
         </Button>
       </form>
