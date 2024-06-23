@@ -1,7 +1,17 @@
+"use client"
+
 import Hero from '@/components/Hero'
 import React from 'react'
+import { useEffect } from "react";
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const About = () => {
+    useEffect(() => {
+        Aos.init({ duration: 1000 });
+        Aos.refresh();
+      }, []);
+    
   return (
     <div>
         <Hero title="Proteção além da expectativa, confiança além do tempo" lastWordSubTitle="" bgUrl="/arkan_bg_about.jpg"/>

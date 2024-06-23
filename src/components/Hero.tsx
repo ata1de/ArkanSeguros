@@ -1,6 +1,9 @@
+"use client"
+
 import React from 'react';
 import { Button } from './ui/button';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 interface HeroInterface {
   title: string,
@@ -26,7 +29,6 @@ function findWord(service: string){
       return 'seus equipamentos'
     case "protecao-veicular":
       return 'seu veiculo'
-
     default:
       return 'sua empresa'
   }
@@ -57,13 +59,13 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
     zIndex: 2,
     color: 'white',
   };
+
   // ####################################### titulo dinamico ##############################
   const listTitle = title.split(' ')
   const lenghtListTitle = listTitle.length
   const lastWord = listTitle[lenghtListTitle -1]
   const newTitleWithoutLastWord = listTitle.slice(0, lenghtListTitle-1).join(' ')
   // ##########################################################################################
-
 
   const subTitleLastWord = findWord(lastWordSubTitle)
   return (
@@ -75,7 +77,12 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
         </h1>
         <p className='font-normal text-[24px] max-[475px]:text-[16px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & <span className='text-Yellow'>{subTitleLastWord}.</span></p>
         <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline w-[313px]'>
-          <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl max-[475px]:text-xl max-[475px]:w-[230px]'>Entrar em contato</Button>
+          {/* <motion.div
+            whileHover={{ scale: 1.015 }}
+            whileTap={{ scale: 0.985 }}
+          > */}
+            <Button className='p-5 bg-Yellow w-[313px] rounded-full h-[72px] font-bold text-2xl max-[475px]:text-xl max-[475px]:w-[230px]'>Entrar em contato</Button>
+          {/* </motion.div> */}
         </Link>
       </div>
     </div>
