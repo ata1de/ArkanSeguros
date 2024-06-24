@@ -12,6 +12,9 @@ const fontSans = FontSans({
 export const metadata: Metadata = {
   title: "Arkan Seguros",
   description: "Proteção e segurança com seguros personalizados para você.",
+  icons: {
+    icon: '/favicon.ico',
+  }
 };
 
 export default function RootLayout({
