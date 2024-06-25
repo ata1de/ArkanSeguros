@@ -13,7 +13,7 @@ interface DashboardCardProps {
 
 const DashboardCard = (props: DashboardCardProps) => {
   return (
-    <div className={cn('flex w-full flex-col gap-3 rounded-xl border p-5 shadow')}>
+    <div className={cn('flex w-full flex-col gap-3 rounded-xl border border-gray-600 p-5 shadow')}>
         <div className="flex justify-between gap-2">
             <p className='text-lg'>{props.label}</p>
             <props.icon className='h-4 w-4 text-gray-400'/>

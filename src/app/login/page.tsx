@@ -64,7 +64,7 @@ const LoginPage = () => {
           </div>
 
           <div className="flex flex-col items-start gap-2">
-            <p className="text-[24px] max-w-[164px] text-WhiteDefault font-black">Bem vindo para o <span className="text-Yellow">Arkan Analytics</span></p>
+            <p className="text-[24px] max-w-[200px] text-WhiteDefault font-black">Bem vindo ao <span className="text-Yellow">Arkan Analytics</span></p>
             <p className="text-base font-normal text-GrayBlue">Acesse sua conta agora mesmo</p>
           </div>
         </div>
@@ -86,7 +86,7 @@ const LoginPage = () => {
               {errors.password && <span className="text-red-400">{errors.password.message}</span>}
             </div>
             <div className="inline-flex m-auto">
-                <Button className="w-[253px] rounded-full text-[20px] font-black" type="submit">Entrar</Button>
+                <Button className="w-[253px] rounded-full text-[20px] font-bold" type="submit">Entrar</Button>
             </div>
           </form>
         </div>
