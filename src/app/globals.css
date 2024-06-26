@@ -97,4 +97,15 @@
     right: 0;
     z-index: 9999; /* ou outro valor alto para garantir que esteja acima dos outros elementos */
   }
+
+#titleTestimonial::before {
+    content: '';
+    display: block;
+    width: 9rem;
+    height: 0.3rem;
+    background-color: #FFB60F;
+    margin: 0 auto;
+    position: absolute;
+    border-radius: 10px;
+}
   

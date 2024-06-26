@@ -10,8 +10,8 @@ import Link from 'next/link'
 const Testimonials = () => {
   return (
     <div style={{background: 'linear-gradient(to bottom, #091B2F, #0A111B)'}} className='back flex flex-col max-[1350px]:py-9 min-[1350px]:flex-row justify-center items-center gap-[50px] min-h-[600px]'>
-        <div className='w-1/3 '>   
-            <p className='font-bold text-[40px] text-white border-t-2 border-Yellow' >Clientes satisfeitos, histórias verdadeiras</p>
+        <div className='w-1/3 max-[1079px]:w-[400px] max-[500px]:w-[328px] '>   
+            <p id='titleTestimonial' className='font-bold text-[40px] text-white ' >Clientes satisfeitos, histórias verdadeiras</p>
 
             <p className='text-slate-400'>Experiências <span className='text-Yellow'>reais</span> que fazem a  <span className='text-Yellow'>diferença</span>. Descubra como nossos serviços <span className='text-Yellow'>transformaram</span> vidas.
             </p>

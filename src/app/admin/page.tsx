@@ -1,6 +1,7 @@
 import SalesCardSection from '@/components/dashboard/SalesCardSection'
 import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard'
 import TableDashboard from '@/components/dashboard/TableDashboard'
+import { DataTableDemo } from '@/components/dashboard/TableShadcnDash'
 import { Separator } from '@/components/ui/separator'
 import Image from 'next/image'
 import React from 'react'
@@ -19,7 +20,7 @@ const AdminPage = () => {
                 <SectionCardDashboard/>
             </div>
             
-            <TableDashboard/>
+            <DataTableDemo/>
         </div>
 
     </div>
