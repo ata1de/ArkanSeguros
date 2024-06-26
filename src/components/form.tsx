@@ -81,7 +81,7 @@ const Forms = () => {
   };
 
   return (
-    <div className='bg-LightBlue min-h-[730px] flex flex-col justify-center items-center pt-[65px]'>
+    <div id='form' className='bg-LightBlue min-h-[730px] flex flex-col justify-center items-center pt-[65px]'>
       <p className='font-bold text-[72px] text-white mb-5 max-[400px]:text-[68px] max-[598px]:text-center'>
         Fale com a <span className='border-b-4 border-Yellow'>Arkan</span>
       </p>

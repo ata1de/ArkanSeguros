@@ -76,7 +76,7 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
           {newTitleWithoutLastWord} <span className='text-Yellow'>{lastWord}.</span>
         </h1>
         <p className='font-normal text-[24px] max-[475px]:text-[16px]'>Conte conosco para proteger <span className='text-Yellow'>você</span> & <span className='text-Yellow'>{subTitleLastWord}.</span></p>
-        <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline w-[313px]'>
+        <Link href="#form" className='no-underline w-[313px]'>
           {/* <motion.div
             whileHover={{ scale: 1.015 }}
             whileTap={{ scale: 0.985 }}

@@ -15,7 +15,7 @@ const Testimonials = () => {
 
             <p className='text-slate-400'>Experiências <span className='text-Yellow'>reais</span> que fazem a  <span className='text-Yellow'>diferença</span>. Descubra como nossos serviços <span className='text-Yellow'>transformaram</span> vidas.
             </p>
-            <Link href="https://wa.me/+5581988575153?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline'>
+            <Link href={'/contact'} className='no-underline'>
                 <Button className='mt-5 bg-Yellow w-[240px] rounded-full'>Entre em contato</Button>
             </Link>
         </div>
