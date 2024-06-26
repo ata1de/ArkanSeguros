@@ -81,7 +81,7 @@ const Forms = () => {
   };
 
   return (
-    <div className='bg-LightBlue min-h-[730px] flex flex-col justify-center items-center pt-[65px]'>
+    <div id='form' className='bg-LightBlue min-h-[730px] flex flex-col justify-center items-center pt-[65px]'>
       <p className='font-bold text-[72px] text-white mb-5 max-[400px]:text-[68px] max-[598px]:text-center'>
         Fale com a <span className='border-b-4 border-Yellow'>Arkan</span>
       </p>
@@ -152,7 +152,7 @@ const Forms = () => {
         <div className='flex flex-col gap-3 items-start mb-6'>
           <Label className='text-white'>Demanda</Label>
           <Textarea
-            className={`text-black resize-none h-[150px] w-[350px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500 border-4' : ''}`}
+            className={`text-black resize-none h-[150px] max-[465px]:w-[340px] w-[418px] md:w-[628px] lg:w-[908px] ${errors.demand ? 'border-red-500 border-4' : ''}`}
             placeholder='Escreva o serviço que você deseja, detalhe o quanto puder.'
             {...register('demand')}
           />
