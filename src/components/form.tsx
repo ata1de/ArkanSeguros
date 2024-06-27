@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from './ui/label';
 import { services } from '@/data/services';
+import { createClient } from '@/services/clients';
 
 const clientSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -49,22 +50,33 @@ const Forms = () => {
                --------------------------\n`
       };
 
-      const response = await fetch('/api/sendMail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(emailConfig)
-      });
-
-      if (response.ok) {
-        toast.success('Formulário enviado com sucesso!', {
-          style: { backgroundColor: '#25D366', color: 'white' },
-          position: 'bottom-left',
-          duration: 2500 // O toast desaparecerá após alguns segundos
+      const responsePostClient = await createClient(data);
+      
+      if (responsePostClient.status === 200) {
+        
+        const response = await fetch('/api/sendMail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(emailConfig)
         });
-      } else {
-        toast.error('Falha ao enviar formulário. Tente novamente.', {
+  
+        if (response.ok) {
+          toast.success('Formulário enviado com sucesso!', {
+            style: { backgroundColor: '#25D366', color: 'white' },
+            position: 'bottom-left',
+            duration: 2500 // O toast desaparecerá após alguns segundos
+          });
+        } else {
+          toast.error('Falha ao enviar formulário. Tente novamente.', {
+            style: { backgroundColor: '#EE1B22', color: 'white' },
+            position: 'bottom-left',
+            duration: 2500
+          });
+        }}
+      else {
+        toast.error('Erro na transferência de dados', {
           style: { backgroundColor: '#EE1B22', color: 'white' },
           position: 'bottom-left',
           duration: 2500
