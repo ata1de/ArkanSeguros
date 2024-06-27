@@ -1,9 +1,22 @@
 // app/api/sendMail/route.ts
+import { render } from '@react-email/components';
 import { NextRequest, NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import nodemailer from 'nodemailer'
+import  ArkanInviteCLientEmail  from '../../../email';
+
+const cliente = {
+  name: 'João da Silva',
+  email: '',
+  phone: '',
+  peopleType: 'Pessoa Física',
+  demand: 'Seguro de vida',
+  service: 'Seguro de Vida',
+  isClient: 'Sim',
+};
+
 
 export async function POST(request: NextRequest) {
-  const { userName, userEmail, subject, html } = await request.json();
+  const { subject, data } = await request.json();
 
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -14,13 +27,15 @@ export async function POST(request: NextRequest) {
       pass: process.env.EMAIL_PASS,
     },
   });
+  const emailHtml = render(ArkanInviteCLientEmail(data));
 
   try {
+
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_RECEIVER,
       subject,
-      html,
+      html: emailHtml,
     });
     return NextResponse.json({ message: 'Email sent successfully' }, { status: 200 });
   } catch (error) {

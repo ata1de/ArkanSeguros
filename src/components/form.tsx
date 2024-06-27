@@ -36,18 +36,8 @@ const Forms = () => {
     reset();
     try {
       const emailConfig = {
-        userName: data.name,
-        userEmail: data.email,
         subject: 'Relatório de novo cliente',
-        html: `Olá,\n\nAqui estão as informações dos novos clientes registrados no seu site:\n\n\
-                <p>Nome: ${data.name}</p>\n\
-               <p>Email: ${data.email}</p>\n\
-               <p>Telefone: ${data.phone}</p>\n\
-               <p>Tipo de Pessoa: ${data.peopleType}</p>\n\
-               <p>Tipo de serviço: ${data.service}</p>\n\
-               <p>Segurado: ${data.isClient}</p>\n\
-               <p>Demanda: ${data.demand}</p>\n\
-               --------------------------\n`
+        data: data
       };
 
       const responsePostClient = await createClient(data);
