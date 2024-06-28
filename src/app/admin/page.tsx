@@ -12,6 +12,7 @@ import { HomeIcon, User2Icon } from 'lucide-react';
 import { ClientTypeFirebase, getAllClients } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientFunction, isClientType } from '@/utils/isClientFunction';
+import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,9 @@ const AdminPage = () => {
 
 const AdminContent = () => {
   const [clientManager, setClientManager] = useState<isClientType>();
+  const [peopleTypeManager, setPeopleTypeManager] = useState<PeopleTypeProps>();
+
+
   const getAllUsers = async () => {
     try {
       const response = await getAllClients();
@@ -34,16 +38,21 @@ const AdminContent = () => {
       throw new Error("Failed to fetch match details");
     }
   };
-
+  
   const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
 
   useEffect(() => {
-    const clientManager = isClientFunction(dataUsers!);
-    setClientManager(clientManager);
-  }, [])
+    if (dataUsers) {
+      const clientManager = isClientFunction(dataUsers);
+      const peopleTypeManager = PeopleTypeFunction(dataUsers);
+      setPeopleTypeManager(peopleTypeManager);
+      setClientManager(clientManager);
+    }
+  }, [dataUsers]);
+
 
   return (
     <div className='bg-DarkBlue min-h-screen text-WhiteDefault'>
@@ -67,7 +76,7 @@ const AdminContent = () => {
             <div className='flex flex-col gap-5 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Dashboard</h1>
               <div>
-                <SectionCardDashboard />
+                <SectionCardDashboard peopleTypeManager={peopleTypeManager!} clientManager={clientManager!}  isLoading={isLoading} />
               </div>
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
                 <div className='w-2/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>

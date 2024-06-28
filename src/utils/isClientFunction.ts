@@ -3,6 +3,7 @@ import { ClientType } from "@/types/clientType";
 export interface isClientType {
     newClient: boolean;
     diff: number;
+    clientCount: number;
 }
 
 export function isClientFunction(clients: ClientType[]) {
@@ -19,9 +20,9 @@ export function isClientFunction(clients: ClientType[]) {
     
     if (clientManager.newClient > clientManager.oldClient) {
         const diff = clientManager.newClient - clientManager.oldClient;
-        return {newClient: true, diff} 
+        return {newClient: true, diff, clientCount: clientManager.newClient} 
     } else {
         const diff = clientManager.oldClient - clientManager.newClient;
-        return {newClient: false, diff}
+        return {newClient: false, diff, clientCount: clientManager.newClient}
     }
 }

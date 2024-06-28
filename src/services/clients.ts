@@ -1,7 +1,9 @@
 import { db } from "@/lib/firebase";
 import { ClientType } from "@/types/clientType";
+import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
+import { isClientFunction } from "@/utils/isClientFunction";
 import { create } from "domain";
-import { collection, query, getDocs, addDoc, Timestamp } from "firebase/firestore";
+import { collection, query, getDocs, addDoc, Timestamp, where } from "firebase/firestore";
 
 export interface ClientTypeFirebase extends ClientType {
     id: string;
@@ -37,4 +39,44 @@ export async function getAllClients() {
         console.log("Error getting documents: ", error);
         throw new Error("Failed to fetch clients");
     }
+}
+
+export async function peopleCounts() {
+    const clientRef = collection(db, "clients");
+    
+    // dados de pessoa fisica
+    const physicalQuery  = query(clientRef, where("peopleType", "==", "Pessoa Física"));
+    const physicalSnapshot = await getDocs(physicalQuery);
+    const physicalSnapshotSize = physicalSnapshot.size;
+
+    // dados de pessoa juridica
+    const legalQuery = query(clientRef, where("peopleType", "==", "Pessoa Jurídica"));
+    const legalSnapshot = await getDocs(legalQuery);
+    const legalSnapshotSize = legalSnapshot.size;
+
+
+    // const peopleTypeManager = PeopleTypeFunction(physicalSnapshotSize, legalSnapshotSize);
+    // return peopleTypeManager;
+
+    return { physicalSnapshotSize, legalSnapshotSize };
+
+}
+
+export async function clientsTypeCount() {
+    const clientRef = collection(db, 'clients')
+
+    // dados para os novos clientes
+    const newClientQuery = query(clientRef, where("isClient", "==", "Novo cliente"))
+    const newClientSnapshot = await getDocs(newClientQuery)
+    const newClientSnapshotSize = newClientSnapshot.size
+
+    // dados para clientes antigos
+    const oldClientQuery = query(clientRef, where("isClient", "==", "Cliente da casa"))
+    const oldClientSnapshot = await getDocs(oldClientQuery)
+    const oldClientSnapshotSize = oldClientSnapshot.size
+
+    // const clientTypeManager = isClientFunction(newClientSnapshotSize, oldClientSnapshotSize)
+    // return clientTypeManager
+
+    return { newClientSnapshotSize, oldClientSnapshotSize}
 }
