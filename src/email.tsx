@@ -37,6 +37,7 @@ const ArkanInviteCLientEmail = ({
   isClient
   }: ArkanInviteCLientEmailProps) => {
     const previewText = `Informações do cliente`;
+    const previewUrl = "http://localhost:3000/email";
   
     return (
       <Html>
@@ -47,8 +48,8 @@ const ArkanInviteCLientEmail = ({
             <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto px-5 pb-5 max-w-[465px]">
               <Section>
               <Img
-                className="bg-cover bg-center bg-no-repeat h-[143px] w-full"
-                src="http://localhost:3000/email/bg_email2.jpg"
+                className="w-[425px] object-cover rounded-full"
+                src="https://scontent.frec5-1.fna.fbcdn.net/v/t39.30808-6/380697712_765556835580568_6746200764253045902_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=P3c_5A6xmJ0Q7kNvgH6ibbN&_nc_pt=1&_nc_ht=scontent.frec5-1.fna&oh=00_AYATImdk6Oc4g3c2A5GntHlcA8TdqZgYuYj4cZLfUjKxpw&oe=6683E7FA"
                 alt="Background Arkan Email"
               />
               </Section>

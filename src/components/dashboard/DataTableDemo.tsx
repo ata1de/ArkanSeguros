@@ -126,7 +126,7 @@ export function DataTableDemo({data}: DataTableDemoProps) {
     },
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize: 8,
       },
     },
   })

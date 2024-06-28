@@ -1,6 +1,11 @@
 import React from 'react'
 import DashboardCard from './DashboardCard'
 import { Activity, CreditCard, DollarSign, User } from 'lucide-react'
+import { isClientType } from '@/utils/isClientFunction'
+
+interface SectionCardDashboardProps {
+  clientManager: isClientType
+}
 
 const SectionCardDashboard = () => {
   return (

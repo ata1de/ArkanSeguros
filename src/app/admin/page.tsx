@@ -5,12 +5,13 @@ import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
 import { ClientTypeFirebase, getAllClients } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { isClientFunction, isClientType } from '@/utils/isClientFunction';
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const AdminPage = () => {
 };
 
 const AdminContent = () => {
+  const [clientManager, setClientManager] = useState<isClientType>();
   const getAllUsers = async () => {
     try {
       const response = await getAllClients();
@@ -33,10 +35,15 @@ const AdminContent = () => {
     }
   };
 
-  const dataUsers = useQuery<ClientTypeFirebase[]>({
+  const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
+
+  useEffect(() => {
+    const clientManager = isClientFunction(dataUsers!);
+    setClientManager(clientManager);
+  }, [])
 
   return (
     <div className='bg-DarkBlue min-h-screen text-WhiteDefault'>
@@ -77,7 +84,7 @@ const AdminContent = () => {
           <TabsContent value='users'>
             <div className='flex flex-col gap-3 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Clientes</h1>
-              <DataTableDemo data={dataUsers.data!} />
+              <DataTableDemo data={dataUsers!} />
             </div>
           </TabsContent>
         </Tabs>
