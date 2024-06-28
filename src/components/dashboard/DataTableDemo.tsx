@@ -35,82 +35,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { ClientTypeFirebase } from "@/services/clients"
+interface DataTableDemoProps {
+  data: ClientTypeFirebase[]
 
-const data: Person[] = [
-  {
-    id: "1",
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    peopleType: "Juridica",
-    demand: "High",
-    service: "Odonto",
-    isClient: "New"
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    email: "jane.smith@example.com",
-    phone: "098-765-4321",
-    peopleType: "Fisica",
-    demand: "Medium",
-    service: "Maquinas",
-    isClient: "Existing"
-  },
-  {
-    id: "3",
-    name: "Robert Brown",
-    email: "robert.brown@example.com",
-    phone: "567-890-1234",
-    peopleType: "Fisica",
-    demand: "Low",
-    service: "Certificado",
-    isClient: "New"
-  },
-  {
-    id: "4",
-    name: "Emily Davis",
-    email: "emily.davis@example.com",
-    phone: "432-109-8765",
-    peopleType: "Client",
-    demand: "High",
-    service: "Insurance",
-    isClient: "Existing"
-  },
-  {
-    id: "5",
-    name: "Michael Wilson",
-    email: "michael.wilson@example.com",
-    phone: "678-345-0123",
-    peopleType: "Fisica",
-    demand: "Medium",
-    service: "Consulting",
-    isClient: "New"
-  },
-  {
-    id: "6",
-    name: "Mateus Ataide",
-    email: "mateus@example.com",
-    phone: "678-345-0123",
-    peopleType: "Juridica",
-    demand: "Medium",
-    service: "Consulting",
-    isClient: "New"
-  },
-]
-
-export type Person = {
-  id: string
-  name: string
-  email: string
-  phone: string
-  peopleType: string
-  demand: string
-  service: string
-  isClient: string
 }
 
-export const columns: ColumnDef<Person>[] = [
+export const columns: ColumnDef<ClientTypeFirebase>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -166,7 +97,7 @@ export const columns: ColumnDef<Person>[] = [
   },
 ]
 
-export function DataTableDemo() {
+export function DataTableDemo({data}: DataTableDemoProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
