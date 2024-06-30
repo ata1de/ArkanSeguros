@@ -1,28 +1,16 @@
-import { ClientType } from "@/types/clientType";
-
 export interface isClientType {
     newClient: boolean;
     diff: number;
     clientCount: number;
 }
 
-export function isClientFunction(clients: ClientType[]) {
-    const clientManager = {newClient: 0, oldClient: 0};
-
-    clients.forEach((client) => {
-        if (client.isClient === 'Cliente da casa') {
-            clientManager.oldClient += 1;
-        } else {
-            clientManager.newClient += 1;
-        }
-    })
-
-    
-    if (clientManager.newClient > clientManager.oldClient) {
-        const diff = clientManager.newClient - clientManager.oldClient;
-        return {newClient: true, diff, clientCount: clientManager.newClient} 
+export function isClientFunction(newClientSnapshotSize: number, oldClientSnapshortSize: number) {    
+    if (newClientSnapshotSize > oldClientSnapshortSize) {
+        const diff = newClientSnapshotSize - oldClientSnapshortSize;
+        return {newClient: true, diff, clientCount: newClientSnapshotSize} 
     } else {
-        const diff = clientManager.oldClient - clientManager.newClient;
-        return {newClient: false, diff, clientCount: clientManager.newClient}
+        const diff = oldClientSnapshortSize - newClientSnapshotSize;
+        return {newClient: false, diff, clientCount: oldClientSnapshortSize}
     }
 }
+

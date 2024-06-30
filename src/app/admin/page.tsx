@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
-import { ClientTypeFirebase, getAllClients } from '@/services/clients';
+import { ClientTypeFirebase, clientsTypeCount, getAllClients, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientFunction, isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
@@ -37,19 +37,26 @@ const AdminContent = () => {
       console.error("Error fetching match details:", error);
       throw new Error("Failed to fetch match details");
     }
-  };
-  
+  };  
   const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
 
-  useEffect(() => {
-    if (dataUsers) {
-      const clientManager = isClientFunction(dataUsers);
-      const peopleTypeManager = PeopleTypeFunction(dataUsers);
+  const cardAnalytics = async () => {
+    try {
+      const clientManager = await clientsTypeCount()
+      const peopleTypeManager = await peopleCounts() 
       setPeopleTypeManager(peopleTypeManager);
       setClientManager(clientManager);
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    if (dataUsers) {
+      cardAnalytics()
     }
   }, [dataUsers]);
 

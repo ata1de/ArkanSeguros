@@ -45,20 +45,20 @@ export async function peopleCounts() {
     const clientRef = collection(db, "clients");
     
     // dados de pessoa fisica
-    const physicalQuery  = query(clientRef, where("peopleType", "==", "Pessoa Física"));
+    const physicalQuery  = query(clientRef, where("peopleType", "==", "Pessoa Fisica"));
     const physicalSnapshot = await getDocs(physicalQuery);
     const physicalSnapshotSize = physicalSnapshot.size;
 
     // dados de pessoa juridica
-    const legalQuery = query(clientRef, where("peopleType", "==", "Pessoa Jurídica"));
+    const legalQuery = query(clientRef, where("peopleType", "==", "Pessoa Juridica"));
     const legalSnapshot = await getDocs(legalQuery);
     const legalSnapshotSize = legalSnapshot.size;
 
 
-    // const peopleTypeManager = PeopleTypeFunction(physicalSnapshotSize, legalSnapshotSize);
-    // return peopleTypeManager;
+    const peopleTypeManager = PeopleTypeFunction(physicalSnapshotSize, legalSnapshotSize);
+    return peopleTypeManager;
 
-    return { physicalSnapshotSize, legalSnapshotSize };
+    // return { physicalSnapshotSize, legalSnapshotSize };
 
 }
 
@@ -75,8 +75,8 @@ export async function clientsTypeCount() {
     const oldClientSnapshot = await getDocs(oldClientQuery)
     const oldClientSnapshotSize = oldClientSnapshot.size
 
-    // const clientTypeManager = isClientFunction(newClientSnapshotSize, oldClientSnapshotSize)
-    // return clientTypeManager
+    const clientTypeManager = isClientFunction(newClientSnapshotSize, oldClientSnapshotSize)
+    return clientTypeManager
 
-    return { newClientSnapshotSize, oldClientSnapshotSize}
+    // return { newClientSnapshotSize, oldClientSnapshotSize}
 }
