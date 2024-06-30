@@ -1,6 +1,7 @@
 import { signInWithEmailAndPassword, auth } from '@/lib/firebase'
 import { generateToken } from '@/lib/jwt'
 import { NextRequest, NextResponse } from 'next/server'
+import  bcrypt from 'bcrypt'
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json()
@@ -9,11 +10,12 @@ export async function POST(req: NextRequest) {
     await signInWithEmailAndPassword(auth, email, password)
     if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
       const token = generateToken(email)
+      const tokenCrypt = await bcrypt.hash(token, 10)
       const response = NextResponse.json({ success: true })
-      response.cookies.set('auth-token', token, {
+      response.cookies.set('auth-token', tokenCrypt, {
         httpOnly: true,
         path: '/',
-        maxAge: 3600,
+        maxAge: 86400, // 1 day in seconds
         secure: true,
         sameSite: 'strict',
       })
