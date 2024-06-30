@@ -4,6 +4,8 @@ import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 import { create } from "domain";
 import { collection, query, getDocs, addDoc, Timestamp, where } from "firebase/firestore";
+import dayjs from 'dayjs';
+import { m } from "framer-motion";
 
 export interface ClientTypeFirebase extends ClientType {
     id: string;
@@ -80,3 +82,36 @@ export async function clientsTypeCount() {
 
     // return { newClientSnapshotSize, oldClientSnapshotSize}
 }
+
+export async function getUserCountByMonth() {
+    const clientRef = collection(db, 'clients')
+    const currentYear = dayjs().year();
+
+    // inizializar um objeto para cada mes
+    const userCountByMonth = [
+        { month: 'Jan', clicks: 0 },
+        { month: 'Feb', clicks: 0 },
+        { month: 'Mar', clicks: 0 },
+        { month: 'Apr', clicks: 0 },
+        { month: 'May', clicks: 0 },
+        { month: 'Jun', clicks: 0 },
+        { month: 'Jul', clicks: 0 },
+        { month: 'Aug', clicks: 0 },
+        { month: 'Sep', clicks: 0 },
+        { month: 'Oct', clicks: 0 },
+        { month: 'Nov', clicks: 0 },
+        { month: 'Dec', clicks: 0 },
+      ];
+
+    for (let month = 0; month < 12; month++) {
+        const start = dayjs().year(currentYear).month(month).startOf('month').toDate();
+        const end = dayjs().year(currentYear).month(month).endOf('month').toDate();
+
+        const queryData = query(clientRef, where('createdAt', '>=', start), where('createdAt', '<=', end))
+
+        const queryDataSnapshot = await getDocs(queryData)
+        userCountByMonth[month].clicks = queryDataSnapshot.size;
+    }
+
+    return userCountByMonth
+} 

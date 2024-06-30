@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
-import { ClientTypeFirebase, clientsTypeCount, getAllClients, peopleCounts } from '@/services/clients';
+import { ClientTypeFirebase, clientsTypeCount, getAllClients, getUserCountByMonth, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientFunction, isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
@@ -27,6 +27,7 @@ const AdminPage = () => {
 const AdminContent = () => {
   const [clientManager, setClientManager] = useState<isClientType>();
   const [peopleTypeManager, setPeopleTypeManager] = useState<PeopleTypeProps>();
+  const [usersCount, setUserCount] = useState<{ month: string; clicks: number; }[]>([]);
 
 
   const getAllUsers = async () => {
@@ -47,6 +48,8 @@ const AdminContent = () => {
     try {
       const clientManager = await clientsTypeCount()
       const peopleTypeManager = await peopleCounts() 
+      const userByMonth = await getUserCountByMonth()
+      setUserCount(userByMonth)
       setPeopleTypeManager(peopleTypeManager);
       setClientManager(clientManager);
     } catch (error) {
@@ -88,7 +91,7 @@ const AdminContent = () => {
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
                 <div className='w-2/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
                   <p className='text-xl font-medium py-3'>Usuários/mês</p>
-                  <FormClicksChart />
+                  <FormClicksChart data={usersCount} />
                 </div>
                 <div className='w-1/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
                   <p className='text-xl font-medium py-3'>Serviço/usuário</p>

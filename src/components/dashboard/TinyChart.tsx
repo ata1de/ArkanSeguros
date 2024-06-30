@@ -1,6 +1,18 @@
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+
+// Definindo o tipo dos dados
+interface DataPoint {
+  month: string;
+  clicks: number;
+}
+
+// Tipo dos props do FormClicksChart
+interface FormClicksChartProps {
+  data: DataPoint[];
+}
+
 const data = [
   { month: 'Jan', clicks: 50 },
   { month: 'Feb', clicks: 75 },
@@ -16,7 +28,7 @@ const data = [
   { month: 'Dec', clicks: 120 },
 ];
 
-const FormClicksChart = () => {
+const FormClicksChart = ({data}: FormClicksChartProps) => {
   return (
     <ResponsiveContainer width="100%" height="100%">
         <LineChart width={300} height={100} data={data}>
