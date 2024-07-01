@@ -9,7 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
-import { ClientTypeFirebase, clientsTypeCount, getAllClients, getUserCountByMonth, peopleCounts } from '@/services/clients';
+import { ClientTypeFirebase, clientsTypeCount, getAllClients, getServicesByUsers, getUserCountByMonth, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientFunction, isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
@@ -70,6 +70,17 @@ const AdminContent = () => {
     }
   }
 
+
+  const getServices = async () => {
+    try {
+      const response = await getServicesByUsers();
+      return response;
+    } catch (error) {
+      console.error("Error fetching match details:", error);
+      throw new Error("Failed to fetch people type");
+    }
+  }
+
   const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
@@ -88,6 +99,11 @@ const AdminContent = () => {
   const {data: dataUserByMonth, isLoading: isLoadingUserByMonth} = useQuery<{ month: string; clicks: number; }[]>({
     queryKey: ['userByMonth'],
     queryFn: getUserByMonth,
+  });
+
+  const {data: dataServices, isLoading: isLoadingServices} = useQuery({
+    queryKey: ['services'],
+    queryFn: getServices,
   });
   // const cardAnalytics = async () => {
   //   try {
@@ -134,13 +150,13 @@ const AdminContent = () => {
                 <SectionCardDashboard peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoading={isLoadingClientManager} />
               </div>
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
-                <div className='w-2/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
+                <div className='w-2/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
                   <p className='text-xl font-medium py-3'>Usuários/mês</p>
                   <FormClicksChart data={dataUserByMonth!} isLoading={isLoadingUserByMonth} />
                 </div>
-                <div className='w-1/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
+                <div className='w-1/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
                   <p className='text-xl font-medium py-3'>Serviço/usuário</p>
-                  <PieCharts />
+                  <PieCharts data={dataServices!} isLoading={isLoadingServices} />
                 </div>
               </div>
             </div>

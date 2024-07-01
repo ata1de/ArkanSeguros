@@ -114,4 +114,35 @@ export async function getUserCountByMonth() {
     }
 
     return userCountByMonth
+}
+
+export async function getServicesByUsers() {
+    const clientRef = collection(db, 'clients')
+    // inizializar um objeto para cada mes
+    const servicesTotal = [
+        { name: 'Plano Odontológico', value: 0 },
+        { name: 'Plano de Saúde', value: 0 },
+        { name: 'Seguros Automotivos', value: 0 },
+        { name: 'Proteção Veicular', value: 0 },
+        { name: 'Seguros de Máquinas', value: 0 },
+        { name: 'Seguro de Vida', value: 0 },
+        { name: 'Seguros Prediais', value: 0 },
+        { name: 'Certificados Digitais', value: 0 },
+      ];
+
+      for (let service = 0; service < 8; service++) {
+        const queryService = query(clientRef, where('service', '==', `${servicesTotal[service].name}`))
+
+        const queryServiceSnapshot = await getDocs(queryService)
+        servicesTotal[service].value = queryServiceSnapshot.size
+      }
+    
+
+    return servicesTotal
 } 
+
+
+
+
+
+
