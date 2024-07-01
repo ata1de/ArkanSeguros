@@ -36,32 +36,77 @@ const AdminContent = () => {
       return response;
     } catch (error) {
       console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch match details");
+      throw new Error("Failed to fetch all clients");
     }
-  };  
+  };
+  
+  const getClientManager = async () => {
+    try {
+      const response = await clientsTypeCount();
+      return response;
+    } catch (error) {
+      console.error("Error fetching match details:", error);
+      throw new Error("Failed to fetch clients type");
+    }
+  }
+
+  const getPeopleTypeManager = async () => {
+    try {
+      const response = await peopleCounts();
+      return response;
+    } catch (error) {
+      console.error("Error fetching match details:", error);
+      throw new Error("Failed to fetch people type");
+    }
+  }
+
+  const getUserByMonth = async () => {
+    try {
+      const response = await getUserCountByMonth();
+      return response;
+    } catch (error) {
+      console.error("Error fetching match details:", error);
+      throw new Error("Failed to fetch user count by month");
+    }
+  }
+
   const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
 
-  const cardAnalytics = async () => {
-    try {
-      const clientManager = await clientsTypeCount()
-      const peopleTypeManager = await peopleCounts() 
-      const userByMonth = await getUserCountByMonth()
-      setUserCount(userByMonth)
-      setPeopleTypeManager(peopleTypeManager);
-      setClientManager(clientManager);
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const {data: dataPeopleManager} = useQuery<PeopleTypeProps>({
+    queryKey: ['peopleTypeManager'],
+    queryFn: getPeopleTypeManager,
+  });
 
-  useEffect(() => {
-    if (dataUsers) {
-      cardAnalytics()
-    }
-  }, [dataUsers]);
+  const {data: dataClientManager, isLoading: isLoadingClientManager} = useQuery<isClientType>({
+    queryKey: ['clientManager'],
+    queryFn: getClientManager,
+  });
+
+  const {data: dataUserByMonth, isLoading: isLoadingUserByMonth} = useQuery<{ month: string; clicks: number; }[]>({
+    queryKey: ['userByMonth'],
+    queryFn: getUserByMonth,
+  });
+  // const cardAnalytics = async () => {
+  //   try {
+  //     const clientManager = await clientsTypeCount()
+  //     const peopleTypeManager = await peopleCounts() 
+  //     const userByMonth = await getUserCountByMonth()
+  //     setUserCount(userByMonth)
+  //     setPeopleTypeManager(peopleTypeManager);
+  //     setClientManager(clientManager);
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   if (dataUsers) {
+  //     cardAnalytics()
+  //   }
+  // }, [dataUsers]);
 
 
   return (
@@ -86,12 +131,12 @@ const AdminContent = () => {
             <div className='flex flex-col gap-5 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Dashboard</h1>
               <div>
-                <SectionCardDashboard peopleTypeManager={peopleTypeManager!} clientManager={clientManager!}  isLoading={isLoading} />
+                <SectionCardDashboard peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoading={isLoadingClientManager} />
               </div>
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
                 <div className='w-2/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
                   <p className='text-xl font-medium py-3'>Usuários/mês</p>
-                  <FormClicksChart data={usersCount} />
+                  <FormClicksChart data={dataUserByMonth!} isLoading={isLoadingUserByMonth} />
                 </div>
                 <div className='w-1/3 max-[1301px]:w-full h-[300px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
                   <p className='text-xl font-medium py-3'>Serviço/usuário</p>
