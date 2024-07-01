@@ -19,7 +19,7 @@ export default function Home() {
     
   }
   useEffect(() => {
-    Aos.init({ duration: 1000 });
+    Aos.init({ duration: 1200 });
     Aos.refresh();
   }, []);
 
@@ -30,7 +30,7 @@ export default function Home() {
 
       <div className="bg-WhiteDefault rounded-lg mb-7 ">
         <div id='sobre' data-aos='fade-right' data-aos-duration='1200' className='flex items-center justify-start  min-[1550px]:justify-center gap-12 py-20 px-8 sm:px-24'>
-          <Image width={488} height={400} data-aos-duration='1200' className='w-[300px] items-center justify-center pl-5 hidden min-[830px]:flex' src="/arkan_vertical.svg" alt="logo da Arkan" />
+          <Image width={488} height={400} className='w-[300px] items-center justify-center pl-5 hidden min-[830px]:flex' src="/arkan_vertical.svg" alt="logo da Arkan" />
 
           <div  className='flex justify-center items-center lg:items-start flex-col pl-5 w-[700px]'>
             <p className='text-sm font-bold pb-8'>A <span className='text-Yellow '>Arkan Seguros</span> é uma empresa verdadeira moderna, impulsionada por uma equipe altamente motivada de profissionais excepcionais e experientes</p>

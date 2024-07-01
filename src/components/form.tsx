@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from './ui/label';
 import { services } from '@/data/services';
+import { createClient } from '@/services/clients';
 
 const clientSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -35,36 +36,37 @@ const Forms = () => {
     reset();
     try {
       const emailConfig = {
-        userName: data.name,
-        userEmail: data.email,
         subject: 'Relatório de novo cliente',
-        html: `Olá,\n\nAqui estão as informações dos novos clientes registrados no seu site:\n\n\
-                <p>Nome: ${data.name}</p>\n\
-               <p>Email: ${data.email}</p>\n\
-               <p>Telefone: ${data.phone}</p>\n\
-               <p>Tipo de Pessoa: ${data.peopleType}</p>\n\
-               <p>Tipo de serviço: ${data.service}</p>\n\
-               <p>Segurado: ${data.isClient}</p>\n\
-               <p>Demanda: ${data.demand}</p>\n\
-               --------------------------\n`
+        data: data
       };
 
-      const response = await fetch('/api/sendMail', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(emailConfig)
-      });
-
-      if (response.ok) {
-        toast.success('Formulário enviado com sucesso!', {
-          style: { backgroundColor: '#25D366', color: 'white' },
-          position: 'bottom-left',
-          duration: 2500 // O toast desaparecerá após alguns segundos
+      const responsePostClient = await createClient(data);
+      
+      if (responsePostClient.status === 200) {
+        
+        const response = await fetch('/api/sendMail', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(emailConfig)
         });
-      } else {
-        toast.error('Falha ao enviar formulário. Tente novamente.', {
+  
+        if (response.ok) {
+          toast.success('Formulário enviado com sucesso!', {
+            style: { backgroundColor: '#25D366', color: 'white' },
+            position: 'bottom-left',
+            duration: 2500 // O toast desaparecerá após alguns segundos
+          });
+        } else {
+          toast.error('Falha ao enviar formulário. Tente novamente.', {
+            style: { backgroundColor: '#EE1B22', color: 'white' },
+            position: 'bottom-left',
+            duration: 2500
+          });
+        }}
+      else {
+        toast.error('Erro na transferência de dados', {
           style: { backgroundColor: '#EE1B22', color: 'white' },
           position: 'bottom-left',
           duration: 2500

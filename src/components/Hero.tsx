@@ -35,16 +35,17 @@ function findWord(service: string){
 }
 
 const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
-  const containerStyle = {
-    position: 'relative',
-    height: '100vh',
+  const containerStyle: React.CSSProperties = {
+    position: "relative",
+    height: "100vh",
     backgroundImage: `url(${bgUrl})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
   };
+  
 
-  const overlayStyle = {
+  const overlayStyle: React.CSSProperties = {
     position: 'absolute',
     top: 0,
     left: 0,
@@ -54,7 +55,7 @@ const Hero = ({title, lastWordSubTitle, bgUrl }: HeroInterface) => {
     zIndex: 1,
   };
 
-  const contentStyle = {
+  const contentStyle: React.CSSProperties = {
     position: 'relative',
     zIndex: 2,
     color: 'white',

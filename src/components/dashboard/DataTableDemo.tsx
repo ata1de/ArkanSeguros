@@ -1,6 +1,8 @@
-"use client";
-import * as React from "react";
+"use client"
+
+import * as React from "react"
 import {
+  ColumnDef,
   ColumnFiltersState,
   SortingState,
   VisibilityState,
@@ -9,35 +11,101 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  useReactTable
-} from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+  useReactTable,
+} from "@tanstack/react-table"
+import { ArrowUpDown, ChevronDown } from "lucide-react"
+
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
-  DropdownMenuContent, DropdownMenuTrigger
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import { Input } from "@/components/ui/input"
 import {
   Table,
   TableBody,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow
-} from "@/components/ui/table";
-import { columns } from "./TableShadcnDash";
+  TableRow,
+} from "@/components/ui/table"
+import { ClientTypeFirebase } from "@/services/clients"
+interface DataTableDemoProps {
+  data: ClientTypeFirebase[]
 
+}
 
-export function DataTableDemo() {
-  const [sorting, setSorting] = React.useState<SortingState>([]);
+export const columns: ColumnDef<ClientTypeFirebase>[] = [
+  {
+    accessorKey: "name",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="hover:bg-muted/10 hover:text-WhiteDefault"
+      >
+        Nome
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+    cell: ({ row }) => <div>{row.getValue("name")}</div>,
+  },
+  {
+    accessorKey: "email",
+    header: ({ column }) => (
+      <Button
+        variant="ghost"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        className="hover:bg-muted/10 hover:text-WhiteDefault"
+      >
+        Email
+        <ArrowUpDown className="ml-2 h-4 w-4" />
+      </Button>
+    ),
+    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+  },
+  {
+    accessorKey: "phone",
+    header: "Telefone",
+    cell: ({ row }) => <div>{row.getValue("phone")}</div>,
+  },
+  {
+    accessorKey: "peopleType",
+    header: "Pessoa",
+    cell: ({ row }) => <div>{row.getValue("peopleType")}</div>,
+  },
+  {
+    accessorKey: "demand",
+    header: "Demanda",
+    cell: ({ row }) => <div>{row.getValue("demand")}</div>,
+  },
+  {
+    accessorKey: "service",
+    header: "Serviço",
+    cell: ({ row }) => <div>{row.getValue("service")}</div>,
+  },
+  {
+    accessorKey: "isClient",
+    header: "Status do cliente",
+    cell: ({ row }) => <div>{row.getValue("isClient")}</div>,
+  },
+]
+
+export function DataTableDemo({data}: DataTableDemoProps) {
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
-  );
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = React.useState({});
-  const [currentPage, setCurrentPage] = React.useState(0);
+  )
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
+  const [currentPage, setCurrentPage] = React.useState(0)
 
   const table = useReactTable({
     data,
@@ -58,10 +126,10 @@ export function DataTableDemo() {
     },
     initialState: {
       pagination: {
-        pageSize: 5,
+        pageSize: 8,
       },
     },
-  });
+  })
 
   return (
     <div className="w-full">
@@ -69,8 +137,11 @@ export function DataTableDemo() {
         <Input
           placeholder="Filtrar pelo email.."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
-          className="max-w-sm bg-DarkBlue focus:ring-primary-500 focus:border-none text-WhiteDefault" />
+          onChange={(event) =>
+            table.getColumn("email")?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm bg-DarkBlue focus:ring-primary-500 focus:border-none text-WhiteDefault"
+        />
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="bg-DarkBlue hover:bg-muted/10 hover:text-WhiteDefault">
             <Button variant="outline" className="ml-auto">
@@ -87,11 +158,13 @@ export function DataTableDemo() {
                     key={column.id}
                     className="capitalize"
                     checked={column.getIsVisible()}
-                    onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
                   >
                     {column.id}
                   </DropdownMenuCheckboxItem>
-                );
+                )
               })}
           </DropdownMenuContent>
         </DropdownMenu>
@@ -107,11 +180,11 @@ export function DataTableDemo() {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -156,8 +229,8 @@ export function DataTableDemo() {
             size="sm"
             className="bg-DarkBlue text-WhiteDefault hover:bg-muted/10 hover:text-WhiteDefault"
             onClick={() => {
-              table.previousPage();
-              setCurrentPage(table.getState().pagination.pageIndex - 1);
+              table.previousPage()
+              setCurrentPage(table.getState().pagination.pageIndex - 1)
             }}
             disabled={!table.getCanPreviousPage()}
           >
@@ -168,8 +241,8 @@ export function DataTableDemo() {
             size="sm"
             className="bg-DarkBlue text-WhiteDefault hover:bg-muted/10 hover:text-WhiteDefault"
             onClick={() => {
-              table.nextPage();
-              setCurrentPage(table.getState().pagination.pageIndex + 1);
+              table.nextPage()
+              setCurrentPage(table.getState().pagination.pageIndex + 1)
             }}
             disabled={!table.getCanNextPage()}
           >
@@ -178,5 +251,5 @@ export function DataTableDemo() {
         </div>
       </div>
     </div>
-  );
+  )
 }
