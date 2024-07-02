@@ -17,7 +17,8 @@ export async function createClient(data: ClientType) {
     try {
         await addDoc(clientRef, {
             ...data,
-            createdAt: Timestamp.now()
+            createdAt: Timestamp.now(),
+            stats: 'nulo'
         }); 
         return { status: 200 }
     } catch (error) {

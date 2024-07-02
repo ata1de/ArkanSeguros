@@ -36,9 +36,52 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { ClientTypeFirebase } from "@/services/clients"
+import Image from "next/image"
+
 interface DataTableDemoProps {
   data: ClientTypeFirebase[]
+}
 
+const statusOptions = ["Feito", "Cancelado", "Em progreso", "Neutro"]
+
+const styledStats = (status: string) => {
+  switch (status) {
+    case "Feito":
+      return "/statsTable/sucessStats.svg"
+    case "Cancelado":
+      return "/statsTable/failedStats.svg"
+    case "Em progreso":
+      return "/statsTable/progressStats.svg"
+    default:
+      return "/statsTable/nullStats.svg"
+  }
+}
+
+const StatusButton: React.FC<{ initialStatus: string }> = ({ initialStatus }) => {
+  const [status, setStatus] = React.useState(initialStatus)
+  const [imgStatus, setImgStatus] = React.useState(styledStats(initialStatus))
+
+
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild className="bg-transparent border-none">
+        <Button variant="outline" className="capitalize">
+         <Image src={styledStats(status)} width={10} height={10} alt="" className="mr-2"/>  {status} <ChevronDown className="ml-2 h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {statusOptions.map((option) => (
+          <DropdownMenuItem
+            key={option}
+            onClick={() => {setStatus(option)}}
+          >
+            <Image src={styledStats(option)} width={10} height={10} alt="" className="mr-2"/> {option}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }
 
 export const columns: ColumnDef<ClientTypeFirebase>[] = [
@@ -83,13 +126,17 @@ export const columns: ColumnDef<ClientTypeFirebase>[] = [
   {
     accessorKey: "demand",
     header: "Demanda",
-    cell: ({ row }) => <div className="
-    truncate max-w-[120px]">{row.getValue("demand")}</div>,
+    cell: ({ row }) => <div className="truncate max-w-[120px]">{row.getValue("demand")}</div>,
   },
   {
     accessorKey: "service",
     header: "Serviço",
     cell: ({ row }) => <div>{row.getValue("service")}</div>,
+  },
+  {
+    accessorKey: "stats",
+    header: "Status",
+    cell: ({ row }) => <StatusButton initialStatus={row.getValue("stats")} />,
   },
   {
     accessorKey: "isClient",
@@ -98,13 +145,10 @@ export const columns: ColumnDef<ClientTypeFirebase>[] = [
   },
 ]
 
-export function DataTableDemo({data}: DataTableDemoProps) {
+export function DataTableDemo({ data }: DataTableDemoProps) {
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
   const [currentPage, setCurrentPage] = React.useState(0)
 
@@ -138,9 +182,7 @@ export function DataTableDemo({data}: DataTableDemoProps) {
         <Input
           placeholder="Filtrar pelo email.."
           value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
-          }
+          onChange={(event) => table.getColumn("email")?.setFilterValue(event.target.value)}
           className="max-w-sm bg-DarkBlue focus:ring-primary-500 focus:border-none text-WhiteDefault"
         />
         <DropdownMenu>
@@ -150,23 +192,18 @@ export function DataTableDemo({data}: DataTableDemoProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end" className="bg-DarkBlue text-WhiteDefault ">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
+            {table.getAllColumns().filter((column) => column.getCanHide()).map((column) => {
+              return (
+                <DropdownMenuCheckboxItem
+                  key={column.id}
+                  className="capitalize"
+                  checked={column.getIsVisible()}
+                  onCheckedChange={(value) => column.toggleVisibility(!!value)}
+                >
+                  {column.id}
+                </DropdownMenuCheckboxItem>
+              )
+            })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
@@ -178,12 +215,7 @@ export function DataTableDemo({data}: DataTableDemoProps) {
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </TableHead>
                   )
                 })}
@@ -193,26 +225,17 @@ export function DataTableDemo({data}: DataTableDemoProps) {
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
+                <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
                 </TableRow>
               ))
             ) : (
               <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                <TableCell colSpan={columns.length} className="h-24 text-center">
                   Sem resultados.
                 </TableCell>
               </TableRow>

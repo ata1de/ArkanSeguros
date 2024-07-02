@@ -10,7 +10,7 @@ export function isClientFunction(newClientSnapshotSize: number, oldClientSnapsho
         return {newClient: true, diff, clientCount: newClientSnapshotSize} 
     } else {
         const diff = oldClientSnapshortSize - newClientSnapshotSize;
-        return {newClient: false, diff, clientCount: oldClientSnapshortSize}
+        return {newClient: false, diff, clientCount: newClientSnapshotSize} 
     }
 }
 

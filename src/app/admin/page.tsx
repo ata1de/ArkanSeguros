@@ -1,5 +1,5 @@
 "use client"
-import PieCharts from '@/components/dashboard/PieChart';
+import PieCharts, { Icons } from '@/components/dashboard/PieChart';
 import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
 import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import FormClicksChart from '@/components/dashboard/TinyChart';
@@ -165,7 +165,14 @@ const AdminContent = () => {
           <TabsContent value='users'>
             <div className='flex flex-col gap-3 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Clientes</h1>
+              {isLoading ? 
+              <div className='w-full h-full m-auto flex items-center justify-center'>
+                <Icons.spinner className='w-14 h-14 animate-spin' />
+              </div>
+              :
               <DataTableDemo data={dataUsers!} />
+              
+              }
             </div>
           </TabsContent>
         </Tabs>
