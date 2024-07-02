@@ -83,7 +83,8 @@ export const columns: ColumnDef<ClientTypeFirebase>[] = [
   {
     accessorKey: "demand",
     header: "Demanda",
-    cell: ({ row }) => <div>{row.getValue("demand")}</div>,
+    cell: ({ row }) => <div className="
+    truncate max-w-[120px]">{row.getValue("demand")}</div>,
   },
   {
     accessorKey: "service",

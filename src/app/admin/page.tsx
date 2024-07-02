@@ -13,6 +13,7 @@ import { ClientTypeFirebase, clientsTypeCount, getAllClients, getServicesByUsers
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientFunction, isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
+import Link from 'next/link';
 
 const queryClient = new QueryClient();
 
@@ -130,7 +131,7 @@ const AdminContent = () => {
       <div className='px-5 py-2'>
         <Tabs defaultValue='home'>
           <TabsList className='flex justify-center items-center gap-7 w-[400px] bg-DarkBlue my-4 pl-5'>
-            <Image className='object-contain' src="/arkan_logo_dark.svg" alt="Arkan Seguros" width={70} height={70} />
+            <Link href='/'><Image className='object-contain' src="/arkan_logo_dark.svg" alt="Arkan Seguros" width={70} height={70} /></Link>
             <div className='grid grid-cols-2 w-[300px]'>
               <TabsTrigger value='home' className='flex justify-center items-center gap-3'>
                 <HomeIcon size={24} className='' />
