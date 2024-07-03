@@ -103,32 +103,11 @@ const AdminContent = () => {
     queryFn: getServices,
   });
 
-  console.log(dataUsers)
-  // const cardAnalytics = async () => {
-  //   try {
-  //     const clientManager = await clientsTypeCount()
-  //     const peopleTypeManager = await peopleCounts() 
-  //     const userByMonth = await getUserCountByMonth()
-  //     setUserCount(userByMonth)
-  //     setPeopleTypeManager(peopleTypeManager);
-  //     setClientManager(clientManager);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (dataUsers) {
-  //     cardAnalytics()
-  //   }
-  // }, [dataUsers]);
-
-
   return (
     <div className='bg-DarkBlue min-h-screen text-WhiteDefault'>
       <div className='px-5 py-2'>
         <Tabs defaultValue='home'>
-          <TabsList className='flex justify-center items-center gap-7 w-[400px] bg-DarkBlue my-4 pl-5'>
+          <TabsList className='flex justify-center max-[425px]:flex-col max-[425px]:h-[130px] items-center gap-7 min-[425px]:w-[400px] bg-DarkBlue my-4 pl-5'>
             <Link href='/'><Image className='object-contain' src="/arkan_logo_dark.svg" alt="Arkan Seguros" width={70} height={70} /></Link>
             <div className='grid grid-cols-2 w-[300px]'>
               <TabsTrigger value='home' className='flex justify-center items-center gap-3'>

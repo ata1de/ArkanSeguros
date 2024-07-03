@@ -127,7 +127,7 @@ export const DemandCard = ({client}: DemandCardProps) => {
     <HoverCardTrigger asChild className="cursor-pointer hover:underline">
       <p className="truncate max-w-[120px]">{client.demand}</p>
     </HoverCardTrigger>
-    <HoverCardContent className="bg-DarkBlue border-2 border-WhiteDefault text-WhiteDefault">
+    <HoverCardContent className="bg-DarkBlue border-2 max-h-[500px] max-w-[500px] border-WhiteDefault text-WhiteDefault">
         <div className="flex flex-col justify-center items-start">
           <div className="flex justify-center items-center">
             <User2 className="mr-2 h-4 w-4 opacity-70" />  
