@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown } from "lucide-react"
+import { ArrowUpDown, CalendarDays, ChevronDown, Divide } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -38,6 +38,8 @@ import {
 import { ClientTypeFirebase, updateStatusUser } from "@/services/clients"
 import Image from "next/image"
 import { useQueryClient } from "@tanstack/react-query"
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
+import { Separator } from "../ui/separator"
 
 export interface ClientDataTableType extends ClientTypeFirebase {
   stats: string
@@ -91,7 +93,7 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
       console.log("Error updating status")
       throw new Error("Error updating status")
     }
-  };
+};
 
   return (
     <DropdownMenu>
@@ -113,6 +115,36 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
     </DropdownMenu>
   );
 };
+
+interface DemandCardProps {
+  client: ClientDataTableType
+
+}
+
+export const DemandCard = ({client}: DemandCardProps) => {
+  return (
+    <HoverCard>
+    <HoverCardTrigger asChild className="cursor-pointer hover:underline">
+      <p className="truncate max-w-[120px]">{client.demand}</p>
+    </HoverCardTrigger>
+    <HoverCardContent className="bg-DarkBlue border-2 border-WhiteDefault text-WhiteDefault">
+        <div className="flex flex-col justify-center items-start">
+          <h4 className="text-sm font-semibold">{client.name}</h4>
+          <Separator className="my-3 bg-gray-400" />
+          <p className="text-sm mb-3">
+            {client.demand}
+          </p>
+          <div className="flex items-center pt-2">
+            <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+            <span className="text-xs text-muted-foreground">
+              Joined December 2021
+            </span>
+          </div>
+        </div>
+    </HoverCardContent>
+  </HoverCard>
+  )
+}
 
 export const columns: ColumnDef<ClientDataTableType>[] = [
   {
@@ -156,7 +188,11 @@ export const columns: ColumnDef<ClientDataTableType>[] = [
   {
     accessorKey: "demand",
     header: "Demanda",
-    cell: ({ row }) => <div className="truncate max-w-[120px]">{row.getValue("demand")}</div>,
+    cell: ({ row }) => (
+      <DemandCard
+        client={row.original}      
+      />
+    ),
   },
   {
     accessorKey: "service",
