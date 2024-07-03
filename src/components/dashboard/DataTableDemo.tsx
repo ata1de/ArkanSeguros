@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, CalendarDays, ChevronDown, Divide } from "lucide-react"
+import { ArrowUpDown, CalendarDays, ChevronDown, Divide, User2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -129,7 +129,10 @@ export const DemandCard = ({client}: DemandCardProps) => {
     </HoverCardTrigger>
     <HoverCardContent className="bg-DarkBlue border-2 border-WhiteDefault text-WhiteDefault">
         <div className="flex flex-col justify-center items-start">
-          <h4 className="text-sm font-semibold">{client.name}</h4>
+          <div className="flex justify-center items-center">
+            <User2 className="mr-2 h-4 w-4 opacity-70" />  
+            <h4 className="text-sm font-semibold">{client.name}</h4>
+          </div>
           <Separator className="my-3 bg-gray-400" />
           <p className="text-sm mb-3">
             {client.demand}
