@@ -3,9 +3,10 @@ import { ClientType } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 import { create } from "domain";
-import { collection, query, getDocs, addDoc, Timestamp, where } from "firebase/firestore";
+import { collection, query, getDocs, addDoc, Timestamp, where, updateDoc, doc } from "firebase/firestore";
 import dayjs from 'dayjs';
 import { m } from "framer-motion";
+import { ClientDataTableType } from "@/components/dashboard/DataTableDemo";
 
 export interface ClientTypeFirebase extends ClientType {
     id: string;
@@ -18,7 +19,7 @@ export async function createClient(data: ClientType) {
         await addDoc(clientRef, {
             ...data,
             createdAt: Timestamp.now(),
-            stats: 'nulo'
+            stats: 'Neutro'
         }); 
         return { status: 200 }
     } catch (error) {
@@ -33,9 +34,9 @@ export async function getAllClients() {
 
     try {
         const querySnapshot = await getDocs(q);
-        const clients: ClientTypeFirebase[] = [];
+        const clients: ClientDataTableType[] = [];
         querySnapshot.forEach((doc) => {
-            clients.push({ id: doc.id, ...doc.data() } as ClientTypeFirebase);
+            clients.push({ id: doc.id, ...doc.data() } as ClientDataTableType);
         });
         return clients;
     } catch (error) {
@@ -141,6 +142,14 @@ export async function getServicesByUsers() {
 
     return servicesTotal
 } 
+
+export async function updateStatusUser(data: Partial<ClientDataTableType>, id: string) {
+    const clientRef = doc(db, 'clients', id)
+
+    const queryDataSnapshot = await updateDoc(clientRef, data)
+
+    return queryDataSnapshot
+}
 
 
 

@@ -36,7 +36,7 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({ clientManag
             icon={DollarSign} 
             amount={peopleTypeManager!.clientCount}
             diff={peopleTypeManager!.diff} 
-            description={` em relação as pessoas ${peopleTypeManager?.pf ? 'fisicas' : 'juridicas'}`}
+            description={` em relação as pessoas ${peopleTypeManager?.pf ? 'jurídicas' : 'físicas'}`}
             plus={true} 
           />
           <DashboardCard label='Sinistros' icon={User} amount={100} description='Sinistros abertos' />

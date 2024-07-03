@@ -35,14 +35,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ClientTypeFirebase } from "@/services/clients"
+import { ClientTypeFirebase, updateStatusUser } from "@/services/clients"
 import Image from "next/image"
+import { useQueryClient } from "@tanstack/react-query"
 
-interface DataTableDemoProps {
-  data: ClientTypeFirebase[]
+export interface ClientDataTableType extends ClientTypeFirebase {
+  stats: string
 }
 
-const statusOptions = ["Feito", "Cancelado", "Em progreso", "Neutro"]
+interface DataTableDemoProps {
+  data: ClientDataTableType[]
+}
+
+const statusOptions = ["Feito", "Cancelado", "Em progresso", "Neutro"]
 
 const styledStats = (status: string) => {
   switch (status) {
@@ -50,18 +55,43 @@ const styledStats = (status: string) => {
       return "/statsTable/sucessStats.svg"
     case "Cancelado":
       return "/statsTable/failedStats.svg"
-    case "Em progreso":
+    case "Em progresso":
       return "/statsTable/progressStats.svg"
     default:
       return "/statsTable/nullStats.svg"
   }
 }
+const handleUpdateStatus = async (updatedClient: Partial<ClientDataTableType>, id: string) => {
+  await updateStatusUser(updatedClient, id);
+};
 
-const StatusButton: React.FC<{ initialStatus: string }> = ({ initialStatus }) => {
-  const [status, setStatus] = React.useState(initialStatus)
-  const [imgStatus, setImgStatus] = React.useState(styledStats(initialStatus))
+const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableType; onUpdateStatus: (client: Partial<ClientDataTableType>, id: string) => void }> = ({ initialStatus, client, onUpdateStatus }) => {
+  const [status, setStatus] = React.useState(initialStatus);
+  const queryClient = useQueryClient();
 
+  
+  const handleUpdateStatus = (newStatus: string) => {
+    setStatus(newStatus);
 
+    const updatedClient = { ...client, stats: newStatus };
+    try {
+      
+      onUpdateStatus(updatedClient, client.id);
+      // atualizando o cache do queryClient para refletir localmente
+      queryClient.setQueryData(["users"], (oldData: ClientDataTableType[] | undefined) => {
+        if (!oldData) return [];
+        return oldData.map((data) => {
+          if (data.id === client.id) {
+            return { ...data, stats: newStatus };
+          }
+          return data;
+        })
+      })
+    } catch (error) {
+      console.log("Error updating status")
+      throw new Error("Error updating status")
+    }
+  };
 
   return (
     <DropdownMenu>
@@ -70,21 +100,21 @@ const StatusButton: React.FC<{ initialStatus: string }> = ({ initialStatus }) =>
          <Image src={styledStats(status)} width={10} height={10} alt="" className="mr-2"/>  {status} <ChevronDown className="ml-2 h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="bg-DarkBlue text-WhiteDefault border-2 border-WhiteDefault">
         {statusOptions.map((option) => (
           <DropdownMenuItem
             key={option}
-            onClick={() => {setStatus(option)}}
+            onClick={() => handleUpdateStatus(option)}
           >
             <Image src={styledStats(option)} width={10} height={10} alt="" className="mr-2"/> {option}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
 
-export const columns: ColumnDef<ClientTypeFirebase>[] = [
+export const columns: ColumnDef<ClientDataTableType>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -136,7 +166,13 @@ export const columns: ColumnDef<ClientTypeFirebase>[] = [
   {
     accessorKey: "stats",
     header: "Status",
-    cell: ({ row }) => <StatusButton initialStatus={row.getValue("stats")} />,
+    cell: ({ row }) => (
+      <StatusButton
+        initialStatus={row.getValue("stats")}
+        client={row.original}
+        onUpdateStatus={handleUpdateStatus}
+      />
+    ),
   },
   {
     accessorKey: "isClient",
@@ -152,7 +188,8 @@ export function DataTableDemo({ data }: DataTableDemoProps) {
   const [rowSelection, setRowSelection] = React.useState({})
   const [currentPage, setCurrentPage] = React.useState(0)
 
-  const table = useReactTable({
+
+  const table = useReactTable<ClientDataTableType>({
     data,
     columns,
     onSortingChange: setSorting,
@@ -236,7 +273,7 @@ export function DataTableDemo({ data }: DataTableDemoProps) {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  Sem resultados.
+                  No results.
                 </TableCell>
               </TableRow>
             )}
@@ -275,5 +312,6 @@ export function DataTableDemo({ data }: DataTableDemoProps) {
         </div>
       </div>
     </div>
+
   )
 }

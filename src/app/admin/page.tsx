@@ -1,7 +1,7 @@
 "use client"
 import PieCharts, { Icons } from '@/components/dashboard/PieChart';
 import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
-import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
+import { ClientDataTableType, DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
@@ -11,8 +11,8 @@ import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
 import { ClientTypeFirebase, clientsTypeCount, getAllClients, getServicesByUsers, getUserCountByMonth, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { isClientFunction, isClientType } from '@/utils/isClientFunction';
-import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
+import { isClientType } from '@/utils/isClientFunction';
+import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
 import Link from 'next/link';
 
 const queryClient = new QueryClient();
@@ -26,10 +26,6 @@ const AdminPage = () => {
 };
 
 const AdminContent = () => {
-  const [clientManager, setClientManager] = useState<isClientType>();
-  const [peopleTypeManager, setPeopleTypeManager] = useState<PeopleTypeProps>();
-  const [usersCount, setUserCount] = useState<{ month: string; clicks: number; }[]>([]);
-
 
   const getAllUsers = async () => {
     try {
@@ -82,7 +78,7 @@ const AdminContent = () => {
     }
   }
 
-  const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
+  const {data: dataUsers, isLoading} = useQuery<ClientDataTableType[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
@@ -106,6 +102,8 @@ const AdminContent = () => {
     queryKey: ['services'],
     queryFn: getServices,
   });
+
+  console.log(dataUsers)
   // const cardAnalytics = async () => {
   //   try {
   //     const clientManager = await clientsTypeCount()
