@@ -1,7 +1,7 @@
 "use client"
-import PieCharts from '@/components/dashboard/PieChart';
+import PieCharts, { Icons } from '@/components/dashboard/PieChart';
 import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
-import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
+import { ClientDataTableType, DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
@@ -11,8 +11,9 @@ import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
 import { ClientTypeFirebase, clientsTypeCount, getAllClients, getServicesByUsers, getUserCountByMonth, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
-import { isClientFunction, isClientType } from '@/utils/isClientFunction';
-import { PeopleTypeFunction, PeopleTypeProps } from '@/utils/PeopleTypeFunction';
+import { isClientType } from '@/utils/isClientFunction';
+import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
+import Link from 'next/link';
 
 const queryClient = new QueryClient();
 
@@ -25,10 +26,6 @@ const AdminPage = () => {
 };
 
 const AdminContent = () => {
-  const [clientManager, setClientManager] = useState<isClientType>();
-  const [peopleTypeManager, setPeopleTypeManager] = useState<PeopleTypeProps>();
-  const [usersCount, setUserCount] = useState<{ month: string; clicks: number; }[]>([]);
-
 
   const getAllUsers = async () => {
     try {
@@ -81,7 +78,7 @@ const AdminContent = () => {
     }
   }
 
-  const {data: dataUsers, isLoading} = useQuery<ClientTypeFirebase[]>({
+  const {data: dataUsers, isLoading} = useQuery<ClientDataTableType[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
@@ -105,32 +102,13 @@ const AdminContent = () => {
     queryKey: ['services'],
     queryFn: getServices,
   });
-  // const cardAnalytics = async () => {
-  //   try {
-  //     const clientManager = await clientsTypeCount()
-  //     const peopleTypeManager = await peopleCounts() 
-  //     const userByMonth = await getUserCountByMonth()
-  //     setUserCount(userByMonth)
-  //     setPeopleTypeManager(peopleTypeManager);
-  //     setClientManager(clientManager);
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   if (dataUsers) {
-  //     cardAnalytics()
-  //   }
-  // }, [dataUsers]);
-
 
   return (
     <div className='bg-DarkBlue min-h-screen text-WhiteDefault'>
       <div className='px-5 py-2'>
         <Tabs defaultValue='home'>
-          <TabsList className='flex justify-center items-center gap-7 w-[400px] bg-DarkBlue my-4 pl-5'>
-            <Image className='object-contain' src="/arkan_logo_dark.svg" alt="Arkan Seguros" width={70} height={70} />
+          <TabsList className='flex justify-center max-[425px]:flex-col max-[425px]:h-[130px] items-center gap-7 min-[425px]:w-[400px] bg-DarkBlue my-4 pl-5'>
+            <Link href='/'><Image className='object-contain' src="/arkan_logo_dark.svg" alt="Arkan Seguros" width={70} height={70} /></Link>
             <div className='grid grid-cols-2 w-[300px]'>
               <TabsTrigger value='home' className='flex justify-center items-center gap-3'>
                 <HomeIcon size={24} className='' />
@@ -164,7 +142,14 @@ const AdminContent = () => {
           <TabsContent value='users'>
             <div className='flex flex-col gap-3 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Clientes</h1>
+              {isLoading ? 
+              <div className='w-full h-full m-auto flex items-center justify-center'>
+                <Icons.spinner className='w-14 h-14 animate-spin' />
+              </div>
+              :
               <DataTableDemo data={dataUsers!} />
+              
+              }
             </div>
           </TabsContent>
         </Tabs>

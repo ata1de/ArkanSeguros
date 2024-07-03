@@ -42,7 +42,7 @@ export const services = [
         title: "Seguros de Máquinas",
         titleHero: "Proteção para seus ativos",
         subtitleHero: "Conte conosco para proteger seus equipamentos.",
-        url_bg: "/services/seguros-equipamentos-maquinas-bg.jpg",
+        url_bg: "/services/seguros-equipamentos-maquinas-bg.png",
         icon: "/icons/icon_machine.svg",
         description: "Proteja seus equipamentos e máquinas com nossos seguros especializados. Garantimos cobertura contra danos, roubo e paralisação de atividades, para que seu trabalho nunca pare.\n\nNossos planos são desenhados para atender as necessidades específicas do seu negócio, proporcionando segurança e suporte em momentos críticos. \n\nConte com a nossa experiência para proteger seus ativos valiosos e manter a produtividade da sua empresa, mesmo diante de imprevistos."
     },
