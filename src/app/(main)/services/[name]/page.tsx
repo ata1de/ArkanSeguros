@@ -31,16 +31,18 @@ const DetailsService = () => {
             </Link>
         </div>
 
-        <div className='bg-DarkBlue flex justify-center items-center min-h-[600px]'>
-          <div className='max-[810px]:flex-col min-[880px]:w-[880px] min-[1290px]:w-[1290px] flex flex-row gap-3 justify-center items-center'>
-            <Image width={280} height={380} src='/services/questionAccordion.svg' alt=''/>
+        <div className='bg-DarkBlue flex justify-center items-center min-h-[600px] relative'>
+          <div className='max-[810px]:flex-col min-[880px]:w-[880px] min-[1290px]:w-[1290px] flex flex-row gap-5 justify-center items-center'>
+            <Image width={300} height={380} src={AccordionQuestions?.image!} alt='' className='rounded-lg mr-5'/>
 
             <div className='flex flex-col items-start w-1/2 gap-3'>
               <p className='text-gray-400 font-medium'>Construa você seu próprio destino</p>
               <p className='text-4xl font-bold text-Yellow'>Perguntas mais frequentes</p>
-              <AccordionService name={AccordionQuestions?.name!} questions={AccordionQuestions?.questions!}/>
+              <AccordionService name={AccordionQuestions?.name!} questions={AccordionQuestions?.questions!} image=''/>
             </div>
           </div>
+          {/* <Image width={40} height={40} src='/questionsServices/question.svg' alt='question icon' className='absolute left-[14%] bottom-20 rotate-[20deg]'/>
+          <Image width={40} height={40} src='/questionsServices/question.svg' alt='question icon' className='absolute left-[80%] top-24 rotate-[160deg]'/> */}
         </div>
 
         <Carousel/>

@@ -7,12 +7,14 @@ export type Question = {
 
 export type ServiceQuestions = {
     name: string;
+    image: string;
     questions: Question[];
 };
 
 export const questionsServices: ServiceQuestions[] = [
     {
         name: "plano-odontologico",
+        image: "/questionsServices/plano-odontologico.jpg",
         questions: [
             {
                 question: "Quais tratamentos estão incluídos no Plano Odontológico?",
@@ -30,6 +32,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "plano-de-saude",
+        image: "/questionsServices/plano-de-saude.jpg",
         questions: [
             {
                 question: "Quais são os hospitais cobertos pelo Plano de Saúde?",
@@ -47,6 +50,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "seguros-automotivos",
+        image: "/questionsServices/seguros-automotivos",
         questions: [
             {
                 question: "Quais são as coberturas incluídas no Seguro Automotivo?",
@@ -64,6 +68,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "protecao-veicular",
+        image: "/questionsServices/protecao-veicular.jpg",
         questions: [
             {
                 question: "Quais são os benefícios da Proteção Veicular?",
@@ -81,6 +86,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "seguros-equipamentos-maquinas",
+        image: "/questionsServices/seguros-equipamentos-maquinas.jpg",
         questions: [
             {
                 question: "Quais tipos de equipamentos estão cobertos?",
@@ -98,6 +104,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "seguro-de-vida",
+        image: "/questionsServices/seguro-de-vida.jpg",
         questions: [
             {
                 question: "Quais são as coberturas oferecidas pelo Seguro de Vida?",
@@ -115,6 +122,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "seguros-prediais",
+        image: "/questionsServices/seguros-prediais.jpeg",
         questions: [
             {
                 question: "Quais riscos estão cobertos pelos Seguros Prediais?",
@@ -132,6 +140,7 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "certificados-digitais",
+        image: "/questionsServices/certificado-digital.jpg",
         questions: [
             {
                 question: "O que são Certificados Digitais?",

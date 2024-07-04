@@ -35,16 +35,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ClientTypeFirebase, updateStatusUser } from "@/services/clients"
+import { ClientDataTableType, updateStatusUser } from "@/services/clients"
 import Image from "next/image"
 import { useQueryClient } from "@tanstack/react-query"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { Separator } from "../ui/separator"
-
-export interface ClientDataTableType extends ClientTypeFirebase {
-  stats: string
-  createdAt: Date
-}
+import { FormattedDate } from "@/utils/FormattedDate"
 
 interface DataTableDemoProps {
   data: ClientDataTableType[]
@@ -141,7 +137,7 @@ export const DemandCard = ({client}: DemandCardProps) => {
           <div className="flex items-center pt-2">
             <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
             <span className="text-xs text-muted-foreground">
-              Joined December 2021
+              {FormattedDate(client.createdAt)}
             </span>
           </div>
         </div>

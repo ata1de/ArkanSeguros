@@ -2,15 +2,17 @@ import { db } from "@/lib/firebase";
 import { ClientType } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
-import { create } from "domain";
+
 import { collection, query, getDocs, addDoc, Timestamp, where, updateDoc, doc } from "firebase/firestore";
 import dayjs from 'dayjs';
 import { m } from "framer-motion";
-import { ClientDataTableType } from "@/components/dashboard/DataTableDemo";
 
-export interface ClientTypeFirebase extends ClientType {
+export interface ClientDataTableType extends ClientType {
     id: string;
+    stats: string
+    createdAt: Date
 }
+
 
 export async function createClient(data: ClientType) {
     const clientRef = collection(db, "clients");
