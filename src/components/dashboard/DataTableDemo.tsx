@@ -43,6 +43,7 @@ import { Separator } from "../ui/separator"
 
 export interface ClientDataTableType extends ClientTypeFirebase {
   stats: string
+  createdAt: Date
 }
 
 interface DataTableDemoProps {
