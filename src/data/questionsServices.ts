@@ -14,14 +14,14 @@ export type ServiceQuestions = {
 export const questionsServices: ServiceQuestions[] = [
     {
         name: "plano-odontologico",
-        image: "/questionsServices/plano-odontologico.jpg",
+        image: "/questionsServices/plano-odontologico2.jpg",
         questions: [
             {
-                question: "Quais tratamentos estão incluídos no Plano Odontológico?",
+                question: "Quais tratamentos estão inclusos?",
                 answer: "O Plano Odontológico inclui consultas, tratamentos preventivos, ortodontia e muito mais."
             },
             {
-                question: "Posso escolher meu dentista?",
+                question: "Posso escolher meu dentista?",   
                 answer: "Sim, contamos com uma rede ampla de dentistas credenciados em todo o país."
             },
             {
@@ -50,10 +50,10 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "seguros-automotivos",
-        image: "/questionsServices/seguros-automotivos",
+        image: "/questionsServices/seguro-automotivo.jpg",
         questions: [
             {
-                question: "Quais são as coberturas incluídas no Seguro Automotivo?",
+                question: "Quais coberturas são incluídas?",
                 answer: "Nosso seguro cobre roubo, acidentes e outros imprevistos, além de oferecer assistência 24 horas."
             },
             {
@@ -71,7 +71,7 @@ export const questionsServices: ServiceQuestions[] = [
         image: "/questionsServices/protecao-veicular.jpg",
         questions: [
             {
-                question: "Quais são os benefícios da Proteção Veicular?",
+                question: "Quais são os benefícios?",
                 answer: "Oferecemos cobertura acessível contra danos, roubos e sinistros, além de assistência 24 horas."
             },
             {
@@ -107,7 +107,7 @@ export const questionsServices: ServiceQuestions[] = [
         image: "/questionsServices/seguro-de-vida.jpg",
         questions: [
             {
-                question: "Quais são as coberturas oferecidas pelo Seguro de Vida?",
+                question: "Quais coberturas são oferecidas",
                 answer: "O seguro de vida oferece proteção financeira para sua família, com planos flexíveis que se adaptam às suas necessidades."
             },
             {
@@ -122,14 +122,14 @@ export const questionsServices: ServiceQuestions[] = [
     },
     {
         name: "seguros-prediais",
-        image: "/questionsServices/seguros-prediais.jpeg",
+        image: "/questionsServices/seguros-prediais.jpg",
         questions: [
             {
-                question: "Quais riscos estão cobertos pelos Seguros Prediais?",
+                question: "Quais riscos estão cobertos?",
                 answer: "Os seguros prediais cobrem riscos como incêndios, roubos e desastres naturais."
             },
             {
-                question: "Posso personalizar o plano de seguro predial?",
+                question: "Posso personalizar o plano?",
                 answer: "Sim, oferecemos planos personalizados que atendem às necessidades específicas de cada cliente."
             },
             {

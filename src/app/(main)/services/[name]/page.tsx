@@ -19,6 +19,13 @@ const DetailsService = () => {
 
   const AccordionQuestions = questionsServices.find((question) => question.name === name)
 
+  const styleAccordion = {
+    backgroundImage: `url('/bg_login.png')`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  };
+
   return (
     <div>
         <Hero title={service?.titleHero ?? ''} lastWordSubTitle={name.toString()} bgUrl={service?.url_bg ?? ''}/>
@@ -31,7 +38,7 @@ const DetailsService = () => {
             </Link>
         </div>
 
-        <div className='bg-DarkBlue flex justify-center items-center min-h-[600px] relative'>
+        <div className='bg-DarkBlue flex justify-center items-center min-h-[600px] relative' style={styleAccordion} >
           <div className='max-[810px]:flex-col min-[880px]:w-[880px] min-[1290px]:w-[1290px] flex flex-row gap-5 justify-center items-center'>
             <Image width={300} height={380} src={AccordionQuestions?.image!} alt='' className='rounded-lg mr-5'/>
 
