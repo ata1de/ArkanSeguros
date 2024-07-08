@@ -69,7 +69,7 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
   const queryClient = useQueryClient();
 
   
-  const handleUpdateStatus = (newStatus: string) => {
+  const handleUpdateStatus = async (newStatus: string) => {
     setStatus(newStatus);
 
     const updatedClient = { ...client, stats: newStatus };
@@ -86,6 +86,9 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
           return data;
         })
       })
+      
+      await queryClient.invalidateQueries({ queryKey: ['accurate'] });
+
     } catch (error) {
       console.log("Error updating status")
       throw new Error("Error updating status")

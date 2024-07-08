@@ -5,7 +5,7 @@ import { isClientFunction } from "@/utils/isClientFunction";
 
 import { collection, query, getDocs, addDoc, Timestamp, where, updateDoc, doc } from "firebase/firestore";
 import dayjs from 'dayjs';
-import { m } from "framer-motion";
+import { accuracyStatus } from "@/utils/accuracyStatus";
 
 export interface ClientDataTableType extends ClientType {
     id: string;
@@ -151,6 +151,23 @@ export async function updateStatusUser(data: Partial<ClientDataTableType>, id: s
     const queryDataSnapshot = await updateDoc(clientRef, data)
 
     return queryDataSnapshot
+}
+ 
+export async function accuracyRate() {
+    const clientRef = collection(db, 'clients')
+
+    // dados para clientes que foram efetivados 
+    const confirmedQuery = query(clientRef, where('stats', '==', 'Feito'))
+    const confirmedQuerySnapshot = await getDocs(confirmedQuery)
+
+    // dados para clientes que foram cancelados
+    const canceledQuery = query(clientRef, where('stats', '==', 'Cancelado'))
+    const canceledQuerySnapshot = await getDocs(canceledQuery)
+
+    const accuracyRate = accuracyStatus(confirmedQuerySnapshot.size, canceledQuerySnapshot.size)
+    return accuracyRate
+
+
 }
 
 
