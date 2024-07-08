@@ -16,14 +16,11 @@ import {
 import { ArrowUpDown, CalendarDays, ChevronDown, Divide, User2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -35,15 +32,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ClientTypeFirebase, updateStatusUser } from "@/services/clients"
+import { ClientDataTableType, updateStatusUser } from "@/services/clients"
 import Image from "next/image"
 import { useQueryClient } from "@tanstack/react-query"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { Separator } from "../ui/separator"
-
-export interface ClientDataTableType extends ClientTypeFirebase {
-  stats: string
-}
+import { FormattedDate } from "@/utils/FormattedDate"
 
 interface DataTableDemoProps {
   data: ClientDataTableType[]
@@ -72,7 +66,7 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
   const queryClient = useQueryClient();
 
   
-  const handleUpdateStatus = (newStatus: string) => {
+  const handleUpdateStatus = async (newStatus: string) => {
     setStatus(newStatus);
 
     const updatedClient = { ...client, stats: newStatus };
@@ -89,6 +83,9 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
           return data;
         })
       })
+      
+      await queryClient.refetchQueries({ queryKey: ['accurate'] });
+
     } catch (error) {
       console.log("Error updating status")
       throw new Error("Error updating status")
@@ -140,7 +137,7 @@ export const DemandCard = ({client}: DemandCardProps) => {
           <div className="flex items-center pt-2">
             <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
             <span className="text-xs text-muted-foreground">
-              Joined December 2021
+              {FormattedDate(client.createdAt)}
             </span>
           </div>
         </div>

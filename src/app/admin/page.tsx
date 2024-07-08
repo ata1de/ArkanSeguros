@@ -1,19 +1,20 @@
 "use client"
 import PieCharts, { Icons } from '@/components/dashboard/PieChart';
 import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
-import { ClientDataTableType, DataTableDemo } from "@/components/dashboard/DataTableDemo";
+import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
-import { ClientTypeFirebase, clientsTypeCount, getAllClients, getServicesByUsers, getUserCountByMonth, peopleCounts } from '@/services/clients';
+import { accuracyRate, ClientDataTableType, clientsTypeCount, getAllClients, getServicesByUsers, getUserCountByMonth, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
 import Link from 'next/link';
+import { accuracyStatusProps } from '@/utils/accuracyStatus';
 
 const queryClient = new QueryClient();
 
@@ -74,16 +75,30 @@ const AdminContent = () => {
       return response;
     } catch (error) {
       console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch people type");
+      throw new Error("Failed to fetch services by users");
     }
   }
+
+  const getAccurateData = async () => {
+    try {
+      const response = await accuracyRate();
+      return response;
+    } catch (error) {
+      console.error("Error fetching match details:", error);
+      throw new Error("Failed to fetch accuracy rate");
+  }}
+
+  const {data: DataAccurate, isLoading: isLoadingAccurate, isRefetching: isRefetchingAccurate } = useQuery<accuracyStatusProps>({
+    queryKey: ['accurate'],
+    queryFn: getAccurateData,
+  })
 
   const {data: dataUsers, isLoading} = useQuery<ClientDataTableType[]>({
     queryKey: ['users'],
     queryFn: getAllUsers,
   });
 
-  const {data: dataPeopleManager} = useQuery<PeopleTypeProps>({
+  const {data: dataPeopleManager, isLoading: isLoadingPeopleManager} = useQuery<PeopleTypeProps>({
     queryKey: ['peopleTypeManager'],
     queryFn: getPeopleTypeManager,
   });
@@ -125,7 +140,7 @@ const AdminContent = () => {
             <div className='flex flex-col gap-5 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Dashboard</h1>
               <div>
-                <SectionCardDashboard peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoading={isLoadingClientManager} />
+                <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate}/>
               </div>
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
                 <div className='w-2/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>

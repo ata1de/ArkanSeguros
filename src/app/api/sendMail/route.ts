@@ -2,18 +2,7 @@
 import { render } from '@react-email/components';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer'
-import  ArkanInviteCLientEmail  from '../../../email';
-
-const cliente = {
-  name: 'João da Silva',
-  email: '',
-  phone: '',
-  peopleType: 'Pessoa Física',
-  demand: 'Seguro de vida',
-  service: 'Seguro de Vida',
-  isClient: 'Sim',
-};
-
+import  ArkanInviteCLientEmail  from '../../../email/email';
 
 export async function POST(request: NextRequest) {
   const { subject, data } = await request.json();
