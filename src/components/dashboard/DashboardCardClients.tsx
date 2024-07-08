@@ -19,7 +19,7 @@ const DashboardCardClients: React.FC<DashboardCardProps> = ({ label, icon: Icon,
           </div>
 
           <div className="flex flex-col gap-1">
-            <h2 className='text-2xl font-semibold'>{amount}%</h2>
+            <h2 className='text-2xl font-semibold'>{amount.toFixed(2)}%</h2>
             <div className="flex items-center gap-2 text-xs text-gray-400">
               <StatsIcon className={`h-4 w-4 ${StatsIcon === TrendingUp ? 'text-green-400' : 'text-red-400'}`}/>
               <span>{description}</span>

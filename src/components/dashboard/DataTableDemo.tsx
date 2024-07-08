@@ -16,14 +16,11 @@ import {
 import { ArrowUpDown, CalendarDays, ChevronDown, Divide, User2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -87,7 +84,7 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
         })
       })
       
-      await queryClient.invalidateQueries({ queryKey: ['accurate'] });
+      await queryClient.refetchQueries({ queryKey: ['accurate'] });
 
     } catch (error) {
       console.log("Error updating status")

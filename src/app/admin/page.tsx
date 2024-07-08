@@ -88,7 +88,7 @@ const AdminContent = () => {
       throw new Error("Failed to fetch accuracy rate");
   }}
 
-  const {data: DataAccurate } = useQuery<accuracyStatusProps>({
+  const {data: DataAccurate, isLoading: isLoadingAccurate, isRefetching: isRefetchingAccurate } = useQuery<accuracyStatusProps>({
     queryKey: ['accurate'],
     queryFn: getAccurateData,
   })
@@ -98,7 +98,7 @@ const AdminContent = () => {
     queryFn: getAllUsers,
   });
 
-  const {data: dataPeopleManager} = useQuery<PeopleTypeProps>({
+  const {data: dataPeopleManager, isLoading: isLoadingPeopleManager} = useQuery<PeopleTypeProps>({
     queryKey: ['peopleTypeManager'],
     queryFn: getPeopleTypeManager,
   });
@@ -140,7 +140,7 @@ const AdminContent = () => {
             <div className='flex flex-col gap-5 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Dashboard</h1>
               <div>
-                <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoading={isLoadingClientManager} />
+                <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate}/>
               </div>
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
                 <div className='w-2/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
