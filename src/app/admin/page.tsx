@@ -9,12 +9,13 @@ import React from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { HomeIcon, User2Icon } from 'lucide-react';
-import { accuracyRate, ClientDataTableType, clientsTypeCount, getAllClients, getServicesByUsers, getUserCountByMonth, peopleCounts } from '@/services/clients';
+import { accuracyRate, ClientDataTableType, clientsTypeCount, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth, peopleCounts } from '@/services/clients';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
 import Link from 'next/link';
 import { accuracyStatusProps } from '@/utils/accuracyStatus';
+import { ProgressClientsProps } from '@/utils/progressClients';
 
 const queryClient = new QueryClient();
 
@@ -88,6 +89,20 @@ const AdminContent = () => {
       throw new Error("Failed to fetch accuracy rate");
   }}
 
+  const getProgressClient = async () => {
+    try {
+      const response = await getStatusProgressClient();
+      return response;
+    } catch (error) {
+      console.error("Error fetching match details:", error);
+      throw new Error("Failed to fetch progress client");
+  }}
+
+  const {data: DataProgressStatus, isLoading: isLoadingProgressStatus, isRefetching: isRefetchingProgressStatus } = useQuery<ProgressClientsProps>({
+    queryKey: ['progress'],
+    queryFn: getProgressClient,
+  })
+
   const {data: DataAccurate, isLoading: isLoadingAccurate, isRefetching: isRefetchingAccurate } = useQuery<accuracyStatusProps>({
     queryKey: ['accurate'],
     queryFn: getAccurateData,
@@ -140,7 +155,7 @@ const AdminContent = () => {
             <div className='flex flex-col gap-5 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Dashboard</h1>
               <div>
-                <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate}/>
+                <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate} isLoadingProgressStatus={isLoadingProgressStatus} isRefetchingProgressStatus={isRefetchingProgressStatus} progressClients={DataProgressStatus!}/>
               </div>
               <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
                 <div className='w-2/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>

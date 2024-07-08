@@ -5,9 +5,8 @@ export interface accuracyStatusProps {
 }
 
 
-export function accuracyStatus(confirmedQuery: number, canceledQuery: number) {
-    const total = canceledQuery + confirmedQuery
-    const accuracy = (confirmedQuery / total) * 100
+export function accuracyStatus(confirmedQuery: number, canceledQuery: number, allClients: number) {
+    const accuracy = (confirmedQuery / allClients) * 100
 
     
     if (confirmedQuery > canceledQuery) {

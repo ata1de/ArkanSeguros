@@ -6,6 +6,7 @@ import { isClientFunction } from "@/utils/isClientFunction";
 import { collection, query, getDocs, addDoc, Timestamp, where, updateDoc, doc } from "firebase/firestore";
 import dayjs from 'dayjs';
 import { accuracyStatus } from "@/utils/accuracyStatus";
+import { progressClients } from "@/utils/progressClients";
 
 export interface ClientDataTableType extends ClientType {
     id: string;
@@ -164,8 +165,26 @@ export async function accuracyRate() {
     const canceledQuery = query(clientRef, where('stats', '==', 'Cancelado'))
     const canceledQuerySnapshot = await getDocs(canceledQuery)
 
-    const accuracyRate = accuracyStatus(confirmedQuerySnapshot.size, canceledQuerySnapshot.size)
+    const allClients = query(clientRef)
+    const allClientsSnapshot = await getDocs(allClients)
+
+    const accuracyRate = accuracyStatus(confirmedQuerySnapshot.size, canceledQuerySnapshot.size, allClientsSnapshot.size)
     return accuracyRate
+
+}
+
+export async function getStatusProgressClient() {
+    const clientRef = collection(db, 'clients')
+
+    // dados para os clientes que estão em progresso
+    const clientProgressQuery = query(clientRef, where('stats', '==', 'Em progresso'))
+    const clientProgressQuerySnapshot = await getDocs(clientProgressQuery)
+
+    const allClients = query(clientRef)
+    const allClientsSnapshot = await getDocs(allClients)
+
+    const responseClientProgress = progressClients(clientProgressQuerySnapshot.size, allClientsSnapshot.size)
+    return responseClientProgress
 
 
 }
