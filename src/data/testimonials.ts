@@ -1,3 +1,11 @@
+
+export interface Testimonials {
+    name: string;
+    position: string;
+    description: string;
+    image: string;
+}
+
 export const testimonials = [
     {
       name: "Maria Silva",
