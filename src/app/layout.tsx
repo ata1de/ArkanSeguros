@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "Arkan Seguros",
   description: "Proteção e segurança com seguros personalizados para você.",
   icons: {
-    icon: '/favicon.ico',
+    icon: '/icons/arkanWhite.ico',
   }
 };
 
@@ -23,6 +23,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/arkanWhite.ico" /> {/* Adicione esta linha */}
+      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

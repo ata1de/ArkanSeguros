@@ -112,6 +112,7 @@ const Forms = () => {
               <select
                 className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
                 {...register('service')}
+                defaultValue='Plano Odontológico'
               >
                 {services.map((service) => (
                   <option value={service.title} key={service.name}>{service.title}</option>
@@ -134,6 +135,7 @@ const Forms = () => {
               <select
                 className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
                 {...register('isClient')}
+                defaultValue={'Novo cliente'}
               >
                 <option value='Cliente da casa'>Segurado</option>
                 <option value='Novo cliente'>Novo Cliente</option>
@@ -144,6 +146,7 @@ const Forms = () => {
               <select
                 className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
                 {...register('peopleType')}
+                defaultValue={'Pessoa Fisica'}
               >
                 <option value='Pessoa Fisica'>Pessoa Física</option>
                 <option value='Pessoa Juridica'>Pessoa Jurídica</option>
