@@ -12,17 +12,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Label } from './ui/label';
 import { services } from '@/data/services';
 import { createClient } from '@/services/clients';
+import { MaskedInput } from './InputMask';
 
 const clientSchema = z.object({
-  name: z.string().min(1, { message: "Name is required" }),
-  email: z.string().email({ message: "Invalid email format" }).min(1, { message: "Email is required" }),
+  name: z.string().min(1),
+  email: z.string().email().min(1),
   phone: z.string()
-    .regex(/^\(?\d{2}\)?\s\d{5}-\d{4}$/, { message: "Phone number must be in the format (81) 99242-3427" })
-    .min(1, { message: "Phone number is required" }),
-  peopleType: z.string().min(1, { message: "Company name is required" }),
-  demand: z.string().min(1, { message: "Demand description is required" }),
-  service: z.string().min(1, {message: 'Service is required'}),
-  isClient: z.string().min(1, {message: 'Client history is required'}),
+    .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/)
+    .min(1),
+  peopleType: z.string().min(1),
+  demand: z.string().min(1),
+  service: z.string().min(1),
+  isClient: z.string().min(1),
 });
 
 type ClientSchema = z.infer<typeof clientSchema>;
@@ -110,9 +111,9 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Como podemos te ajudar</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.service ? 'border-red-500 border-4' : ''}`}
                 {...register('service')}
-                defaultValue='Plano Odontológico'
+                defaultValue={'Plano Odontológico'}
               >
                 {services.map((service) => (
                   <option value={service.title} key={service.name}>{service.title}</option>
@@ -124,7 +125,8 @@ const Forms = () => {
           <div className='flex flex-col items-center justify-center gap-8'>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Telefone</Label>
-              <Input
+              <MaskedInput
+                mask="(99) 99999-9999"
                 className={`text-black w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
                 placeholder='(00) 00000-0000'
                 {...register('phone')}
@@ -133,7 +135,7 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Segurado/Novo cliente</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.isClient ? 'border-red-500 border-4' : ''}`}
                 {...register('isClient')}
                 defaultValue={'Novo cliente'}
               >
@@ -144,7 +146,7 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Pessoa Jurídica/Física</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.phone ? 'border-red-500 border-4' : ''}`}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.peopleType ? 'border-red-500 border-4' : ''}`}
                 {...register('peopleType')}
                 defaultValue={'Pessoa Fisica'}
               >

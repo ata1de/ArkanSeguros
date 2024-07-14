@@ -36,6 +36,8 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
   const isLoading = isLoadingClientManager || isLoadingProgressStatus || isLoadingPeopleManager || isLoadingAccurate
   const isRefetching = isRefetchingAccurate || isRefetchingProgressStatus
 
+  
+
   return (
     <div className='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4'>
       {isLoading || isRefetching ? (
