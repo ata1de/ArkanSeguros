@@ -23,9 +23,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/arkanWhite.ico" /> {/* Adicione esta linha */}
-      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

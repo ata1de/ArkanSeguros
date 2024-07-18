@@ -1,20 +1,16 @@
 "use client"
 
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { MenuIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import React, { useState } from 'react'
-import { Button } from './ui/button'
-import { services } from '@/data/services'
-import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import { NavigationMenuDemo } from './NavigationMenu'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
-import { MenuIcon } from 'lucide-react'
 import { Separator } from './ui/separator'
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from './ui/sheet'
 
 const Header = () => {
   const { scrollY} = useScroll()
-
   const [hidden, setHidden] = useState(false)
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
