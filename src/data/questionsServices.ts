@@ -25,7 +25,7 @@ export const questionsServices: ServiceQuestions[] = [
                 answer: "Sim, contamos com uma rede ampla de dentistas credenciados em todo o país."
             },
             {
-                question: "O plano cobre tratamentos de emergência?",
+                question: "Cobre tratamentos de emergência?",
                 answer: "Sim, o plano oferece cobertura para tratamentos de emergência."
             }
         ]
@@ -35,7 +35,7 @@ export const questionsServices: ServiceQuestions[] = [
         image: "/questionsServices/plano-de-saude.jpg",
         questions: [
             {
-                question: "Quais são os hospitais cobertos pelo Plano de Saúde?",
+                question: "Quais hospitais são cobertos em Recife?",
                 answer: "Nosso plano cobre os melhores hospitais e profissionais de saúde em todo o país."
             },
             {
@@ -79,7 +79,7 @@ export const questionsServices: ServiceQuestions[] = [
                 answer: "Sim, nossa proteção inclui cobertura contra enchentes e colisões."
             },
             {
-                question: "Posso ajustar o plano conforme minhas necessidades?",
+                question: "Posso ajustar conforme minhas necessidades?",
                 answer: "Sim, oferecemos planos flexíveis que se ajustam ao seu perfil e necessidades específicas."
             }
         ]
@@ -147,11 +147,11 @@ export const questionsServices: ServiceQuestions[] = [
                 answer: "Certificados Digitais garantem a segurança das suas transações eletrônicas através de autenticação e criptografia de dados."
             },
             {
-                question: "Quais são os benefícios dos Certificados Digitais?",
+                question: "Quais são os benefícios?",
                 answer: "Oferecemos um ambiente digital mais seguro, protegendo suas informações contra acessos não autorizados."
             },
             {
-                question: "Como adquirir um Certificado Digital?",
+                question: "Como adquirir?",
                 answer: "Nossa equipe pode orientar você no processo de aquisição de certificados digitais, adequados para empresas e indivíduos."
             }
         ]
