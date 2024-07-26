@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<h1 align=center>📈Libertas📈</h1>
 
-## Getting Started
+<br>
+ 
+![video]('https://github.com/ata1de/ArkanSeguros/blob/main/public/readme/video-dashboard.mkv')
 
-First, run the development server:
+<br>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# View the project here ⬇
+https://libertas-frontend.vercel.app/
+<br>
+
+## ☕ More about 
+Libertas is a law firm committed to offering personalized, high-quality legal solutions to our clients. At the moment, the project is made of 2 pages and all of them has good features:
+- Home
 ```
+  - Sobre: Learn a little about the company and what it offers ; 
+  - Serviços: Shows 3 random services
+  - História: A tab to go to showing the company's history
+  - Conte conosco: See contact infos and send a message 
+```
+- Services
+```
+Show all services
+```
+<br>
+Besides that, obviously the project is 100% adaptable for mobile devices and strategy planned for future software maintenance.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br> 
+<br> 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 🚀 Techs used 
+* **[ Typescript ](https://www.typescriptlang.org/)**
+* **[ Tailwind ](https://tailwindcss.com/)**
+* **[ Zod ](https://zod.dev/)**
+* **[ Axios ](https://axios-http.com/ptbr/docs/intro)**
+* **[ ShadcnUI ](https://ui.shadcn.com/)**
+* **[ Aos ](https://michalsnik.github.io/aos/)**
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 📝 Main learnings
+* Creating forms with useForms and managing with zod schema
+* Organizing styles with tailwind
+* Using shadcnUi and Aos to improve the user interface 
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⬆ Next Steps
+* Add more responsibility
+* Add menu navbar
+* Add one more page
+* Create new erros in form submit
+* Create 404 page
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# ⚙️ Open and rnu project
+Clone o repositório
+```
+https://github.com/ata1de/Libertas_frontend.git
+```
+Instale as dependências
+```
+npm install
+```
+Rode o projeto
+```
+npm run dev
+```
+Abra o link
+```
+http://localhost:3000
+```
