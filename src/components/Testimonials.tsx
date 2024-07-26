@@ -2,10 +2,9 @@
 
 import { testimonials } from '@/data/testimonials'
 import Image from 'next/image'
-import React from 'react'
-import { Separator } from './ui/separator'
-import { Button } from './ui/button'
 import Link from 'next/link'
+import { Button } from './ui/button'
+import { Separator } from './ui/separator'
 
 const Testimonials = () => {
   return (
@@ -28,7 +27,9 @@ const Testimonials = () => {
                     </div>
                     <p className='text-slate-400'>{testimonial.position}</p>
                     <Separator className='max-w-[334px] bg-slate-400'/>
-                    <p className='max-w-[334px] font-normal text-base text-white'>{testimonial.description}</p>
+                    <p className=' h-[72px] font-normal text-base text-white overflow-hidden max-[334px]:truncate '>
+                      {testimonial.description}
+                    </p>
                 </div>
             ))}
         </div>

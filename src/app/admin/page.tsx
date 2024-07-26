@@ -1,21 +1,20 @@
 "use client"
+import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import PieCharts, { Icons } from '@/components/dashboard/PieChart';
 import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
-import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
-import Image from 'next/image';
-import React from 'react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { TabsContent } from '@radix-ui/react-tabs';
-import { HomeIcon, User2Icon } from 'lucide-react';
 import { accuracyRate, ClientDataTableType, clientsTypeCount, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth, peopleCounts } from '@/services/clients';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { accuracyStatusProps } from '@/utils/accuracyStatus';
 import { isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
-import Link from 'next/link';
-import { accuracyStatusProps } from '@/utils/accuracyStatus';
 import { ProgressClientsProps } from '@/utils/progressClients';
+import { TabsContent } from '@radix-ui/react-tabs';
+import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { HomeIcon, User2Icon } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const queryClient = new QueryClient();
 
