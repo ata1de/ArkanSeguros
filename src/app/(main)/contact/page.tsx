@@ -1,12 +1,10 @@
 "use client"
 
-import Header from '@/components/Header'
 import { Separator } from '@/components/ui/separator'
+import Aos from "aos"
+import "aos/dist/aos.css"
 import Image from 'next/image'
-import React from 'react'
-import { useEffect } from "react";
-import Aos from "aos";
-import "aos/dist/aos.css";
+import { useEffect } from "react"
 
 const Contact = () => {
   useEffect(() => {
@@ -25,7 +23,7 @@ const Contact = () => {
           <p className='text-slate-300'>R. Mearim, 614 - Estância, Recife - PE, 50771-450</p>
           <div className='flex justify-center items-center gap-3'>
             <Image src="/icons/icon_contact_phone.svg" alt="icon de celular" width={24} height={24} />
-            <p className='text-slate-300'>(81) 98688-4201</p>
+            <p className='text-slate-300'>(81) 98688-4201 | (81) 98857-5153</p>
           </div>
           <div className='flex justify-center items-center gap-3'>
             <Image src="/icons/icon_contact_email.svg" alt="icon de email" width={24} height={24} />

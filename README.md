@@ -4,6 +4,8 @@
  
 ![video]('https://github.com/ata1de/ArkanSeguros/blob/main/public/readme/video-dashboard.mkv')
 
+![video]('https://github.com/ata1de/ArkanSeguros/blob/main/public/readme/video-main-website.mkv')
+
 <br>
 
 # View the project here ⬇
