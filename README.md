@@ -48,31 +48,13 @@ Besides that, obviously the project is 100% adaptable for mobile devices and str
 
 
 ## 📝 Main learnings
-* Creating forms with useForms and managing with zod schema
-* Organizing styles with tailwind
-* Using shadcnUi and Aos to improve the user interface 
 
-## ⬆ Next Steps
-* Add more responsibility
-* Add menu navbar
-* Add one more page
-* Create new erros in form submit
-* Create 404 page
+- Implemented Firebase for authentication and data requests.
+- Utilized React Query for efficient state management.
+- Integrated React Hook Form with Zod for enhanced schema validation.
+- Combined Nodemailer and React Email for stylized email notifications.
+- Leveraged Recharts for improved data visualization.
+- Employed Shadcn UI for superior component design.
+- Organized styles effectively with Tailwind CSS.
+- Created a custom 404 error page for the first time.
 
-# ⚙️ Open and rnu project
-Clone o repositório
-```
-https://github.com/ata1de/Libertas_frontend.git
-```
-Instale as dependências
-```
-npm install
-```
-Rode o projeto
-```
-npm run dev
-```
-Abra o link
-```
-http://localhost:3000
-```
