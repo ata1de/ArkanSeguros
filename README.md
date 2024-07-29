@@ -5,15 +5,15 @@
  ## WebSite Arkan Seguros
  
 
-https://github.com/user-attachments/assets/5f03bb47-d804-45d4-baae-0f26d181489f
+https://github.com/user-attachments/assets/0e2177fa-c0ed-4ce9-b9ad-f9e014c0c5e8
 
 
 
 ## Dashboard Arkan Analytics
 
 
+https://github.com/user-attachments/assets/5f03bb47-d804-45d4-baae-0f26d181489f
 
-https://github.com/user-attachments/assets/0e2177fa-c0ed-4ce9-b9ad-f9e014c0c5e8
 
 
 <br>
