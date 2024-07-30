@@ -20,9 +20,9 @@ https://github.com/user-attachments/assets/5f03bb47-d804-45d4-baae-0f26d181489f
 <br>
 
 ## ☕ More about 
-Desenvolvi um site completo para a Arkan Seguros, uma empresa dedicada a fornecer soluções de seguros personalizadas. No site, destaquei de forma clara e intuitiva os diversos serviços que a Arkan oferece, assim como seus valores fundamentais e missão, criando uma experiência informativa e envolvente para os visitantes.
+I developed a comprehensive website for Arkan Seguros, a company dedicated to providing customized insurance solutions. On the website, I clearly and intuitively highlighted the various services that Arkan offers, as well as its core values ​​and mission, creating an informative and engaging experience for visitors.
 
-Além disso, implementei uma dashboard automatizada que analisa os dados das pessoas que se inscrevem através do formulário online. Essa ferramenta avançada proporciona insights únicos, permitindo à Arkan Seguros entender melhor o perfil dos seus clientes e ajustar suas estratégias de marketing e atendimento de forma mais eficaz.
+In addition, I implemented an automated dashboard that analyzes the data of people who register through the online form. This advanced tool provides unique insights, allowing Arkan Seguros to better understand the profile of its customers and adjust its marketing and service strategies more effectively.
 
 <br>
 Besides that, obviously the project is 100% adaptable for mobile devices and strategy planned for future software maintenance.
