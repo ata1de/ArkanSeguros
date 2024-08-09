@@ -1,30 +1,29 @@
-<h1 align=center>📈Libertas📈</h1>
+<h1 align=center>Arkan Seguros</h1>
 
 <br>
+
+ ## WebSite Arkan Seguros
  
-![video]('https://github.com/ata1de/ArkanSeguros/blob/main/public/readme/video-dashboard.mkv')
 
-![video]('https://github.com/ata1de/ArkanSeguros/blob/main/public/readme/video-main-website.mkv')
+https://github.com/user-attachments/assets/0e2177fa-c0ed-4ce9-b9ad-f9e014c0c5e8
+
+
+
+## Dashboard Arkan Analytics
+
+
+https://github.com/user-attachments/assets/5f03bb47-d804-45d4-baae-0f26d181489f
+
+
 
 <br>
-
-# View the project here ⬇
-https://libertas-frontend.vercel.app/
 <br>
 
 ## ☕ More about 
-Libertas is a law firm committed to offering personalized, high-quality legal solutions to our clients. At the moment, the project is made of 2 pages and all of them has good features:
-- Home
-```
-  - Sobre: Learn a little about the company and what it offers ; 
-  - Serviços: Shows 3 random services
-  - História: A tab to go to showing the company's history
-  - Conte conosco: See contact infos and send a message 
-```
-- Services
-```
-Show all services
-```
+I developed a comprehensive website for Arkan Seguros, a company dedicated to providing customized insurance solutions. On the website, I clearly and intuitively highlighted the various services that Arkan offers, as well as its core values ​​and mission, creating an informative and engaging experience for visitors.
+
+In addition, I implemented an automated dashboard that analyzes the data of people who register through the online form. This advanced tool provides unique insights, allowing Arkan Seguros to better understand the profile of its customers and adjust its marketing and service strategies more effectively.
+
 <br>
 Besides that, obviously the project is 100% adaptable for mobile devices and strategy planned for future software maintenance.
 
@@ -39,34 +38,23 @@ Besides that, obviously the project is 100% adaptable for mobile devices and str
 * **[ Axios ](https://axios-http.com/ptbr/docs/intro)**
 * **[ ShadcnUI ](https://ui.shadcn.com/)**
 * **[ Aos ](https://michalsnik.github.io/aos/)**
+* **[ React Hook Forms ](https://react-hook-form.com/)**
+* **[ Tanstack React Query ](https://tanstack.com/)**
+* **[ Dayjs ](https://day.js.org/)**
+* **[ FireBase ](https://firebase.google.com/?hl=pt)**
+* **[ Nodemailer ](https://nodemailer.com/)**
+* **[ Recharts ](https://recharts.org/en-US/)**
+
 
 
 ## 📝 Main learnings
-* Creating forms with useForms and managing with zod schema
-* Organizing styles with tailwind
-* Using shadcnUi and Aos to improve the user interface 
 
-## ⬆ Next Steps
-* Add more responsibility
-* Add menu navbar
-* Add one more page
-* Create new erros in form submit
-* Create 404 page
+- Implemented Firebase for authentication and data requests.
+- Utilized React Query for efficient state management.
+- Integrated React Hook Form with Zod for enhanced schema validation.
+- Combined Nodemailer and React Email for stylized email notifications.
+- Leveraged Recharts for improved data visualization.
+- Employed Shadcn UI for superior component design.
+- Organized styles effectively with Tailwind CSS.
+- Created a custom 404 error page for the first time.
 
-# ⚙️ Open and rnu project
-Clone o repositório
-```
-https://github.com/ata1de/Libertas_frontend.git
-```
-Instale as dependências
-```
-npm install
-```
-Rode o projeto
-```
-npm run dev
-```
-Abra o link
-```
-http://localhost:3000
-```
