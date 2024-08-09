@@ -1,6 +1,6 @@
 import Footer from "@/components/Footer";
+import Forms from "@/components/form";
 import Header from "@/components/Header";
-import Forms from "@/components/Form";
 import Image from "next/image";
 import Link from "next/link";
 
