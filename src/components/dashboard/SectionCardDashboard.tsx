@@ -10,10 +10,10 @@ import { ProgressClientsProps } from '@/utils/progressClients';
 
 interface SectionCardDashboardProps {
   clientManager: isClientType
-  peopleTypeManager: PeopleTypeProps 
+  peopleTypeManager: PeopleTypeProps
   accuracyRate: accuracyStatusProps
   progressClients: ProgressClientsProps
-  isLoadingProgressStatus: boolean 
+  isLoadingProgressStatus: boolean
   isLoadingClientManager: boolean;
   isLoadingPeopleManager: boolean;
   isLoadingAccurate: boolean;
@@ -36,7 +36,7 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
   const isLoading = isLoadingClientManager || isLoadingProgressStatus || isLoadingPeopleManager || isLoadingAccurate
   const isRefetching = isRefetchingAccurate || isRefetchingProgressStatus
 
-  
+
 
   return (
     <div className='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4'>

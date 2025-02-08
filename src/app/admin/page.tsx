@@ -171,13 +171,13 @@ const AdminContent = () => {
           <TabsContent value='users'>
             <div className='flex flex-col gap-3 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Clientes</h1>
-              {isLoading ? 
+              {isLoading ?
               <div className='w-full h-full m-auto flex items-center justify-center'>
                 <Icons.spinner className='w-14 h-14 animate-spin' />
               </div>
               :
               <DataTableDemo data={dataUsers!} />
-              
+
               }
             </div>
           </TabsContent>
