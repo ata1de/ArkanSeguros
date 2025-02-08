@@ -27,3 +27,8 @@ export interface UserCountByMonthProps {
     month: string;
     leads: number;
 }
+
+export interface ServicesByUsersProps {
+    name: string;
+    value: number;
+}

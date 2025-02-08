@@ -1,20 +1,14 @@
-import React from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { ServicesByUsersProps } from '@/types/leads';
 import { Loader2 } from 'lucide-react';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 export const Icons = {
   spinner: Loader2,
 };
 
-// Definindo o tipo dos dados
-interface DataPoint {
-  name: string;
-  value: number;
-}
-
 // Tipo dos props do Example
-interface ExampleProps {
-  data: DataPoint[];
+interface PieChartsProps {
+  data: ServicesByUsersProps[];
   isLoading: boolean;
 }
 
@@ -32,7 +26,7 @@ const CustomTooltip = ({ active, payload }: any) => {
   return null;
 };
 
-const Example = ({ data, isLoading }: ExampleProps) => {
+const PieCharts = ({ data, isLoading }: PieChartsProps) => {
   return (
     <div className="w-full h-full m-auto">
       {isLoading ? (
@@ -66,4 +60,4 @@ const Example = ({ data, isLoading }: ExampleProps) => {
   );
 };
 
-export default Example;
+export default PieCharts;

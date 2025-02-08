@@ -5,9 +5,9 @@ import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAccurateDoneLeads, getClientType, getPeopleType, getProgressClient, getUserCountByMonth } from "@/process/leads";
-import { ClientDataTableType, getAllClients, getServicesByUsers } from '@/services/clients';
-import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps, ProgressClientsProps, UserCountByMonthProps } from '@/types/leads';
+import { getAccurateDoneLeads, getClientType, getPeopleType, getProgressClient, getServicesByUsers, getUserCountByMonth } from "@/process/leads";
+import { ClientDataTableType, getAllClients } from '@/services/clients';
+import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps, ProgressClientsProps, ServicesByUsersProps, UserCountByMonthProps } from '@/types/leads';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { useQuery } from '@tanstack/react-query';
 import { HomeIcon, User2Icon } from 'lucide-react';
@@ -25,16 +25,6 @@ const AdminPage = () => {
       throw new Error("Failed to fetch all clients");
     }
   };
-
-  const getServices = async () => {
-    try {
-      const response = await getServicesByUsers();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch services by users");
-    }
-  }
 
   const {data: DataProgressStatus, isLoading: isLoadingProgressStatus, isRefetching: isRefetchingProgressStatus } = useQuery<ProgressClientsProps>({
     queryKey: ['progress'],
@@ -66,9 +56,9 @@ const AdminPage = () => {
     queryFn: getUserCountByMonth,
   });
 
-  const {data: dataServices, isLoading: isLoadingServices} = useQuery({
+  const {data: dataServices, isLoading: isLoadingServices} = useQuery<ServicesByUsersProps[]>({
     queryKey: ['services'],
-    queryFn: getServices,
+    queryFn: getServicesByUsers,
   });
 
   return (

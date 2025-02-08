@@ -29,3 +29,9 @@ export const getUserCountByMonth = async () => {
 
     return data
 }
+
+export const getServicesByUsers = async () => {
+    const { data } = await api.get('/leads/services')
+
+    return data
+}
