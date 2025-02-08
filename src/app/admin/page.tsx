@@ -5,9 +5,10 @@ import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { accuracyRate, ClientDataTableType, clientsTypeCount, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth, peopleCounts } from '@/services/clients';
+import { getClientManager } from "@/process/leads";
+import { accuracyRate, ClientDataTableType, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth, peopleCounts } from '@/services/clients';
+import { ClientManagerProps } from '@/types/leads';
 import { accuracyStatusProps } from '@/utils/accuracyStatus';
-import { isClientType } from '@/utils/isClientFunction';
 import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
 import { ProgressClientsProps } from '@/utils/progressClients';
 import { TabsContent } from '@radix-ui/react-tabs';
@@ -37,16 +38,6 @@ const AdminContent = () => {
       throw new Error("Failed to fetch all clients");
     }
   };
-  
-  const getClientManager = async () => {
-    try {
-      const response = await clientsTypeCount();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch clients type");
-    }
-  }
 
   const getPeopleTypeManager = async () => {
     try {
@@ -117,7 +108,7 @@ const AdminContent = () => {
     queryFn: getPeopleTypeManager,
   });
 
-  const {data: dataClientManager, isLoading: isLoadingClientManager} = useQuery<isClientType>({
+  const {data: dataClientManager, isLoading: isLoadingClientManager} = useQuery<ClientManagerProps>({
     queryKey: ['clientManager'],
     queryFn: getClientManager,
   });

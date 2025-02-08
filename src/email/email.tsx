@@ -1,22 +1,17 @@
 import * as React from "react";
 import {
     Body,
-    Button,
     Container,
-    Column,
     Head,
     Heading,
     Hr,
     Html,
     Img,
-    Link,
     Preview,
-    Row,
     Section,
     Text,
     Tailwind,
   } from "@react-email/components";
-  
 interface ArkanInviteCLientEmailProps {
   name: string;
   email: string;
@@ -26,7 +21,7 @@ interface ArkanInviteCLientEmailProps {
   service: string;
   isClient: string;
   }
-  
+
 const ArkanInviteCLientEmail = ({
   name,
   email,
@@ -38,7 +33,7 @@ const ArkanInviteCLientEmail = ({
   }: ArkanInviteCLientEmailProps) => {
     const previewText = `Informações do cliente`;
     const previewUrl = "http://localhost:3000/email";
-  
+
     return (
       <Html>
         <Head />
@@ -94,4 +89,3 @@ const ArkanInviteCLientEmail = ({
   };
 
 export default ArkanInviteCLientEmail
-  

@@ -1,18 +1,18 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import { toast } from 'sonner';
-import { useCallback } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { LoginResponseType, loginSchema, LoginSchemaType } from "@/types/auth";
-import { login } from "@/api/auth";
 import { mappedErrors } from "@/constants/errors";
 import { setStorage } from "@/lib/storage";
+import { login } from "@/process/auth";
+import { LoginResponseType, loginSchema, LoginSchemaType } from "@/types/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from 'sonner';
 
 const LoginPage = () => {
   const router = useRouter();

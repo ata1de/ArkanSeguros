@@ -1,15 +1,15 @@
-import React from 'react';
-import DashboardCard from './DashboardCard';
-import { Activity, DollarSign, LineChart, Loader, TrendingDown, TrendingUp, UserPlus } from 'lucide-react';
-import { isClientType } from '@/utils/isClientFunction';
-import { SkeletonCard } from '../Skeleton';
+import { ClientManagerProps } from '@/types/leads';
 import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
 import { accuracyStatusProps } from '@/utils/accuracyStatus';
-import DashboardCardClients from './DashboardCardClients';
 import { ProgressClientsProps } from '@/utils/progressClients';
+import { Activity, DollarSign, LineChart, Loader, TrendingDown, TrendingUp, UserPlus } from 'lucide-react';
+import React from 'react';
+import { SkeletonCard } from '../Skeleton';
+import DashboardCard from './DashboardCard';
+import DashboardCardClients from './DashboardCardClients';
 
 interface SectionCardDashboardProps {
-  clientManager: isClientType
+  clientManager: ClientManagerProps
   peopleTypeManager: PeopleTypeProps
   accuracyRate: accuracyStatusProps
   progressClients: ProgressClientsProps
@@ -52,10 +52,10 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
           <DashboardCard
             label='Clientes Novos'
             icon={UserPlus}
-            amount={clientManager?.clientCount || 0}
-            diff={clientManager?.diff || 0}
-            description='em relação aos clientes antigos'
-            plus={clientManager?.newClient}
+            amount={clientManager?.newClientCount || 0}
+            diff={clientManager?.difference || 0}
+            description={'em relação aos clientes antigos'}
+            plus={clientManager?.isNewClientPrevalence}
           />
           <DashboardCard
             label={`Pessoas ${peopleTypeManager?.pf ? 'Física' : 'Jurídica'}`}
