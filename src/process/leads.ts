@@ -23,3 +23,9 @@ export const getProgressClient = async () => {
 
     return data
 }
+
+export const getUserCountByMonth = async () => {
+    const { data } = await api.get('/leads/monthly')
+
+    return data
+}

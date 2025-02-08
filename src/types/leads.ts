@@ -22,3 +22,8 @@ export interface ProgressClientsProps {
     inProgressCountLeads: number
     percentage: number
 }
+
+export interface UserCountByMonthProps {
+    month: string;
+    leads: number;
+}

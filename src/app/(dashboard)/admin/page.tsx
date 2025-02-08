@@ -5,9 +5,9 @@ import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAccurateDoneLeads, getClientType, getPeopleType, getProgressClient } from "@/process/leads";
-import { ClientDataTableType, getAllClients, getServicesByUsers, getUserCountByMonth } from '@/services/clients';
-import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps, ProgressClientsProps } from '@/types/leads';
+import { getAccurateDoneLeads, getClientType, getPeopleType, getProgressClient, getUserCountByMonth } from "@/process/leads";
+import { ClientDataTableType, getAllClients, getServicesByUsers } from '@/services/clients';
+import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps, ProgressClientsProps, UserCountByMonthProps } from '@/types/leads';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { useQuery } from '@tanstack/react-query';
 import { HomeIcon, User2Icon } from 'lucide-react';
@@ -25,17 +25,6 @@ const AdminPage = () => {
       throw new Error("Failed to fetch all clients");
     }
   };
-
-  const getUserByMonth = async () => {
-    try {
-      const response = await getUserCountByMonth();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch user count by month");
-    }
-  }
-
 
   const getServices = async () => {
     try {
@@ -72,9 +61,9 @@ const AdminPage = () => {
     queryFn: getClientType,
   });
 
-  const {data: dataUserByMonth, isLoading: isLoadingUserByMonth} = useQuery<{ month: string; clicks: number; }[]>({
+  const {data: dataUserByMonth, isLoading: isLoadingUserByMonth} = useQuery<UserCountByMonthProps[]>({
     queryKey: ['userByMonth'],
-    queryFn: getUserByMonth,
+    queryFn: getUserCountByMonth,
   });
 
   const {data: dataServices, isLoading: isLoadingServices} = useQuery({

@@ -1,6 +1,5 @@
-import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Loader2 } from 'lucide-react';
+import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 export const Icons = {
   spinner: Loader2,
@@ -9,7 +8,7 @@ export const Icons = {
 // Definindo o tipo dos dados
 interface DataPoint {
   month: string;
-  clicks: number;
+  leads: number;
 }
 
 // Tipo dos props do FormClicksChart
@@ -33,7 +32,7 @@ const FormClicksChart = ({ data, isLoading }: FormClicksChartProps) => {
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip content={CustomTooltip} />
             <Legend />
-            <Line type="monotone" dataKey="clicks" stroke="#FFB60F" strokeWidth={2} />
+            <Line type="monotone" dataKey="leads" stroke="#FFB60F" strokeWidth={2} />
           </LineChart>
         </ResponsiveContainer>
       )}
