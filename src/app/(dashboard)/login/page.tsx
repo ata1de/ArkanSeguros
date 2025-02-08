@@ -2,17 +2,17 @@
 
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import { mappedErrors } from "@/constants/errors";
 import { setStorage } from "@/lib/storage";
 import { login } from "@/process/auth";
 import { LoginResponseType, loginSchema, LoginSchemaType } from "@/types/auth";
+import { errorHandler } from "@/utils/errors";
+import { successAlert } from "@/utils/successAlert";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from 'sonner';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -24,33 +24,20 @@ const LoginPage = () => {
     }
   });
 
+  const onSuccessLoginHandler = (data: LoginResponseType) => {
+    successAlert('Usuário logado! Seja bem vindo')
+
+    setStorage('token', data.token)
+    setStorage('user', JSON.stringify(data.user))
+
+    router.push("/admin");
+  }
+
   const { mutate: loginMutate } = useMutation<LoginResponseType, Error, LoginSchemaType>({
 		mutationKey: ['login'],
-		mutationFn: async (data) => {
-			const response = await login(data);
-			return response.data;
-		},
-		onSuccess: (data: LoginResponseType) => {
-			toast.success('Usuário logado! Seja bem vindo', {
-                style: { backgroundColor: '#25D366', color: 'white' },
-                position: 'bottom-right',
-                duration: 2500
-            });
-
-      setStorage('token', data.token)
-      setStorage('user', JSON.stringify(data.user))
-
-      router.push("/admin");
-		},
-		onError: (error: Error) => {
-      const errorMessage = mappedErrors[error.message] || 'Algo de errado aconteceu, tente novamente.';
-
-			toast.error(errorMessage, {
-                style: { backgroundColor: '#EE1B22', color: 'white' },
-                position: 'bottom-right',
-                duration: 2500
-            });
-		},
+		mutationFn: login,
+		onSuccess: onSuccessLoginHandler,
+		onError: errorHandler
 	});
 
   const onSubmit = useCallback<SubmitHandler<LoginSchemaType>>(
