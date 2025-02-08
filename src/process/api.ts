@@ -21,7 +21,7 @@ const TokenInterceptor = (config: any) => {
 const ErrorInterceptor = (error: AxiosError) => {
     if (error.response?.status === 401) {
         clearStorage();
-        redirect("/");
+        redirect("/login");
     }
     return Promise.reject(error?.response?.data || error);
 }

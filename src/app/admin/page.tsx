@@ -5,11 +5,9 @@ import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getClientManager } from "@/process/leads";
-import { accuracyRate, ClientDataTableType, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth, peopleCounts } from '@/services/clients';
-import { ClientManagerProps } from '@/types/leads';
-import { accuracyStatusProps } from '@/utils/accuracyStatus';
-import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
+import { getAccurateDoneLeads, getClientType, getPeopleType } from "@/process/leads";
+import { ClientDataTableType, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth } from '@/services/clients';
+import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps } from '@/types/leads';
 import { ProgressClientsProps } from '@/utils/progressClients';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
@@ -39,16 +37,6 @@ const AdminContent = () => {
     }
   };
 
-  const getPeopleTypeManager = async () => {
-    try {
-      const response = await peopleCounts();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch people type");
-    }
-  }
-
   const getUserByMonth = async () => {
     try {
       const response = await getUserCountByMonth();
@@ -70,15 +58,6 @@ const AdminContent = () => {
     }
   }
 
-  const getAccurateData = async () => {
-    try {
-      const response = await accuracyRate();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch accuracy rate");
-  }}
-
   const getProgressClient = async () => {
     try {
       const response = await getStatusProgressClient();
@@ -95,7 +74,7 @@ const AdminContent = () => {
 
   const {data: DataAccurate, isLoading: isLoadingAccurate, isRefetching: isRefetchingAccurate } = useQuery<accuracyStatusProps>({
     queryKey: ['accurate'],
-    queryFn: getAccurateData,
+    queryFn: getAccurateDoneLeads,
   })
 
   const {data: dataUsers, isLoading} = useQuery<ClientDataTableType[]>({
@@ -105,12 +84,12 @@ const AdminContent = () => {
 
   const {data: dataPeopleManager, isLoading: isLoadingPeopleManager} = useQuery<PeopleTypeProps>({
     queryKey: ['peopleTypeManager'],
-    queryFn: getPeopleTypeManager,
+    queryFn: getPeopleType,
   });
 
   const {data: dataClientManager, isLoading: isLoadingClientManager} = useQuery<ClientManagerProps>({
     queryKey: ['clientManager'],
-    queryFn: getClientManager,
+    queryFn: getClientType,
   });
 
   const {data: dataUserByMonth, isLoading: isLoadingUserByMonth} = useQuery<{ month: string; clicks: number; }[]>({

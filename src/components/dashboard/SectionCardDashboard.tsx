@@ -1,6 +1,4 @@
-import { ClientManagerProps } from '@/types/leads';
-import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
-import { accuracyStatusProps } from '@/utils/accuracyStatus';
+import { ClientManagerProps, PeopleTypeProps, accuracyStatusProps } from '@/types/leads';
 import { ProgressClientsProps } from '@/utils/progressClients';
 import { Activity, DollarSign, LineChart, Loader, TrendingDown, TrendingUp, UserPlus } from 'lucide-react';
 import React from 'react';
@@ -37,7 +35,6 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
   const isRefetching = isRefetchingAccurate || isRefetchingProgressStatus
 
 
-
   return (
     <div className='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4'>
       {isLoading || isRefetching ? (
@@ -52,25 +49,25 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
           <DashboardCard
             label='Clientes Novos'
             icon={UserPlus}
-            amount={clientManager?.newClientCount || 0}
+            amount={clientManager?.newClientsCount || 0}
             diff={clientManager?.difference || 0}
             description={'em relação aos clientes antigos'}
             plus={clientManager?.isNewClientPrevalence}
           />
           <DashboardCard
-            label={`Pessoas ${peopleTypeManager?.pf ? 'Física' : 'Jurídica'}`}
+            label={`Pessoas ${peopleTypeManager?.isPfPrevalence ? 'Física' : 'Jurídica'}`}
             icon={DollarSign}
-            amount={peopleTypeManager?.clientCount || 0}
-            diff={peopleTypeManager?.diff || 0}
-            description={` em relação às pessoas ${peopleTypeManager?.pf ? 'jurídicas' : 'físicas'}`}
+            amount={peopleTypeManager?.isPfPrevalence ? peopleTypeManager?.pfCount : peopleTypeManager?.pjCount}
+            diff={peopleTypeManager?.difference || 0}
+            description={` em relação às pessoas ${peopleTypeManager?.isPfPrevalence ? 'físicas' : 'jurídicas'}`}
             plus={true}
           />
           <DashboardCardClients
             label='Clientes Efetivados'
             icon={LineChart}
-            amount={accuracyRate?.accuracyRate || 0}
-            description={`${accuracyRate?.variation.toFixed(2)}% em relação aos clientes cancelados`}
-            statsIcon={accuracyRate?.resultVariation ? TrendingUp : TrendingDown}
+            amount={accuracyRate?.doneAccuracyRate || 0}
+            description={`${accuracyRate?.variationRate.toFixed(2)}% em relação aos clientes cancelados`}
+            statsIcon={accuracyRate?.isPositiveVariation ? TrendingUp : TrendingDown}
             isProgress={false}
           />
           <DashboardCardClients 
