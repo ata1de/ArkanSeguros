@@ -1,5 +1,4 @@
-import { ClientManagerProps, PeopleTypeProps, accuracyStatusProps } from '@/types/leads';
-import { ProgressClientsProps } from '@/utils/progressClients';
+import { ClientManagerProps, PeopleTypeProps, ProgressClientsProps, accuracyStatusProps } from '@/types/leads';
 import { Activity, DollarSign, LineChart, Loader, TrendingDown, TrendingUp, UserPlus } from 'lucide-react';
 import React from 'react';
 import { SkeletonCard } from '../Skeleton';
@@ -70,12 +69,15 @@ const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
             statsIcon={accuracyRate?.isPositiveVariation ? TrendingUp : TrendingDown}
             isProgress={false}
           />
-          <DashboardCardClients 
-          label='Clientes em Progresso' 
-          icon={Activity} 
-          amount={progressClients.percentProgress}
-          statsIcon={Loader} 
-          description={`${progressClients.amountProgress} cliente's estão no processo para ser efetivados`} 
+          <DashboardCardClients
+          label='Clientes em Progresso'
+          icon={Activity}
+          amount={progressClients.percentage}
+          statsIcon={Loader}
+          description={`${progressClients.inProgressCountLeads} ${
+                  progressClients.inProgressCountLeads > 1 ? "clientes estão" : "cliente está"
+                } no processo para a efetivação`
+          }
           isProgress={true}
           />
         </>

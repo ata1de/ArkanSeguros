@@ -1,6 +1,5 @@
 import { clearStorage, getStorage } from "@/lib/storage";
 import axios, { AxiosError } from "axios";
-import { redirect } from "next/navigation";
 
 const api = axios.create({
     baseURL: "http://localhost:3333",
@@ -21,7 +20,7 @@ const TokenInterceptor = (config: any) => {
 const ErrorInterceptor = (error: AxiosError) => {
     if (error.response?.status === 401) {
         clearStorage();
-        redirect("/login");
+        window.location.href = "/login";
     }
     return Promise.reject(error?.response?.data || error);
 }

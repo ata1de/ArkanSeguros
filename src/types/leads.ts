@@ -17,3 +17,8 @@ export interface accuracyStatusProps {
     isPositiveVariation: boolean;
     variationRate: number;
 }
+
+export interface ProgressClientsProps {
+    inProgressCountLeads: number
+    percentage: number
+}

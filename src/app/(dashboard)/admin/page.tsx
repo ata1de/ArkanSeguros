@@ -5,27 +5,16 @@ import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
 import FormClicksChart from '@/components/dashboard/TinyChart';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAccurateDoneLeads, getClientType, getPeopleType } from "@/process/leads";
-import { ClientDataTableType, getAllClients, getServicesByUsers, getStatusProgressClient, getUserCountByMonth } from '@/services/clients';
-import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps } from '@/types/leads';
-import { ProgressClientsProps } from '@/utils/progressClients';
+import { getAccurateDoneLeads, getClientType, getPeopleType, getProgressClient } from "@/process/leads";
+import { ClientDataTableType, getAllClients, getServicesByUsers, getUserCountByMonth } from '@/services/clients';
+import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps, ProgressClientsProps } from '@/types/leads';
 import { TabsContent } from '@radix-ui/react-tabs';
-import { QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { HomeIcon, User2Icon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const queryClient = new QueryClient();
-
 const AdminPage = () => {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <AdminContent />
-    </QueryClientProvider>
-  );
-};
-
-const AdminContent = () => {
 
   const getAllUsers = async () => {
     try {
@@ -57,15 +46,6 @@ const AdminContent = () => {
       throw new Error("Failed to fetch services by users");
     }
   }
-
-  const getProgressClient = async () => {
-    try {
-      const response = await getStatusProgressClient();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch progress client");
-  }}
 
   const {data: DataProgressStatus, isLoading: isLoadingProgressStatus, isRefetching: isRefetchingProgressStatus } = useQuery<ProgressClientsProps>({
     queryKey: ['progress'],

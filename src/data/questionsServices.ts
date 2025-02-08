@@ -21,7 +21,7 @@ export const questionsServices: ServiceQuestions[] = [
                 answer: "O Plano Odontológico inclui consultas, tratamentos preventivos, ortodontia e muito mais."
             },
             {
-                question: "Posso escolher meu dentista?",   
+                question: "Posso escolher meu dentista?",
                 answer: "Sim, contamos com uma rede ampla de dentistas credenciados em todo o país."
             },
             {
