@@ -9,9 +9,11 @@ import { progressClients } from "@/utils/progressClients";
 import dayjs from 'dayjs';
 import { addDoc, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 
-export interface ClientDataTableType extends LeadType {
-    id: string;
-    createdAt: Date
+export interface ClientDataTableType {
+    page: number,
+    perPage: number,
+    total: number,
+    leads: LeadType[]
 }
 
 
@@ -146,7 +148,7 @@ export async function getServicesByUsers() {
     return servicesTotal
 } 
 
-export async function updateStatusUser(data: Partial<ClientDataTableType>, id: string) {
+export async function updateStatusUser(data: Partial<LeadType>, id: number) {
     const clientRef = doc(db, 'clients', id)
 
     const queryDataSnapshot = await updateDoc(clientRef, data)

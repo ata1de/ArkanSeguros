@@ -34,6 +34,7 @@ export interface ServicesByUsersProps {
 }
 
 export interface LeadType {
+    id: number;
     name: string;
     email: string;
     phone: string;
@@ -43,4 +44,5 @@ export interface LeadType {
     interest_plan: string;
     is_pf: string;
     creator_id: number | null;
+    createdAt: Date;
 }

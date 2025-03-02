@@ -25,12 +25,10 @@ const AdminPage = () => {
     queryFn: getAccurateDoneLeads,
   })
 
-  const {data: dataUsers, isLoading} = useQuery<ClientDataTableType[]>({
+  const {data: dataUsers, isLoading} = useQuery<ClientDataTableType>({
     queryKey: ['users'],
     queryFn: getAllLeads,
   });
-
-  console.log('data users', dataUsers);
 
   const {data: dataPeopleManager, isLoading: isLoadingPeopleManager} = useQuery<PeopleTypeProps>({
     queryKey: ['peopleTypeManager'],

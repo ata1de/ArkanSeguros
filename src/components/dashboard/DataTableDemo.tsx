@@ -1,6 +1,5 @@
 "use client"
 
-import * as React from "react"
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -13,7 +12,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, CalendarDays, ChevronDown, Divide, User2 } from "lucide-react"
+import { ArrowUpDown, CalendarDays, ChevronDown, User2 } from "lucide-react"
+import * as React from "react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -33,15 +33,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { ClientDataTableType, updateStatusUser } from "@/services/clients"
-import Image from "next/image"
+import { LeadType } from "@/types/leads"
+import { FormattedDate } from "@/utils/FormattedDate"
 import { useQueryClient } from "@tanstack/react-query"
+import Image from "next/image"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
 import { Separator } from "../ui/separator"
-import { FormattedDate } from "@/utils/FormattedDate"
-
-interface DataTableDemoProps {
-  data: ClientDataTableType[]
-}
 
 const statusOptions = ["Feito", "Cancelado", "Em progresso", "Neutro"]
 
@@ -57,24 +54,24 @@ const styledStats = (status: string) => {
       return "/statsTable/nullStats.svg"
   }
 }
-const handleUpdateStatus = async (updatedClient: Partial<ClientDataTableType>, id: string) => {
+const handleUpdateStatus = async (updatedClient: Partial<LeadType>, id: number) => {
   await updateStatusUser(updatedClient, id);
 };
 
-const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableType; onUpdateStatus: (client: Partial<ClientDataTableType>, id: string) => void }> = ({ initialStatus, client, onUpdateStatus }) => {
+const StatusButton: React.FC<{ initialStatus: string; client: LeadType; onUpdateStatus: (client: Partial<LeadType>, id: number) => void }> = ({ initialStatus, client, onUpdateStatus }) => {
   const [status, setStatus] = React.useState(initialStatus);
   const queryClient = useQueryClient();
 
-  
+
   const handleUpdateStatus = async (newStatus: string) => {
     setStatus(newStatus);
 
     const updatedClient = { ...client, stats: newStatus };
     try {
-      
+
       onUpdateStatus(updatedClient, client.id);
       // atualizando o cache do queryClient para refletir localmente
-      queryClient.setQueryData(["users"], (oldData: ClientDataTableType[] | undefined) => {
+      queryClient.setQueryData(["users"], (oldData: LeadType[] | undefined) => {
         if (!oldData) return [];
         return oldData.map((data) => {
           if (data.id === client.id) {
@@ -83,7 +80,7 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
           return data;
         })
       })
-      
+
       await queryClient.refetchQueries({ queryKey: ['accurate'] });
 
     } catch (error) {
@@ -114,39 +111,39 @@ const StatusButton: React.FC<{ initialStatus: string; client: ClientDataTableTyp
 };
 
 interface DemandCardProps {
-  client: ClientDataTableType
+  client: LeadType
 
 }
 
-export const DemandCard = ({client}: DemandCardProps) => {
+export const DemandCard = ({ client }: DemandCardProps) => {
   return (
     <HoverCard>
-    <HoverCardTrigger asChild className="cursor-pointer hover:underline">
-      <p className="truncate max-w-[120px]">{client.demand}</p>
-    </HoverCardTrigger>
-    <HoverCardContent className="bg-DarkBlue border-2 max-h-[500px] max-w-[500px] border-WhiteDefault text-WhiteDefault">
-        <div className="flex flex-col justify-center items-start">
-          <div className="flex justify-center items-center">
-            <User2 className="mr-2 h-4 w-4 opacity-70" />  
-            <h4 className="text-sm font-semibold">{client.name}</h4>
+      <HoverCardTrigger asChild className="cursor-pointer hover:underline">
+        <p className="truncate max-w-[120px]">{client.demand}</p>
+      </HoverCardTrigger>
+      <HoverCardContent className="bg-DarkBlue border-2 max-h-[500px] max-w-[500px] border-WhiteDefault text-WhiteDefault">
+          <div className="flex flex-col justify-center items-start">
+            <div className="flex justify-center items-center">
+              <User2 className="mr-2 h-4 w-4 opacity-70" />
+              <h4 className="text-sm font-semibold">{client.name}</h4>
+            </div>
+            <Separator className="my-3 bg-gray-400" />
+            <p className="text-sm mb-3">
+              {client.demand}
+            </p>
+            <div className="flex items-center pt-2">
+              <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
+              <span className="text-xs text-muted-foreground">
+                {FormattedDate(client.createdAt)}
+              </span>
+            </div>
           </div>
-          <Separator className="my-3 bg-gray-400" />
-          <p className="text-sm mb-3">
-            {client.demand}
-          </p>
-          <div className="flex items-center pt-2">
-            <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
-            <span className="text-xs text-muted-foreground">
-              {FormattedDate(client.createdAt)}
-            </span>
-          </div>
-        </div>
-    </HoverCardContent>
+      </HoverCardContent>
   </HoverCard>
   )
 }
 
-export const columns: ColumnDef<ClientDataTableType>[] = [
+export const columns: ColumnDef<LeadType>[] = [
   {
     accessorKey: "name",
     header: ({ column }) => (
@@ -181,16 +178,16 @@ export const columns: ColumnDef<ClientDataTableType>[] = [
     cell: ({ row }) => <div>{row.getValue("phone")}</div>,
   },
   {
-    accessorKey: "peopleType",
+    accessorKey: "is_pf",
     header: "Pessoa",
-    cell: ({ row }) => <div>{row.getValue("peopleType")}</div>,
+    cell: ({ row }) => <div>{row.getValue("is_pf")}</div>,
   },
   {
     accessorKey: "demand",
     header: "Demanda",
     cell: ({ row }) => (
       <DemandCard
-        client={row.original}      
+        client={row.original}
       />
     ),
   },
@@ -200,11 +197,11 @@ export const columns: ColumnDef<ClientDataTableType>[] = [
     cell: ({ row }) => <div>{row.getValue("service")}</div>,
   },
   {
-    accessorKey: "stats",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => (
       <StatusButton
-        initialStatus={row.getValue("stats")}
+        initialStatus={row.getValue("status")}
         client={row.original}
         onUpdateStatus={handleUpdateStatus}
       />
@@ -217,16 +214,20 @@ export const columns: ColumnDef<ClientDataTableType>[] = [
   },
 ]
 
+
+interface DataTableDemoProps {
+  data: ClientDataTableType;
+}
+
 export function DataTableDemo({ data }: DataTableDemoProps) {
-  const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
-  const [rowSelection, setRowSelection] = React.useState({})
-  const [currentPage, setCurrentPage] = React.useState(0)
+  const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = React.useState({});
+  const [currentPage, setCurrentPage] = React.useState(data.page - 1);
 
-
-  const table = useReactTable<ClientDataTableType>({
-    data,
+  const table = useReactTable({
+    data: data.leads,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -241,13 +242,17 @@ export function DataTableDemo({ data }: DataTableDemoProps) {
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination: {
+        pageIndex: currentPage,
+        pageSize: data.perPage,
+      },
     },
     initialState: {
       pagination: {
-        pageSize: 8,
+        pageSize: data.perPage,
       },
     },
-  })
+  });
 
   return (
     <div className="w-full">
