@@ -3,14 +3,14 @@ import { ClientType } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 
-import { collection, query, getDocs, addDoc, Timestamp, where, updateDoc, doc } from "firebase/firestore";
-import dayjs from 'dayjs';
+import { LeadType } from "@/types/leads";
 import { accuracyStatus } from "@/utils/accuracyStatus";
 import { progressClients } from "@/utils/progressClients";
+import dayjs from 'dayjs';
+import { addDoc, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 
-export interface ClientDataTableType extends ClientType {
+export interface ClientDataTableType extends LeadType {
     id: string;
-    stats: string
     createdAt: Date
 }
 

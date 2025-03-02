@@ -1,18 +1,6 @@
-import { ServicesByUsersProps } from '@/types/leads';
-import { Loader2 } from 'lucide-react';
+import { COLORS } from '@/constants/colors';
+import { IconsSpinner, PieChartsProps } from '@/types/dashboard';
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
-
-export const Icons = {
-  spinner: Loader2,
-};
-
-// Tipo dos props do Example
-interface PieChartsProps {
-  data: ServicesByUsersProps[];
-  isLoading: boolean;
-}
-
-const COLORS = ['#1E90FF', '#32CD32', '#FFD700', '#ffaf47', '#FF6347','#6A5ACD', '#69e9ff', '#FF69B4'];
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -31,7 +19,7 @@ const PieCharts = ({ data, isLoading }: PieChartsProps) => {
     <div className="w-full h-full m-auto">
       {isLoading ? (
         <div className='w-full h-full m-auto flex items-center justify-center'>
-          <Icons.spinner className='w-8 h-8 animate-spin' />
+          <IconsSpinner.spinner className='w-8 h-8 animate-spin' />
         </div>
       ) : (
         <ResponsiveContainer width="100%" height="100%">
@@ -49,9 +37,9 @@ const PieCharts = ({ data, isLoading }: PieChartsProps) => {
               outerRadius={80}
               label
             >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
             </Pie>
           </PieChart>
         </ResponsiveContainer>

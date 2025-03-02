@@ -1,28 +1,12 @@
-import { Loader2 } from 'lucide-react';
+import { IconsSpinner, TinyChartProps } from '@/types/dashboard';
 import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
-export const Icons = {
-  spinner: Loader2,
-};
-
-// Definindo o tipo dos dados
-interface DataPoint {
-  month: string;
-  leads: number;
-}
-
-// Tipo dos props do FormClicksChart
-interface FormClicksChartProps {
-  data: DataPoint[];
-  isLoading: boolean;
-}
-
-const FormClicksChart = ({ data, isLoading }: FormClicksChartProps) => {
+const TinyChart = ({ data, isLoading }: TinyChartProps) => {
   return (
     <div className="w-full h-full m-auto">
       {isLoading ? (
         <div className='w-full h-full m-auto flex items-center justify-center'>
-          <Icons.spinner className='w-10 h-10 animate-spin' />
+          <IconsSpinner.spinner className='w-10 h-10 animate-spin' />
         </div>
       ) : (
         <ResponsiveContainer width="100%" height="100%">
@@ -52,4 +36,4 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-export default FormClicksChart;
+export default TinyChart;

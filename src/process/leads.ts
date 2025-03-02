@@ -35,3 +35,9 @@ export const getServicesByUsers = async () => {
 
     return data
 }
+
+export const getAllLeads = async () => {
+    const { data } = await api.get('/leads')
+
+    return data
+}

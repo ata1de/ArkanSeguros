@@ -1,12 +1,11 @@
 "use client"
 import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
-import PieCharts, { Icons } from '@/components/dashboard/PieChart';
-import SectionCardDashboard from '@/components/dashboard/SectionCardDashboard';
-import FormClicksChart from '@/components/dashboard/TinyChart';
+import SectionCardDashboard from "@/components/dashboard/SectionCardDashboard";
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { getAccurateDoneLeads, getClientType, getPeopleType, getProgressClient, getServicesByUsers, getUserCountByMonth } from "@/process/leads";
-import { ClientDataTableType, getAllClients } from '@/services/clients';
+import { getAccurateDoneLeads, getAllLeads, getClientType, getPeopleType, getProgressClient, getServicesByUsers, getUserCountByMonth } from "@/process/leads";
+import { ClientDataTableType } from '@/services/clients';
+import { IconsSpinner } from "@/types/dashboard";
 import { accuracyStatusProps, ClientManagerProps, PeopleTypeProps, ProgressClientsProps, ServicesByUsersProps, UserCountByMonthProps } from '@/types/leads';
 import { TabsContent } from '@radix-ui/react-tabs';
 import { useQuery } from '@tanstack/react-query';
@@ -15,16 +14,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const AdminPage = () => {
-
-  const getAllUsers = async () => {
-    try {
-      const response = await getAllClients();
-      return response;
-    } catch (error) {
-      console.error("Error fetching match details:", error);
-      throw new Error("Failed to fetch all clients");
-    }
-  };
 
   const {data: DataProgressStatus, isLoading: isLoadingProgressStatus, isRefetching: isRefetchingProgressStatus } = useQuery<ProgressClientsProps>({
     queryKey: ['progress'],
@@ -38,8 +27,10 @@ const AdminPage = () => {
 
   const {data: dataUsers, isLoading} = useQuery<ClientDataTableType[]>({
     queryKey: ['users'],
-    queryFn: getAllUsers,
+    queryFn: getAllLeads,
   });
+
+  console.log('data users', dataUsers);
 
   const {data: dataPeopleManager, isLoading: isLoadingPeopleManager} = useQuery<PeopleTypeProps>({
     queryKey: ['peopleTypeManager'],
@@ -79,34 +70,20 @@ const AdminPage = () => {
             </div>
           </TabsList>
           <Separator className='bg-gray-600' />
-          <TabsContent value='home'>
-            <div className='flex flex-col gap-5 w-full p-5'>
-              <h1 className='text-3xl font-semibold'>Dashboard</h1>
-              <div>
-                <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate} isLoadingProgressStatus={isLoadingProgressStatus} isRefetchingProgressStatus={isRefetchingProgressStatus} progressClients={DataProgressStatus!}/>
-              </div>
-              <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
-                <div className='w-2/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
-                  <p className='text-xl font-medium py-3'>Usuários/mês</p>
-                  <FormClicksChart data={dataUserByMonth!} isLoading={isLoadingUserByMonth} />
-                </div>
-                <div className='w-1/3 max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
-                  <p className='text-xl font-medium py-3'>Serviço/usuário</p>
-                  <PieCharts data={dataServices!} isLoading={isLoadingServices} />
-                </div>
-              </div>
-            </div>
-          </TabsContent>
+
+          <SectionCardDashboard accuracyRate={DataAccurate!} peopleTypeManager={dataPeopleManager!} clientManager={dataClientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate} isLoadingProgressStatus={isLoadingProgressStatus} isRefetchingProgressStatus={isRefetchingProgressStatus} progressClients={DataProgressStatus!} dataUserByMonth={dataUserByMonth!} dataServices={dataServices!}
+          isLoadingUserByMonth={isLoadingUserByMonth} isLoadingServices={isLoadingServices}
+          />
+
           <TabsContent value='users'>
             <div className='flex flex-col gap-3 w-full p-5'>
               <h1 className='text-3xl font-semibold'>Clientes</h1>
               {isLoading ?
               <div className='w-full h-full m-auto flex items-center justify-center'>
-                <Icons.spinner className='w-14 h-14 animate-spin' />
+                <IconsSpinner.spinner className='w-14 h-14 animate-spin' />
               </div>
               :
               <DataTableDemo data={dataUsers!} />
-
               }
             </div>
           </TabsContent>
