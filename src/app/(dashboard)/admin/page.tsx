@@ -1,6 +1,6 @@
 "use client"
-import { DataTableDemo } from "@/components/dashboard/DataTableDemo";
 import SectionCardDashboard from "@/components/dashboard/SectionCardDashboard";
+import { DataTableDemo } from "@/components/dashboard/Table/DataTableDemo";
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getAccurateDoneLeads, getAllLeads, getClientType, getPeopleType, getProgressClient, getServicesByUsers, getUserCountByMonth } from "@/process/leads";
