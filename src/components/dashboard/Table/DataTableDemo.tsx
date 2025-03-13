@@ -30,11 +30,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { ClientDataTableType } from "@/services/clients"
+import { TableType } from "@/types/table"
 import { columns } from "./columns"
 
 interface DataTableDemoProps {
-  data: ClientDataTableType;
+  data: TableType;
 }
 
 export function DataTableDemo({ data }: DataTableDemoProps) {

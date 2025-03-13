@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
+import { updateLeadStatus } from "@/process/leads"
 import { LeadType } from "@/types/leads"
-import { getPersonType, getStatusPlan, handleUpdateStatus } from "@/utils/table"
+import { getPersonType, getStatusPlan } from "@/utils/table"
 import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown } from "lucide-react"
 import { DemandCard } from "./DemandCard"
@@ -66,7 +67,7 @@ const columns: ColumnDef<LeadType>[] = [
         <StatusButton
           initialStatus={getStatusPlan(row.getValue("status"))}
           client={row.original}
-          onUpdateStatus={handleUpdateStatus}
+          onUpdateStatus={updateLeadStatus}
         />
       ),
     },

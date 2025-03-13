@@ -43,7 +43,7 @@ export const getAllLeads = async () => {
 }
 
 export const updateLeadStatus = async (status: string, id: number) => {
-    await api.patch(`/leads/${id}`, {
+    await api.patch(`/leads/status/${id}`, {
         status
     })
 }

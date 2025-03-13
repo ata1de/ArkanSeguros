@@ -2,64 +2,63 @@
 
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { statusOptions } from '@/constants/table';
+import { DEFAULT_USERS_DATA, statusOptions } from '@/constants/table';
 import { LeadType } from "@/types/leads";
-import { styledStats } from '@/utils/table';
+import { TableType } from '@/types/table';
+import { getStatusPlan, statusObj, styledStats } from '@/utils/table';
 import { useQueryClient } from "@tanstack/react-query";
 import { ChevronDown } from "lucide-react";
 import Image from 'next/image';
-import React from "react";
+import React, { useState } from "react";
 
-const StatusButton: React.FC<{ initialStatus: string; client: LeadType; onUpdateStatus: (client: Partial<LeadType>, id: number) => void }> = ({ initialStatus, client, onUpdateStatus }) => {
-    const [status, setStatus] = React.useState(initialStatus);
+const StatusButton: React.FC<{ initialStatus: string; client: LeadType; onUpdateStatus: (status: string, id: number) => Promise<void> }> = ({ initialStatus, client, onUpdateStatus }) => {
+    const [status, setStatus] = useState(initialStatus);
     const queryClient = useQueryClient();
-  
-  
-    const handleUpdateStatus = async (newStatus: string) => {
-      setStatus(newStatus);
-  
-      const updatedClient = { ...client, stats: newStatus };
+
+    const handleUpdateStatus = async (newStatus: keyof typeof statusObj) => {
       try {
-  
-        onUpdateStatus(updatedClient, client.id);
-        // atualizando o cache do queryClient para refletir localmente
-        queryClient.setQueryData(["users"], (oldData: LeadType[] | undefined) => {
-          if (!oldData) return [];
-          return oldData.map((data) => {
+        await onUpdateStatus(newStatus, client.id);
+
+        setStatus(getStatusPlan(newStatus));
+        queryClient.setQueryData(["users"], (oldData: TableType | undefined
+        ) => {
+          if (!oldData) return DEFAULT_USERS_DATA;
+
+          const updatedLeads = oldData.leads.map((data) => {
             if (data.id === client.id) {
-              return { ...data, stats: newStatus };
+              return { ...data, status: newStatus };
             }
+
             return data;
-          })
-        })
-  
-        await queryClient.refetchQueries({ queryKey: ['accurate'] });
-  
+          });
+
+          return { ...oldData, leads: updatedLeads };
+        });
+        queryClient.refetchQueries({ queryKey: ['accurate', 'users', 'progress', 'peopleTypeManager'] });
       } catch (error) {
-        console.log("Error updating status")
-        throw new Error("Error updating status")
+        throw new Error("Error updating status");
       }
-  };
-  
+    };
+
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild className="bg-transparent border-none">
           <Button variant="outline" className="capitalize">
-           <Image src={styledStats(status)} width={10} height={10} alt="" className="mr-2"/>  {status} <ChevronDown className="ml-2 h-4 w-4" />
+            <Image src={styledStats(status)} width={10} height={10} alt="" className="mr-2"/> {status} <ChevronDown className="ml-2 h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-DarkBlue text-WhiteDefault border-2 border-WhiteDefault">
-          {statusOptions.map((option) => (
+          {statusOptions.map(({ label, value}) => (
             <DropdownMenuItem
-              key={option}
-              onClick={() => handleUpdateStatus(option)}
+              key={label}
+              onClick={() => handleUpdateStatus(value as keyof typeof statusObj)}
             >
-              <Image src={styledStats(option)} width={10} height={10} alt="" className="mr-2"/> {option}
+              <Image src={styledStats(label)} width={10} height={10} alt="" className="mr-2"/> {label}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
     );
-  };
+};
 
 export default StatusButton;
