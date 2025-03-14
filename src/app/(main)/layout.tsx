@@ -17,11 +17,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
             target="_blank"
             className="fixed bottom-5 right-7 z-[51]"
             >
-                <Image
-                    src="/icons/icon_wpp.svg"
-                    alt="icon do Whatsaap"
-                    width={50}
-                    height={50}
+
+            <Image
+                src="/icons/icon_wpp.svg"
+                alt="icon do Whatsaap"
+                width={50}
+                height={50}
             />
         </Link>
         </div>

@@ -1,18 +1,18 @@
 "use client"
 
-import React, { useEffect } from 'react';
-import { Textarea } from './ui/textarea';
-import { Input } from './ui/input';
-import { Toaster } from './ui/sonner';
-import { toast } from 'sonner';
-import { Button } from './ui/button';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from './ui/label';
 import { services } from '@/data/services';
-import { createClient } from '@/services/clients';
+import { createLead } from '@/process/leads';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 import { MaskedInput } from './InputMask';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Toaster } from './ui/sonner';
+import { Textarea } from './ui/textarea';
 
 const clientSchema = z.object({
   name: z.string().min(1),
@@ -22,15 +22,41 @@ const clientSchema = z.object({
     .min(1),
   peopleType: z.string().min(1),
   demand: z.string().min(1),
-  service: z.string().min(1),
-  isClient: z.string().min(1),
+  interest_plan: z.string().min(1),
+  is_new_lead: z.string().min(1),
 });
 
-type ClientSchema = z.infer<typeof clientSchema>;
+export type ClientSchema = z.infer<typeof clientSchema>;
+
 
 const Forms = () => {
+  const queryClient = useQueryClient();
+
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ClientSchema>({
     resolver: zodResolver(clientSchema)
+  });
+
+
+  const { mutateAsync: onCreateLead } = useMutation<ClientSchema & { status: number }, Error, ClientSchema>({
+    mutationKey: ['users'],
+    mutationFn: async (data) => {
+      const response = await createLead(data);
+      console.log(response, 'response');
+      return { ...response, status: response.status };
+    },
+    onSuccess: async () => {
+      queryClient.refetchQueries({
+        queryKey: ['accurate', 'users', 'progress', 'peopleTypeManager']
+      });
+    },
+    onError: error => {
+      console.log('error', error);
+      toast.error('Erro na transferência de dados', {
+        style: { backgroundColor: '#EE1B22', color: 'white' },
+        position: 'bottom-left',
+        duration: 2500
+      });
+    }
   });
 
   const handleClient = async (data: ClientSchema) => {
@@ -41,10 +67,11 @@ const Forms = () => {
         data: data
       };
 
-      const responsePostClient = await createClient(data);
-      
-      if (responsePostClient.status === 200) {
-        
+      const responsePostClient = await onCreateLead(data);
+
+      console.log(responsePostClient), 'response post lead';
+
+      if (responsePostClient?.status === 201) {
         const response = await fetch('/api/sendMail', {
           method: 'POST',
           headers: {
@@ -52,32 +79,25 @@ const Forms = () => {
           },
           body: JSON.stringify(emailConfig)
         });
-  
+
         if (response.ok) {
-          toast.success('Formulário enviado com sucesso!', {
+          return toast.success('Formulário enviado com sucesso!', {
             style: { backgroundColor: '#25D366', color: 'white' },
-            position: 'bottom-left',
-            duration: 2500 // O toast desaparecerá após alguns segundos
-          });
-        } else {
-          toast.error('Falha ao enviar formulário. Tente novamente.', {
-            style: { backgroundColor: '#EE1B22', color: 'white' },
             position: 'bottom-left',
             duration: 2500
           });
-        }}
-      else {
-        toast.error('Erro na transferência de dados', {
+        }
+
+        return toast.error('Falha ao enviar formulário. Tente novamente.', {
           style: { backgroundColor: '#EE1B22', color: 'white' },
           position: 'bottom-left',
           duration: 2500
         });
       }
     } catch (error) {
-      console.log(error);
       toast.error('Erro ao enviar o e-mail. Tente novamente.', {
         style: { backgroundColor: '#EE1B22', color: 'white' },
-        position:'bottom-left', 
+        position: 'bottom-left',
         duration: 2500
       });
     }
@@ -111,8 +131,8 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Como podemos te ajudar</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.service ? 'border-red-500 border-4' : ''}`}
-                {...register('service')}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.interest_plan ? 'border-red-500 border-4' : ''}`}
+                {...register('interest_plan')}
                 defaultValue={'Plano Odontológico'}
               >
                 {services.map((service) => (
@@ -121,7 +141,7 @@ const Forms = () => {
               </select>
             </div>
           </div>
-          
+
           <div className='flex flex-col items-center justify-center gap-8'>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Telefone</Label>
@@ -135,8 +155,8 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Segurado/Novo cliente</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.isClient ? 'border-red-500 border-4' : ''}`}
-                {...register('isClient')}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.is_new_lead ? 'border-red-500 border-4' : ''}`}
+                {...register('is_new_lead')}
                 defaultValue={'Novo cliente'}
               >
                 <option value='Cliente da casa'>Segurado</option>
