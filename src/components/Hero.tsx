@@ -1,9 +1,8 @@
 "use client"
 
+import Link from 'next/link';
 import React from 'react';
 import { Button } from './ui/button';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
 
 interface HeroInterface {
   title: string,

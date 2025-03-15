@@ -1,7 +1,6 @@
 import Image from 'next/image'
-import React from 'react'
-import { Separator } from './ui/separator'
 import Link from 'next/link'
+import { Separator } from './ui/separator'
 
 const Footer = () => {
   return (
@@ -13,7 +12,7 @@ const Footer = () => {
                 <div>
                     <p className='font-bold text-center md:text-right text-WhiteDefault'>Contato</p>
                     <p className='text-LightGray text-center md:text-right'>98688-4201 | 98857-5153</p>
-                    <p className='text-LightGray text-center md:text-right'>Contato@arkanseguros.com.br</p>
+                    <p className='text-LightGray text-center md:text-right'>contato@arkanconsultoria.com.br</p>
                 </div>
                 <div>
                     <p className='font-bold text-center md:text-right text-WhiteDefault'>Redes Sociais</p>

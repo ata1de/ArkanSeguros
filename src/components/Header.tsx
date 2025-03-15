@@ -54,7 +54,7 @@ const Header = () => {
               {/* <p className='uppercase text-2xl text-Yellow font-bold font-sans'>ARKAN</p> */}
             </SheetTitle>
             <SheetDescription className='text-left'>
-              Browse our site through this area.
+              Pesquise em nosso site atráves do menu abaixo
             </SheetDescription>
             <Separator className='w-auto'/>
           </SheetHeader>
