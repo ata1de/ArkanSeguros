@@ -1,9 +1,9 @@
-export interface ClientType {
+export type Lead = {
     name: string;
     email: string;
     phone: string;
-    peopleType: string;
+    is_pf: boolean;
     demand: string;
-    service: string;
-    isClient: string;
-}
+    interest_plan: string;
+    is_new_lead: boolean;
+  };

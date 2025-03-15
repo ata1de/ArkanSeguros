@@ -1,4 +1,5 @@
 import { ClientSchema } from "@/components/form";
+import { Lead } from "@/types/clientType";
 import api from "./api";
 
 export const getPeopleType = async () => {
@@ -53,6 +54,17 @@ export const createLead = async (body: ClientSchema): Promise<ClientSchema & {
     status: number
 }> => {
     const { data, status } = await api.post('/leads', body)
+
+    return {
+        ...data,
+        status
+    }
+}
+
+export const addFormLead = async (body: Lead): Promise<Lead & {
+    status: number
+}> => {
+    const { data, status } = await api.post('/leads/form', body)
 
     return {
         ...data,

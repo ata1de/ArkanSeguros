@@ -1,7 +1,8 @@
 "use client"
 
 import { services } from '@/data/services';
-import { createLead } from '@/process/leads';
+import { addFormLead } from '@/process/leads';
+import { Lead } from '@/types/clientType';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
@@ -20,7 +21,7 @@ const clientSchema = z.object({
   phone: z.string()
     .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/)
     .min(1),
-  peopleType: z.string().min(1),
+  is_pf: z.string().min(1),
   demand: z.string().min(1),
   interest_plan: z.string().min(1),
   is_new_lead: z.string().min(1),
@@ -28,6 +29,21 @@ const clientSchema = z.object({
 
 export type ClientSchema = z.infer<typeof clientSchema>;
 
+const getIsNewLead = (is_new_lead: string) => {
+  if (is_new_lead === 'new') {
+    return true;
+  }
+
+  return false;
+}
+
+const getIsPf = (is_pf: string) => {
+  if (is_pf === 'PF') {
+    return true;
+  }
+
+  return false;
+}
 
 const Forms = () => {
   const queryClient = useQueryClient();
@@ -36,11 +52,26 @@ const Forms = () => {
     resolver: zodResolver(clientSchema)
   });
 
+  const getObjData = (data: ClientSchema): Lead => {
+    const objData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      is_pf: getIsPf(data.is_pf),
+      demand: data.demand,
+      interest_plan: data.interest_plan,
+      is_new_lead: getIsNewLead(data.is_new_lead),
+      status: 'NOT_STARTED'
+    };
 
-  const { mutateAsync: onCreateLead } = useMutation<ClientSchema & { status: number }, Error, ClientSchema>({
+    return objData;
+  }
+
+
+  const { mutateAsync: createLead } = useMutation<Lead & { status: number }, Error, Lead>({
     mutationKey: ['users'],
     mutationFn: async (data) => {
-      const response = await createLead(data);
+      const response = await addFormLead(data);
       console.log(response, 'response');
       return { ...response, status: response.status };
     },
@@ -61,13 +92,17 @@ const Forms = () => {
 
   const handleClient = async (data: ClientSchema) => {
     reset();
+    const objData = getObjData(data);
+
     try {
       const emailConfig = {
         subject: 'Relatório de novo cliente',
-        data: data
+        data: objData
       };
 
-      const responsePostClient = await onCreateLead(data);
+      console.log(emailConfig, 'emailConfig');
+
+      const responsePostClient = await createLead(objData);
 
       console.log(responsePostClient), 'response post lead';
 
@@ -157,21 +192,21 @@ const Forms = () => {
               <select
                 className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.is_new_lead ? 'border-red-500 border-4' : ''}`}
                 {...register('is_new_lead')}
-                defaultValue={'Novo cliente'}
+                defaultValue={'old'}
               >
-                <option value='Cliente da casa'>Segurado</option>
-                <option value='Novo cliente'>Novo Cliente</option>
+                <option value='old'>Segurado</option>
+                <option value='new'>Novo Cliente</option>
               </select>
             </div>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Pessoa Jurídica/Física</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.peopleType ? 'border-red-500 border-4' : ''}`}
-                {...register('peopleType')}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.is_pf ? 'border-red-500 border-4' : ''}`}
+                {...register('is_pf')}
                 defaultValue={'Pessoa Fisica'}
               >
-                <option value='Pessoa Fisica'>Pessoa Física</option>
-                <option value='Pessoa Juridica'>Pessoa Jurídica</option>
+                <option value='PF'>Pessoa Física</option>
+                <option value='PJ'>Pessoa Jurídica</option>
               </select>
             </div>
           </div>
