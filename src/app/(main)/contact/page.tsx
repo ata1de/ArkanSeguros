@@ -27,7 +27,7 @@ const Contact = () => {
           </div>
           <div className='flex justify-center items-center gap-3'>
             <Image src="/icons/icon_contact_email.svg" alt="icon de email" width={24} height={24} />
-            <p className='text-slate-300'>Contato@arkanseguros.com.br</p>
+            <p className='text-slate-300'>contato@arkanconsultoria.com.br</p>
           </div>
         </div>
 

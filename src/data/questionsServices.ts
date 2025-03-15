@@ -18,7 +18,7 @@ export const questionsServices: ServiceQuestions[] = [
         questions: [
             {
                 question: "Quais tratamentos estão inclusos?",
-                answer: "O Plano Odontológico inclui consultas, tratamentos preventivos, ortodontia e muito mais."
+                answer: "O Plano Odontológico inclui consultas, tratamentos preventivos, extração, restaurações, canal (endodontia) e muitos outros procedimentos. A depender do plano escolhido você também pode contar com cobertura em ortodontia (aparelho)."
             },
             {
                 question: "Posso escolher meu dentista?",   
