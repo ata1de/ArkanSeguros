@@ -46,6 +46,8 @@ export function DataTableDemo() {
     },
   });
 
+  console.log(dataUsers, "dataUsers");
+
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -193,8 +195,7 @@ export function DataTableDemo() {
             className="bg-DarkBlue text-WhiteDefault hover:bg-muted/10 hover:text-WhiteDefault"
             onClick={() => setCurrentPage((prev) => prev + 1)}
             disabled={
-              !dataUsers?.leads ||
-              currentPage + 1 > Math.ceil(dataUsers.total / dataUsers.perPage)
+              !dataUsers?.leads || dataUsers.leads.length < dataUsers.perPage
             }
           >
             Next
