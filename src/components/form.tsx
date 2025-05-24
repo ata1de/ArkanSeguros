@@ -263,7 +263,7 @@ const Forms = () => {
           type="submit"
           disabled={isPending}
         >
-          {true ? (
+          {isPending ? (
             <IconsSpinner.spinner className="w-4 h-4 animate-spin" />
           ) : (
             "ENVIAR"
