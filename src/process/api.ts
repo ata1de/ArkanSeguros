@@ -2,7 +2,7 @@ import { clearStorage, getStorage } from "@/lib/storage";
 import axios, { AxiosError } from "axios";
 
 const api = axios.create({
-    baseURL: "http://localhost:3333",
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
         "Content-Type": "application/json"
     }
