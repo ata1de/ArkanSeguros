@@ -107,36 +107,41 @@ const Forms = () => {
     const objData = getObjData(data);
 
     try {
-      const emailConfig = {
-        subject: "Relatório de novo cliente",
-        data: objData,
-      };
+      // const emailConfig = {
+      //   subject: "Relatório de novo cliente",
+      //   data: objData,
+      // };
 
-      const responsePostClient = await createLead(objData);
+      await createLead(objData);
 
-      if (responsePostClient?.status === 201) {
-        const response = await fetch("/api/sendMail", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(emailConfig),
-        });
+      // if (responsePostClient?.status === 201) {
+      //   const response = await fetch("/api/sendMail", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(emailConfig),
+      //   });
 
-        if (response.ok) {
-          return toast.success("Formulário enviado com sucesso!", {
-            style: { backgroundColor: "#25D366", color: "white" },
-            position: "bottom-left",
-            duration: 2500,
-          });
-        }
+      //   if (response.ok) {
+      //     return toast.success("Formulário enviado com sucesso!", {
+      //       style: { backgroundColor: "#25D366", color: "white" },
+      //       position: "bottom-left",
+      //       duration: 2500,
+      //     });
+      //   }
 
-        return toast.error("Falha ao enviar formulário. Tente novamente.", {
-          style: { backgroundColor: "#EE1B22", color: "white" },
-          position: "bottom-left",
-          duration: 2500,
-        });
-      }
+      //   return toast.error("Falha ao enviar formulário. Tente novamente.", {
+      //     style: { backgroundColor: "#EE1B22", color: "white" },
+      //     position: "bottom-left",
+      //     duration: 2500,
+      //   });
+      // }
+      toast.success("Formulário enviado com sucesso!", {
+        style: { backgroundColor: "#25D366", color: "white" },
+        position: "bottom-left",
+        duration: 2500,
+      });
     } catch (error) {
       toast.error("Erro ao enviar o e-mail. Tente novamente.", {
         style: { backgroundColor: "#EE1B22", color: "white" },
