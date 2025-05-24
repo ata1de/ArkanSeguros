@@ -1,5 +1,5 @@
 import { db } from "@/lib/firebase";
-import { ClientType } from "@/types/clientType";
+import { Lead } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 
@@ -17,7 +17,7 @@ export interface ClientDataTableType {
 }
 
 
-export async function createClient(data: ClientType) {
+export async function createClient(data: Lead) {
     const clientRef = collection(db, "clients");
 
     try {
@@ -41,7 +41,7 @@ export async function getAllClients() {
         const querySnapshot = await getDocs(q);
         const clients: ClientDataTableType[] = [];
         querySnapshot.forEach((doc) => {
-            clients.push({ id: doc.id, ...doc.data() } as ClientDataTableType);
+            clients.push({ id: doc.id, ...doc.data() } as unknown as ClientDataTableType);
         });
         return clients;
     } catch (error) {
@@ -148,7 +148,7 @@ export async function getServicesByUsers() {
     return servicesTotal
 } 
 
-export async function updateStatusUser(data: Partial<LeadType>, id: number) {
+export async function updateStatusUser(data: Partial<LeadType>, id: string) {
     const clientRef = doc(db, 'clients', id)
 
     const queryDataSnapshot = await updateDoc(clientRef, data)

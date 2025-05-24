@@ -38,8 +38,8 @@ export const getServicesByUsers = async () => {
     return data
 }
 
-export const getAllLeads = async () => {
-    const { data } = await api.get('/leads')
+export const getAllLeads = async (page: number, perPage: number) => {
+    const { data } = await api.get(`/leads?page=${page}&perPage=${perPage}`)
 
     return data
 }
