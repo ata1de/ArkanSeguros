@@ -1,24 +1,6 @@
-import React from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { Loader2 } from 'lucide-react';
-
-export const Icons = {
-  spinner: Loader2,
-};
-
-// Definindo o tipo dos dados
-interface DataPoint {
-  name: string;
-  value: number;
-}
-
-// Tipo dos props do Example
-interface ExampleProps {
-  data: DataPoint[];
-  isLoading: boolean;
-}
-
-const COLORS = ['#1E90FF', '#32CD32', '#FFD700', '#ffaf47', '#FF6347','#6A5ACD', '#69e9ff', '#FF69B4'];
+import { COLORS } from '@/constants/colors';
+import { IconsSpinner, PieChartsProps } from '@/types/dashboard';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
@@ -32,12 +14,12 @@ const CustomTooltip = ({ active, payload }: any) => {
   return null;
 };
 
-const Example = ({ data, isLoading }: ExampleProps) => {
+const PieCharts = ({ data, isLoading }: PieChartsProps) => {
   return (
     <div className="w-full h-full m-auto">
       {isLoading ? (
         <div className='w-full h-full m-auto flex items-center justify-center'>
-          <Icons.spinner className='w-8 h-8 animate-spin' />
+          <IconsSpinner.spinner className='w-8 h-8 animate-spin' />
         </div>
       ) : (
         <ResponsiveContainer width="100%" height="100%">
@@ -55,9 +37,9 @@ const Example = ({ data, isLoading }: ExampleProps) => {
               outerRadius={80}
               label
             >
-              {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-              ))}
+                {data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
             </Pie>
           </PieChart>
         </ResponsiveContainer>
@@ -66,4 +48,4 @@ const Example = ({ data, isLoading }: ExampleProps) => {
   );
 };
 
-export default Example;
+export default PieCharts;

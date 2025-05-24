@@ -1,49 +1,51 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import axios from "axios";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/sonner";
-import { toast } from 'sonner';
-
-
-const loginSchema = z.object({
-  email: z.string().min(1, { message: "Email is required" }).email({ message: "Invalid email format" }),
-  password: z.string().min(1, { message: "Password is required" }),
-});
-
-type LoginSchemaType = z.infer<typeof loginSchema>;
+import { setStorage } from "@/lib/storage";
+import { login } from "@/process/auth";
+import { LoginResponseType, loginSchema, LoginSchemaType } from "@/types/auth";
+import { errorHandler } from "@/utils/errors";
+import { successAlert } from "@/utils/successAlert";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useCallback } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const router = useRouter();
-  const { register, formState: { errors }, handleSubmit, reset } = useForm<LoginSchemaType>({
+  const { register, formState: { errors }, handleSubmit } = useForm<LoginSchemaType>({
     resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: ""
+    }
   });
 
-  const handleLogin = async (data: LoginSchemaType) => {
-    reset()
-    try {
-      const response = await axios.post("/api/login", data);
-      if (response.status === 200) {
-        toast.success('Usuário logado! Seja bem vindo', {
-            style: { backgroundColor: '#25D366', color: 'white' },
-            position: 'bottom-right',
-            duration: 2500 
-        });
-        router.push("/admin");
-      }
-    } catch (error) {
-        toast.error(`${(error as any).response.data.error}`, {
-            style: { backgroundColor: '#EE1B22', color: 'white' },
-            position: 'bottom-right',
-            duration: 2500
-        });
-    }
-  };
+  const onSuccessLoginHandler = (data: LoginResponseType) => {
+    successAlert('Usuário logado! Seja bem vindo')
+
+    setStorage('token', data.token)
+    setStorage('user', JSON.stringify(data.user))
+
+    router.push("/admin");
+  }
+
+  const { mutate: loginMutate } = useMutation<LoginResponseType, Error, LoginSchemaType>({
+		mutationKey: ['login'],
+		mutationFn: login,
+		onSuccess: onSuccessLoginHandler,
+		onError: errorHandler
+	});
+
+  const onSubmit = useCallback<SubmitHandler<LoginSchemaType>>(
+		(body) => {
+			return loginMutate(body);
+		},
+		[loginMutate]
+	);
 
   const styleLogin = {
     backgroundColor: "#102843",
@@ -74,7 +76,7 @@ const LoginPage = () => {
             <p className="text-[20px] text-gray-400">Preencha seus dados</p>
           </div>
 
-          <form onSubmit={handleSubmit(handleLogin)} className="w-full flex flex-col gap-4">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
             <div className="w-full">
               <label htmlFor="email">Email</label>
               <input className="w-full p-2 border border-gray-300 rounded " type="email" id="email" {...register("email")} />

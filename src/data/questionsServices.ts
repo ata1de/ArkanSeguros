@@ -21,7 +21,7 @@ export const questionsServices: ServiceQuestions[] = [
                 answer: "O Plano Odontológico inclui consultas, tratamentos preventivos, extração, restaurações, canal (endodontia) e muitos outros procedimentos. A depender do plano escolhido você também pode contar com cobertura em ortodontia (aparelho)."
             },
             {
-                question: "Posso escolher meu dentista?",   
+                question: "Posso escolher meu dentista?",
                 answer: "Sim, contamos com uma rede ampla de dentistas credenciados em todo o país."
             },
             {

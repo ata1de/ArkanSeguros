@@ -1,18 +1,19 @@
 "use client"
 
-import React, { useEffect } from 'react';
-import { Textarea } from './ui/textarea';
-import { Input } from './ui/input';
-import { Toaster } from './ui/sonner';
-import { toast } from 'sonner';
-import { Button } from './ui/button';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Label } from './ui/label';
 import { services } from '@/data/services';
-import { createClient } from '@/services/clients';
+import { addFormLead } from '@/process/leads';
+import { Lead } from '@/types/clientType';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
+import { z } from 'zod';
 import { MaskedInput } from './InputMask';
+import { Button } from './ui/button';
+import { Input } from './ui/input';
+import { Label } from './ui/label';
+import { Toaster } from './ui/sonner';
+import { Textarea } from './ui/textarea';
 
 const clientSchema = z.object({
   name: z.string().min(1),
@@ -20,31 +21,92 @@ const clientSchema = z.object({
   phone: z.string()
     .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/)
     .min(1),
-  peopleType: z.string().min(1),
+  is_pf: z.string().min(1),
   demand: z.string().min(1),
-  service: z.string().min(1),
-  isClient: z.string().min(1),
+  interest_plan: z.string().min(1),
+  is_new_lead: z.string().min(1),
 });
 
-type ClientSchema = z.infer<typeof clientSchema>;
+export type ClientSchema = z.infer<typeof clientSchema>;
+
+const getIsNewLead = (is_new_lead: string) => {
+  if (is_new_lead === 'new') {
+    return true;
+  }
+
+  return false;
+}
+
+const getIsPf = (is_pf: string) => {
+  if (is_pf === 'PF') {
+    return true;
+  }
+
+  return false;
+}
 
 const Forms = () => {
+  const queryClient = useQueryClient();
+
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ClientSchema>({
     resolver: zodResolver(clientSchema)
   });
 
+  const getObjData = (data: ClientSchema): Lead => {
+    const objData = {
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      is_pf: getIsPf(data.is_pf),
+      demand: data.demand,
+      interest_plan: data.interest_plan,
+      is_new_lead: getIsNewLead(data.is_new_lead),
+      status: 'NOT_STARTED'
+    };
+
+    return objData;
+  }
+
+
+  const { mutateAsync: createLead } = useMutation<Lead & { status: number }, Error, Lead>({
+    mutationKey: ['users'],
+    mutationFn: async (data) => {
+      const response = await addFormLead(data);
+      console.log(response, 'response');
+      return { ...response, status: response.status };
+    },
+    onSuccess: async () => {
+      queryClient.refetchQueries({
+        queryKey: ['accurate', 'users', 'progress', 'peopleTypeManager']
+      });
+    },
+    onError: error => {
+      console.log('error', error);
+      toast.error('Erro na transferência de dados', {
+        style: { backgroundColor: '#EE1B22', color: 'white' },
+        position: 'bottom-left',
+        duration: 2500
+      });
+    }
+  });
+
   const handleClient = async (data: ClientSchema) => {
     reset();
+    const objData = getObjData(data);
+
     try {
       const emailConfig = {
         subject: 'Relatório de novo cliente',
-        data: data
+        data: objData
       };
 
-      const responsePostClient = await createClient(data);
-      
-      if (responsePostClient.status === 200) {
-        
+      console.log(emailConfig, 'emailConfig');
+
+      const responsePostClient = await createLead(objData);
+
+      console.log(responsePostClient), 'response post lead';
+
+      if (responsePostClient?.status === 201) {
         const response = await fetch('/api/sendMail', {
           method: 'POST',
           headers: {
@@ -52,32 +114,25 @@ const Forms = () => {
           },
           body: JSON.stringify(emailConfig)
         });
-  
+
         if (response.ok) {
-          toast.success('Formulário enviado com sucesso!', {
+          return toast.success('Formulário enviado com sucesso!', {
             style: { backgroundColor: '#25D366', color: 'white' },
-            position: 'bottom-left',
-            duration: 2500 // O toast desaparecerá após alguns segundos
-          });
-        } else {
-          toast.error('Falha ao enviar formulário. Tente novamente.', {
-            style: { backgroundColor: '#EE1B22', color: 'white' },
             position: 'bottom-left',
             duration: 2500
           });
-        }}
-      else {
-        toast.error('Erro na transferência de dados', {
+        }
+
+        return toast.error('Falha ao enviar formulário. Tente novamente.', {
           style: { backgroundColor: '#EE1B22', color: 'white' },
           position: 'bottom-left',
           duration: 2500
         });
       }
     } catch (error) {
-      console.log(error);
       toast.error('Erro ao enviar o e-mail. Tente novamente.', {
         style: { backgroundColor: '#EE1B22', color: 'white' },
-        position:'bottom-left', 
+        position: 'bottom-left',
         duration: 2500
       });
     }
@@ -111,8 +166,8 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Como podemos te ajudar</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.service ? 'border-red-500 border-4' : ''}`}
-                {...register('service')}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.interest_plan ? 'border-red-500 border-4' : ''}`}
+                {...register('interest_plan')}
                 defaultValue={'Plano Odontológico'}
               >
                 {services.map((service) => (
@@ -121,7 +176,7 @@ const Forms = () => {
               </select>
             </div>
           </div>
-          
+
           <div className='flex flex-col items-center justify-center gap-8'>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Telefone</Label>
@@ -135,23 +190,23 @@ const Forms = () => {
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Segurado/Novo cliente</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.isClient ? 'border-red-500 border-4' : ''}`}
-                {...register('isClient')}
-                defaultValue={'Novo cliente'}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.is_new_lead ? 'border-red-500 border-4' : ''}`}
+                {...register('is_new_lead')}
+                defaultValue={'old'}
               >
-                <option value='Cliente da casa'>Segurado</option>
-                <option value='Novo cliente'>Novo Cliente</option>
+                <option value='old'>Segurado</option>
+                <option value='new'>Novo Cliente</option>
               </select>
             </div>
             <div className='flex flex-col gap-3 items-start'>
               <Label className='text-white text-right'>Pessoa Jurídica/Física</Label>
               <select
-                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.peopleType ? 'border-red-500 border-4' : ''}`}
-                {...register('peopleType')}
+                className={`text-slate-500 p-2 ring-offset-background bg-background rounded w-[200px] md:w-[300px] lg:w-[440px] ${errors.is_pf ? 'border-red-500 border-4' : ''}`}
+                {...register('is_pf')}
                 defaultValue={'Pessoa Fisica'}
               >
-                <option value='Pessoa Fisica'>Pessoa Física</option>
-                <option value='Pessoa Juridica'>Pessoa Jurídica</option>
+                <option value='PF'>Pessoa Física</option>
+                <option value='PJ'>Pessoa Jurídica</option>
               </select>
             </div>
           </div>
