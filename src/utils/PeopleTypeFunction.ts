@@ -1,10 +1,3 @@
-export interface PeopleTypeProps {
-    pf: boolean;
-    diff: number;
-    clientCount: number;
-}
-
-
 export function PeopleTypeFunction(physicalSnapshotSize: number, legalSnapshortSize: number) {    
     if (physicalSnapshotSize > legalSnapshortSize) {
         const diff = physicalSnapshotSize - legalSnapshortSize;

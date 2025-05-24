@@ -1,90 +1,45 @@
-import React from 'react';
-import DashboardCard from './DashboardCard';
-import { Activity, DollarSign, LineChart, Loader, TrendingDown, TrendingUp, UserPlus } from 'lucide-react';
-import { isClientType } from '@/utils/isClientFunction';
-import { SkeletonCard } from '../Skeleton';
-import { PeopleTypeProps } from '@/utils/PeopleTypeFunction';
-import { accuracyStatusProps } from '@/utils/accuracyStatus';
-import DashboardCardClients from './DashboardCardClients';
-import { ProgressClientsProps } from '@/utils/progressClients';
+import { SectionCardDashboardProps } from "@/types/dashboard";
+import { TabsContent } from "../ui/tabs";
+import CardsDashboard from "./CardsDashboard";
+import PieCharts from "./PieChart";
+import TinyChart from "./TinyChart";
 
-interface SectionCardDashboardProps {
-  clientManager: isClientType
-  peopleTypeManager: PeopleTypeProps 
-  accuracyRate: accuracyStatusProps
-  progressClients: ProgressClientsProps
-  isLoadingProgressStatus: boolean 
-  isLoadingClientManager: boolean;
-  isLoadingPeopleManager: boolean;
-  isLoadingAccurate: boolean;
-  isRefetchingAccurate: boolean;
-  isRefetchingProgressStatus: boolean;
+function SectionCardDashboard ({
+    accuracyRate,
+    peopleTypeManager,
+    clientManager,
+    dataUserByMonth,
+    dataServices,
+    progressClients,
+    isLoadingClientManager,
+    isLoadingAccurate,
+    isLoadingPeopleManager,
+    isRefetchingAccurate,
+    isLoadingProgressStatus,
+    isRefetchingProgressStatus,
+    isLoadingUserByMonth,
+    isLoadingServices,
+}: SectionCardDashboardProps) {
+    return (
+        <TabsContent value='home'>
+            <div className='flex flex-col gap-5 w-full p-5'>
+              <h1 className='text-3xl font-semibold'>Dashboard</h1>
+              <div>
+                <CardsDashboard accuracyRate={accuracyRate!} peopleTypeManager={peopleTypeManager!} clientManager={clientManager!}  isLoadingClientManager={isLoadingClientManager} isLoadingAccurate={isLoadingAccurate} isLoadingPeopleManager={isLoadingPeopleManager} isRefetchingAccurate={isRefetchingAccurate} isLoadingProgressStatus={isLoadingProgressStatus} isRefetchingProgressStatus={isRefetchingProgressStatus} progressClients={progressClients!}/>
+              </div>
+              <div className='flex max-[1301px]:flex-col items-center justify-center gap-3 w-full mt-8 mb-12'>
+                <div className='w-[65%] max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
+                  <p className='text-xl font-medium py-3'>Usuários/mês</p>
+                  <TinyChart data={dataUserByMonth!} isLoading={isLoadingUserByMonth} />
+                </div>
+                <div className='w-[35%] max-[1301px]:w-full h-[370px] flex flex-col items-start justify-center p-5 border border-gray-600 rounded-md'>
+                  <p className='text-xl font-medium py-3'>Serviço/usuário</p>
+                  <PieCharts data={dataServices!} isLoading={isLoadingServices} />
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+    )
 }
-
-const SectionCardDashboard: React.FC<SectionCardDashboardProps> = ({
-  clientManager,
-  isLoadingClientManager,
-  peopleTypeManager,
-  progressClients,
-  isLoadingPeopleManager,
-  accuracyRate,
-  isLoadingAccurate,
-  isLoadingProgressStatus,
-  isRefetchingAccurate,
-  isRefetchingProgressStatus
-}) => {
-  const isLoading = isLoadingClientManager || isLoadingProgressStatus || isLoadingPeopleManager || isLoadingAccurate
-  const isRefetching = isRefetchingAccurate || isRefetchingProgressStatus
-
-  
-
-  return (
-    <div className='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4'>
-      {isLoading || isRefetching ? (
-        <>
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-        </>
-      ) : (
-        <>
-          <DashboardCard
-            label='Clientes Novos'
-            icon={UserPlus}
-            amount={clientManager?.clientCount || 0}
-            diff={clientManager?.diff || 0}
-            description='em relação aos clientes antigos'
-            plus={clientManager?.newClient}
-          />
-          <DashboardCard
-            label={`Pessoas ${peopleTypeManager?.pf ? 'Física' : 'Jurídica'}`}
-            icon={DollarSign}
-            amount={peopleTypeManager?.clientCount || 0}
-            diff={peopleTypeManager?.diff || 0}
-            description={` em relação às pessoas ${peopleTypeManager?.pf ? 'jurídicas' : 'físicas'}`}
-            plus={true}
-          />
-          <DashboardCardClients
-            label='Clientes Efetivados'
-            icon={LineChart}
-            amount={accuracyRate?.accuracyRate || 0}
-            description={`${accuracyRate?.variation.toFixed(2)}% em relação aos clientes cancelados`}
-            statsIcon={accuracyRate?.resultVariation ? TrendingUp : TrendingDown}
-            isProgress={false}
-          />
-          <DashboardCardClients 
-          label='Clientes em Progresso' 
-          icon={Activity} 
-          amount={progressClients.percentProgress}
-          statsIcon={Loader} 
-          description={`${progressClients.amountProgress} cliente's estão no processo para ser efetivados`} 
-          isProgress={true}
-          />
-        </>
-      )}
-    </div>
-  );
-};
 
 export default SectionCardDashboard;

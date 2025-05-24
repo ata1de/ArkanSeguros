@@ -1,21 +1,23 @@
 import { db } from "@/lib/firebase";
-import { ClientType } from "@/types/clientType";
+import { Lead } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 
-import { collection, query, getDocs, addDoc, Timestamp, where, updateDoc, doc } from "firebase/firestore";
-import dayjs from 'dayjs';
+import { LeadType } from "@/types/leads";
 import { accuracyStatus } from "@/utils/accuracyStatus";
 import { progressClients } from "@/utils/progressClients";
+import dayjs from 'dayjs';
+import { addDoc, collection, doc, getDocs, query, Timestamp, updateDoc, where } from "firebase/firestore";
 
-export interface ClientDataTableType extends ClientType {
-    id: string;
-    stats: string
-    createdAt: Date
+export interface ClientDataTableType {
+    page: number,
+    perPage: number,
+    total: number,
+    leads: LeadType[]
 }
 
 
-export async function createClient(data: ClientType) {
+export async function createClient(data: Lead) {
     const clientRef = collection(db, "clients");
 
     try {
@@ -39,7 +41,7 @@ export async function getAllClients() {
         const querySnapshot = await getDocs(q);
         const clients: ClientDataTableType[] = [];
         querySnapshot.forEach((doc) => {
-            clients.push({ id: doc.id, ...doc.data() } as ClientDataTableType);
+            clients.push({ id: doc.id, ...doc.data() } as unknown as ClientDataTableType);
         });
         return clients;
     } catch (error) {
@@ -146,7 +148,7 @@ export async function getServicesByUsers() {
     return servicesTotal
 } 
 
-export async function updateStatusUser(data: Partial<ClientDataTableType>, id: string) {
+export async function updateStatusUser(data: Partial<LeadType>, id: string) {
     const clientRef = doc(db, 'clients', id)
 
     const queryDataSnapshot = await updateDoc(clientRef, data)
