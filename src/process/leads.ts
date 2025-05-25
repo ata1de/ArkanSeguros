@@ -1,4 +1,3 @@
-import { ClientSchema } from "@/components/form";
 import { Lead } from "@/types/clientType";
 import api from "./api";
 
@@ -50,7 +49,7 @@ export const updateLeadStatus = async (status: string, id: number) => {
     })
 }
 
-export const createLead = async (body: ClientSchema): Promise<ClientSchema & {
+export const createLead = async (body: Lead): Promise<Lead & {
     status: number
 }> => {
     const { data, status } = await api.post('/leads', body)
