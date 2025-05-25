@@ -1,9 +1,17 @@
-import { CardsDashboardProps } from '@/types/dashboard';
-import { Activity, DollarSign, LineChart, Loader, TrendingDown, TrendingUp, UserPlus } from 'lucide-react';
-import React from 'react';
-import { SkeletonCard } from '../Skeleton';
-import DashboardCard from './DashboardCard';
-import DashboardCardClients from './DashboardCardClients';
+import { CardsDashboardProps } from "@/types/dashboard";
+import {
+  Activity,
+  DollarSign,
+  LineChart,
+  Loader,
+  TrendingDown,
+  TrendingUp,
+  UserPlus,
+} from "lucide-react";
+import React from "react";
+import { SkeletonCard } from "../Skeleton";
+import DashboardCard from "./DashboardCard";
+import DashboardCardClients from "./DashboardCardClients";
 
 const CardsDashboard: React.FC<CardsDashboardProps> = ({
   clientManager,
@@ -15,14 +23,17 @@ const CardsDashboard: React.FC<CardsDashboardProps> = ({
   isLoadingAccurate,
   isLoadingProgressStatus,
   isRefetchingAccurate,
-  isRefetchingProgressStatus
+  isRefetchingProgressStatus,
 }) => {
-  const isLoading = isLoadingClientManager || isLoadingProgressStatus || isLoadingPeopleManager || isLoadingAccurate
-  const isRefetching = isRefetchingAccurate || isRefetchingProgressStatus
-
+  const isLoading =
+    isLoadingClientManager ||
+    isLoadingProgressStatus ||
+    isLoadingPeopleManager ||
+    isLoadingAccurate;
+  const isRefetching = isRefetchingAccurate || isRefetchingProgressStatus;
 
   return (
-    <div className='grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4'>
+    <div className="grid w-full grid-cols-1 gap-4 gap-x-8 transition-all sm:grid-cols-2 xl:grid-cols-4">
       {isLoading || isRefetching ? (
         <>
           <SkeletonCard />
@@ -33,39 +44,52 @@ const CardsDashboard: React.FC<CardsDashboardProps> = ({
       ) : (
         <>
           <DashboardCard
-            label='Clientes Novos'
+            label="Clientes Novos"
             icon={UserPlus}
             amount={clientManager?.newClientsCount || 0}
             diff={clientManager?.difference || 0}
-            description={'em relação aos clientes antigos'}
+            description={"em relação aos clientes antigos"}
             plus={clientManager?.isNewClientPrevalence}
           />
           <DashboardCard
-            label={`Pessoas ${peopleTypeManager?.isPfPrevalence ? 'Física' : 'Jurídica'}`}
+            label={`Pessoas ${
+              peopleTypeManager?.isPfPrevalence ? "Física" : "Jurídica"
+            }`}
             icon={DollarSign}
-            amount={peopleTypeManager?.isPfPrevalence ? peopleTypeManager?.pfCount : peopleTypeManager?.pjCount}
+            amount={
+              peopleTypeManager?.isPfPrevalence
+                ? peopleTypeManager?.pfCount
+                : peopleTypeManager?.pjCount
+            }
             diff={peopleTypeManager?.difference || 0}
-            description={` em relação às pessoas ${peopleTypeManager?.isPfPrevalence ? 'físicas' : 'jurídicas'}`}
+            description={` em relação às pessoas ${
+              peopleTypeManager?.isPfPrevalence ? "físicas" : "jurídicas"
+            }`}
             plus={true}
           />
           <DashboardCardClients
-            label='Clientes Efetivados'
+            label="Clientes Efetivados"
             icon={LineChart}
             amount={accuracyRate?.doneAccuracyRate || 0}
-            description={`${accuracyRate?.variationRate.toFixed(2)}% em relação aos clientes cancelados`}
-            statsIcon={accuracyRate?.isPositiveVariation ? TrendingUp : TrendingDown}
+            description={`${
+              accuracyRate?.variationRate?.toFixed(2) || 0
+            }% em relação aos clientes cancelados`}
+            statsIcon={
+              accuracyRate?.isPositiveVariation ? TrendingUp : TrendingDown
+            }
             isProgress={false}
           />
           <DashboardCardClients
-          label='Clientes em Progresso'
-          icon={Activity}
-          amount={progressClients.percentage}
-          statsIcon={Loader}
-          description={`${progressClients.inProgressCountLeads} ${
-                  progressClients.inProgressCountLeads > 1 ? "clientes estão" : "cliente está"
-                } no processo para a efetivação`
-          }
-          isProgress={true}
+            label="Clientes em Progresso"
+            icon={Activity}
+            amount={progressClients?.percentage || 0}
+            statsIcon={Loader}
+            description={`${progressClients?.inProgressCountLeads || 0} ${
+              progressClients?.inProgressCountLeads > 1
+                ? "clientes estão"
+                : "cliente está"
+            } no processo para a efetivação`}
+            isProgress={true}
           />
         </>
       )}
