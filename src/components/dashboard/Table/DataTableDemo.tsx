@@ -10,7 +10,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, PlusIcon } from "lucide-react";
 import * as React from "react";
 
 import { Button } from "@/components/ui/button";
@@ -33,10 +33,12 @@ import { getAllLeads } from "@/process/leads";
 import { ClientDataTableType } from "@/services/clients";
 import { IconsSpinner } from "@/types/dashboard";
 import { useQuery } from "@tanstack/react-query";
+import { AddClientModal } from "./AddClientModal";
 import { columns } from "./columns";
 
 export function DataTableDemo() {
   const [currentPage, setCurrentPage] = React.useState(0);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   const { data: dataUsers, isLoading } = useQuery<ClientDataTableType>({
     queryKey: ["users", currentPage],
@@ -45,8 +47,6 @@ export function DataTableDemo() {
       return data;
     },
   });
-
-  console.log(dataUsers, "dataUsers");
 
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -123,6 +123,14 @@ export function DataTableDemo() {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        <Button
+          variant="outline"
+          onClick={() => setModalOpen(true)}
+          className="bg-DarkBlue text-WhiteDefault hover:bg-muted/10 hover:text-WhiteDefault"
+        >
+          <PlusIcon className="w-4 h-4" />
+          Adicionar cliente
+        </Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -150,6 +158,7 @@ export function DataTableDemo() {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  className="hover:bg-gray-900/50 transition px-4"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -187,7 +196,7 @@ export function DataTableDemo() {
             onClick={() => setCurrentPage((prev) => prev - 1)}
             disabled={currentPage === 0}
           >
-            Previous
+            Anterior
           </Button>
           <Button
             variant="outline"
@@ -198,10 +207,15 @@ export function DataTableDemo() {
               !dataUsers?.leads || dataUsers.leads.length < dataUsers.perPage
             }
           >
-            Next
+            Próxima
           </Button>
         </div>
       </div>
+      <AddClientModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onSave={() => {}}
+      />
     </div>
   );
 }
