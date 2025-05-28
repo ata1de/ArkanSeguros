@@ -1,5 +1,4 @@
 import { db } from "@/lib/firebase";
-import { Lead } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 

@@ -2,35 +2,23 @@
 
 import { services } from "@/data/services";
 import { addFormLead } from "@/process/leads";
-import { Lead } from "@/types/clientType";
+import {
+  AddLeadFormPublicSchemaType,
+  addLeadFormPublicSchema,
+} from "@/schemas/leads";
 import { IconsSpinner } from "@/types/dashboard";
+import { LeadTypeForm } from "@/types/leads";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 import { MaskedInput } from "./InputMask";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Toaster } from "./ui/sonner";
 import { Textarea } from "./ui/textarea";
-
-const clientSchema = z.object({
-  name: z.string().min(1),
-  email: z.string().email().min(1),
-  phone: z
-    .string()
-    .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/)
-    .min(1),
-  is_pf: z.string().min(1),
-  demand: z.string().min(1),
-  interest_plan: z.string().min(1),
-  is_new_lead: z.string().min(1),
-});
-
-export type ClientSchema = z.infer<typeof clientSchema>;
 
 const getIsNewLead = (is_new_lead: string) => {
   if (is_new_lead === "new") {
@@ -57,11 +45,11 @@ const Forms = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ClientSchema>({
-    resolver: zodResolver(clientSchema),
+  } = useForm<AddLeadFormPublicSchemaType>({
+    resolver: zodResolver(addLeadFormPublicSchema),
   });
 
-  const getObjData = (data: ClientSchema): Lead => {
+  const getObjData = (data: AddLeadFormPublicSchemaType): LeadTypeForm => {
     const objData = {
       name: data.name,
       email: data.email,
@@ -77,9 +65,9 @@ const Forms = () => {
   };
 
   const { mutateAsync: createLead } = useMutation<
-    Lead & { status: number },
+    LeadTypeForm & { status: number },
     Error,
-    Lead
+    LeadTypeForm
   >({
     mutationKey: ["users"],
     mutationFn: async (data) => {
@@ -100,7 +88,7 @@ const Forms = () => {
     },
   });
 
-  const handleClient = async (data: ClientSchema) => {
+  const handleClient = async (data: AddLeadFormPublicSchemaType) => {
     setIsPending(true);
 
     reset();

@@ -33,6 +33,18 @@ export interface ServicesByUsersProps {
     value: number;
 }
 
+export interface LeadTypeForm {
+    id?: number;
+    name: string;
+    email: string;
+    phone: string;
+    is_pf: boolean;
+    demand: string;
+    interest_plan: string;
+    is_new_lead: boolean;
+    status: string;
+}
+
 export interface LeadType {
     id: number;
     name: string;
@@ -42,7 +54,7 @@ export interface LeadType {
     status: string;
     demand: string;
     interest_plan: string;
-    is_pf: string;
+    is_pf: boolean;
     creator_id: number | null;
     createdAt: Date;
 }
