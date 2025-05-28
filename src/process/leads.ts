@@ -61,8 +61,6 @@ export const updateLead = async (body: LeadTypeForm, id: number) => {
 export const deleteLead = async (id: number) => {
     const { data, status } = await api.delete(`/leads/${id}`)
 
-    console.log(data, status);
-
     return {
         ...data,
         status

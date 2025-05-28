@@ -114,7 +114,6 @@ const Table = () => {
 
         queryClient.invalidateQueries({ queryKey: ["users", currentPage] });
       } catch (error) {
-        console.log(error);
         toast.error("Erro ao remover cliente", {
           style: { backgroundColor: "#EE1B22", color: "white" },
           position: "bottom-left",
