@@ -10,45 +10,57 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { services } from "@/data/services";
-import { createLead } from "@/process/leads";
-import { Lead } from "@/types/clientType";
+import { createLead, updateLead } from "@/process/leads";
+import { FormLeadSchemaType } from "@/schemas/leads";
+import { LeadTypeForm } from "@/types/leads";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 
 interface AddClientModalProps {
   open: boolean;
   onClose: () => void;
   onSave: (data: any) => void;
+  isEdit?: boolean;
+  lead?: LeadTypeForm;
 }
 
-const initialForm = {
-  name: "",
-  email: "",
-  phone: "",
-  is_pf: false,
-  demand: "",
-  interest_plan: services[0].title,
-  status: "NOT_STARTED",
-  is_new_lead: false,
-};
-
-export const AddClientModal: React.FC<AddClientModalProps> = ({
+const AddClientModal: React.FC<AddClientModalProps> = ({
   open,
   onClose,
   onSave,
+  isEdit,
+  lead,
 }) => {
   const queryClient = useQueryClient();
-  const [form, setForm] = useState(initialForm);
+
+  const initialForm = useMemo(() => {
+    return {
+      name: lead?.name || "",
+      email: lead?.email || "",
+      phone: lead?.phone || "",
+      is_pf: lead?.is_pf || false,
+      demand: lead?.demand || "",
+      interest_plan: lead?.interest_plan || services[0].title,
+      status: lead?.status || "NOT_STARTED",
+      is_new_lead: lead?.is_new_lead || false,
+    };
+  }, [lead]);
+
+  const [form, setForm] = useState<FormLeadSchemaType>(initialForm);
+
+  useEffect(() => {
+    setForm(initialForm);
+  }, [initialForm]);
 
   const { mutateAsync: createLeadMutation, isPending } = useMutation<
-    Lead & { status: number },
+    LeadTypeForm & { status: number },
     Error,
-    Lead
+    LeadTypeForm
   >({
     mutationKey: ["users", "createLead"],
-    mutationFn: async (data: Lead) => {
+    mutationFn: async (data: LeadTypeForm) => {
       const response = await createLead(data);
       return response;
     },
@@ -72,6 +84,35 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
     },
   });
 
+  const { mutateAsync: updateLeadMutation, isPending: isUpdating } =
+    useMutation<LeadTypeForm & { status: number }, Error, LeadTypeForm>({
+      mutationKey: ["users", "updateLead"],
+      mutationFn: async (data: LeadTypeForm) => {
+        const response = await updateLead(data, Number(lead?.id));
+        return response;
+      },
+      onSuccess: async () => {
+        toast.success("Cliente atualizado com sucesso", {
+          style: { backgroundColor: "#008000", color: "white" },
+          position: "bottom-left",
+          duration: 2500,
+        });
+
+        queryClient.refetchQueries({
+          queryKey: ["accurate", "users", "progress", "peopleTypeManager"],
+        });
+
+        window.location.reload();
+      },
+      onError: () => {
+        toast.error("Erro na atualização do cliente", {
+          style: { backgroundColor: "#EE1B22", color: "white" },
+          position: "bottom-left",
+          duration: 2500,
+        });
+      },
+    });
+
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -81,7 +122,11 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
   };
 
   const handleSave = useCallback(async () => {
-    await createLeadMutation(form);
+    if (isEdit) {
+      await updateLeadMutation(form);
+    } else {
+      await createLeadMutation(form);
+    }
     onClose();
     // setForm(initialForm);
   }, [form, onSave, onClose]);
@@ -94,7 +139,7 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
       >
         <SheetHeader>
           <SheetTitle className="text-WhiteDefault text-2xl">
-            Adicionar Cliente
+            {isEdit ? "Editar Cliente" : "Adicionar Cliente"}
           </SheetTitle>
         </SheetHeader>
         <div className="space-y-3 mt-6">
@@ -194,7 +239,8 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
               !form.email ||
               !form.phone ||
               !form.demand ||
-              isPending
+              isPending ||
+              isUpdating
             }
             className="bg-primary-500 text-white"
           >
@@ -209,3 +255,5 @@ export const AddClientModal: React.FC<AddClientModalProps> = ({
     </Sheet>
   );
 };
+
+export default AddClientModal;

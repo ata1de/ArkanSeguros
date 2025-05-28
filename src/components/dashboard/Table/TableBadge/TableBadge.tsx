@@ -12,7 +12,7 @@ const statusStyles = {
   Fulfilled: "bg-green-100 text-green-800 border border-green-300",
 };
 
-export const Badge: React.FC<BadgeProps> = ({ status, children }) => {
+const TableBadge: React.FC<BadgeProps> = ({ status, children }) => {
   return (
     <span
       className={`px-3 py-1 rounded-full text-xs font-semibold inline-block ${statusStyles[status]}`}
@@ -21,3 +21,5 @@ export const Badge: React.FC<BadgeProps> = ({ status, children }) => {
     </span>
   );
 };
+
+export default TableBadge;

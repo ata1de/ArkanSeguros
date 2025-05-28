@@ -1,6 +1,6 @@
 "use client";
 import SectionCardDashboard from "@/components/dashboard/SectionCardDashboard";
-import { DataTableDemo } from "@/components/dashboard/Table/DataTableDemo";
+import { Table } from "@/components/dashboard/Table";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
@@ -123,7 +123,7 @@ const AdminPage = () => {
           <TabsContent value="users">
             <div className="flex flex-col gap-3 w-full p-5">
               <h1 className="text-3xl font-semibold">Clientes</h1>
-              <DataTableDemo />
+              <Table />
             </div>
           </TabsContent>
         </Tabs>
