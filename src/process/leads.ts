@@ -1,4 +1,4 @@
-import { Lead } from "@/types/clientType";
+import { LeadTypeForm } from "@/types/leads";
 import api from "./api";
 
 export const getPeopleType = async () => {
@@ -49,7 +49,27 @@ export const updateLeadStatus = async (status: string, id: number) => {
     })
 }
 
-export const createLead = async (body: Lead): Promise<Lead & {
+export const updateLead = async (body: LeadTypeForm, id: number) => {
+    const { data, status } = await api.put(`/leads/${id}`, body)
+
+    return {
+        ...data,
+        status
+    }
+}
+
+export const deleteLead = async (id: number) => {
+    const { data, status } = await api.delete(`/leads/${id}`)
+
+    console.log(data, status);
+
+    return {
+        ...data,
+        status
+    }
+}
+
+export const createLead = async (body: LeadTypeForm): Promise<LeadTypeForm & {
     status: number
 }> => {
     const { data, status } = await api.post('/leads', body)
@@ -60,7 +80,7 @@ export const createLead = async (body: Lead): Promise<Lead & {
     }
 }
 
-export const addFormLead = async (body: Lead): Promise<Lead & {
+export const addFormLead = async (body: LeadTypeForm): Promise<LeadTypeForm & {
     status: number
 }> => {
     const { data, status } = await api.post('/leads/form', body)

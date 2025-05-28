@@ -8,7 +8,7 @@ interface DashboardCardProps {
   amount: number;
   description: string;
   statsIcon: LucideIcon;
-  isProgress: boolean; // Adicionando a propriedade isProgress
+  isProgress: boolean;
 }
 
 const DashboardCardClients: React.FC<DashboardCardProps> = ({
@@ -32,7 +32,6 @@ const DashboardCardClients: React.FC<DashboardCardProps> = ({
       <h2 className="text-2xl font-semibold">{amount?.toFixed(2) || 0}%</h2>
 
       <div className="flex flex-col gap-1">
-        {/* Condição para renderização baseada em isProgress */}
         {isProgress ? (
           <div className="flex items-center gap-2 text-xs text-gray-400">
             <StatsIcon className={`h-4 w-4 text-Yellow`} />

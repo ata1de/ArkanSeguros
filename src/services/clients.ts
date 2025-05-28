@@ -1,9 +1,8 @@
 import { db } from "@/lib/firebase";
-import { Lead } from "@/types/clientType";
 import { PeopleTypeFunction } from "@/utils/PeopleTypeFunction";
 import { isClientFunction } from "@/utils/isClientFunction";
 
-import { LeadType } from "@/types/leads";
+import { LeadType, LeadTypeForm } from "@/types/leads";
 import { accuracyStatus } from "@/utils/accuracyStatus";
 import { progressClients } from "@/utils/progressClients";
 import dayjs from 'dayjs';
@@ -17,7 +16,7 @@ export interface ClientDataTableType {
 }
 
 
-export async function createClient(data: Lead) {
+export async function createClient(data: LeadTypeForm) {
     const clientRef = collection(db, "clients");
 
     try {
