@@ -6,7 +6,8 @@ export interface Services {
     titleHero: string;
     subtitleHero: string;
     url_bg: string;
-    icon: string;
+    icon: string | null;
+    svgIcon?: string;
     description: string;
 }
 
@@ -89,14 +90,15 @@ export const services = [
             `
     },
     {
-        name: "certificados-digitais",
-        title: "Certificados Digitais",
-        titleHero: "Segurança digital",
-        subtitleHero: "Conte conosco para proteger suas transações online.",
-        url_bg: "/services/certificados-digitais-bg.png",
-        icon: "/icons/icon_certificate.svg",
+        name: "consultoria-empresarial",
+        title: "Consultoria Empresarial",
+        titleHero: "Proteção para o seu negócio",
+        subtitleHero: "Conte conosco para proteger sua empresa.",
+        url_bg: "/services/consultoria-empresarial.jpg",
+        icon: null,
+        svgIcon: "Handshake",
         description: `
-        Garanta a segurança das suas transações eletrônicas com nossos certificados digitais, proporcionando autenticação e criptografia de dados de alta confiabilidade. Com um certificado digital, você protege suas informações contra acessos não autorizados, garantindo um ambiente digital mais seguro para suas operações diárias.\n\n Nossos certificados digitais são ideais para empresas e indivíduos que buscam segurança e confiança em suas transações online. Oferecemos uma gama de soluções para autenticação, assinatura digital e criptografia, atendendo às necessidades específicas de cada cliente. Com nossos certificados, você pode realizar transações eletrônicas com total tranquilidade, sabendo que seus dados estão protegidos contra fraudes e violações de privacidade.\n\n As autoridades certificadoras <strong>Serasa Experian, Certisign, Soluti, Valid e Certificados Digitais Digitalsign</strong> são algumas das principais parceiras, oferecendo soluções robustas e confiáveis para garantir a segurança das suas transações eletrônicas.\n\n Não comprometa a segurança das suas operações online. Invista em certificados digitais e tenha a certeza de que suas transações estão protegidas contra ameaças cibernéticas. Com nossos certificados, você garante a integridade e a confidencialidade das suas informações, proporcionando um ambiente digital seguro para você e seus clientes.\n\n Entre em contato conosco agora mesmo e descubra como nossos certificados digitais podem proteger suas transações eletrônicas. Não espere mais para garantir a segurança e a confiança que você precisa em suas operações online.
-        `
+            A consultoria empresarial com foco nas áreas comercial e de licitações tem como objetivo impulsionar o crescimento sustentável das empresas por meio da estruturação de processos de vendas e da atuação estratégica em compras públicas.\n\nNa área comercial, atuamos no mapeamento do funil de vendas, definição de metas, treinamento de equipes, criação de estratégias de prospecção e fidelização de clientes, com foco em resultados concretos e aumento de faturamento.\n\nNa área de licitações, oferecemos assessoria completa para participação em processos licitatórios: desde a análise de editais, preparação da documentação, montagem de propostas competitivas, até o acompanhamento dos certames e recursos administrativos, garantindo segurança jurídica e aumento das chances de êxito.\n\nNosso trabalho é personalizado, adaptado às necessidades de cada cliente, com foco em otimizar resultados, reduzir riscos e gerar oportunidades de crescimento no setor público e privado.
+            `
     }
 ];

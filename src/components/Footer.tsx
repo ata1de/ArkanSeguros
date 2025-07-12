@@ -17,13 +17,13 @@ const Footer = () => {
                 <div>
                     <p className='font-bold text-center md:text-right text-WhiteDefault'>Redes Sociais</p>
                     <Link href='https://www.instagram.com/arkanseguros/' target='_blank' className='no-underline'>
-                        <p className='text-LightGray text-center md:text-right'>Instagram</p>
+                        <p className='text-LightGray text-center md:text-right hover:underline'>Instagram</p>
                     </Link>
                     <Link href="https://wa.me/+5581986884201?text=Ol%C3%A1%2C+venha+nos+conhecer%2C+n%C3%A3o+hesite+em+mandar+mensagem%21%21" target='_blank' className='no-underline'>
-                        <p className='text-LightGray text-center md:text-right'>Whatsaap</p>
+                        <p className='text-LightGray text-center md:text-right hover:underline'>Whatsaap</p>
                     </Link>
                     <Link href='https://www.facebook.com/arkanseguro/' target='_blank' className='no-underline'>
-                        <p className='text-LightGray text-center md:text-right'>Facebook</p>
+                        <p className='text-LightGray text-center md:text-right hover:underline'>Facebook</p>
                     </Link>    
                 </div>
             </div>

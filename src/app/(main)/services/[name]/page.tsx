@@ -64,7 +64,7 @@ const DetailsService = () => {
             <p className='text-4xl font-bold text-Yellow'>Perguntas mais frequentes</p>
             <AccordionService name={accordionQuestions?.name!} questions={accordionQuestions?.questions!} image='' />
           </div>
-        </div>
+      </div>
       </div>
 
     </div>

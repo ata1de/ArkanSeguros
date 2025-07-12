@@ -43,7 +43,7 @@ export default function Home() {
 
             <div  className=" flex flex-wrap lg:grid lg:grid-cols-4 justify-center items-center gap-5 ">
               {services.map((service) => (
-                <ServiceCard key={service.name} name={service.name} icon={service.icon} title={service.title} />
+                <ServiceCard key={service.name} name={service.name} icon={service.icon} svgIcon={service.svgIcon} title={service.title} />
               ))}
             </div>
         </div>

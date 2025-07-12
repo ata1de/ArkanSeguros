@@ -139,21 +139,21 @@ export const questionsServices: ServiceQuestions[] = [
         ]
     },
     {
-        name: "certificados-digitais",
-        image: "/questionsServices/certificado-digital.jpg",
-        questions: [
+        name: "consultoria-empresarial",
+        image: "/services/consultoria-empresarial.jpg",
+        "questions": [
             {
-                question: "O que são Certificados Digitais?",
-                answer: "Certificados Digitais garantem a segurança das suas transações eletrônicas através de autenticação e criptografia de dados."
+                "question": "Quais resultados minha empresa pode esperar ao contratar a consultoria empresarial?",
+                "answer": "Aumento no faturamento, equipe mais preparada e processos comerciais mais eficientes."
             },
             {
-                question: "Quais são os benefícios?",
-                answer: "Oferecemos um ambiente digital mais seguro, protegendo suas informações contra acessos não autorizados."
+                "question": "Como a consultoria auxilia na participação em licitações públicas?",
+                "answer": "Cuidamos de todo o processo: análise de editais, montagem da documentação e propostas, além do acompanhamento dos certames."
             },
             {
-                question: "Como adquirir?",
-                answer: "Nossa equipe pode orientar você no processo de aquisição de certificados digitais, adequados para empresas e indivíduos."
+                "question": "Qual é a metodologia de trabalho e o prazo para ver os primeiros resultados?",
+                "answer": "Seguimos três fases: diagnóstico, planejamento e execução. Os primeiros resultados surgem em 60 a 90 dias."
             }
         ]
-    }
+}
 ];
