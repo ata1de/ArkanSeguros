@@ -34,7 +34,12 @@ export default function Home() {
 
           <div  className='flex justify-center items-center lg:items-start flex-col pl-5 w-[700px]'>
             <p className='text-sm font-bold pb-8'>A <span className='text-Yellow '>Arkan Seguros</span> é uma empresa verdadeiramente moderna, impulsionada por uma equipe altamente motivada de profissionais excepcionais e experientes.</p>
-            <p className='text-sm text-DarkBlue text-left '>A Arkan Seguros, com mais de 8 anos de experiência no mercado, tem como missão fundamental ajudar pessoas e empresas a encontrarem a melhor opção para cuidar da saúde, odontologia e seguros em geral. Com uma equipe altamente capacitada e dedicada, nos esforçamos para proporcionar soluções personalizadas e eficazes que atendam às necessidades específicas de cada cliente. Nosso objetivo é atender da melhor forma possível, oferecendo produtos de alta qualidade e um atendimento diferenciado. Acreditamos na construção de um relacionamento duradouro e de confiança com nossos clientes, baseado em transparência, responsabilidade e compromisso. Estamos sempre prontos para oferecer o suporte necessário, garantindo a proteção e a tranquilidade que você merece.</p>
+            <p className='text-sm text-DarkBlue text-left '>A Arkan Consultoria é especialista em Gestão Comercial para licitações públicas, atuando há mais de 9 anos na geração de oportunidades e no crescimento de empresas que desejam atuar no mercado governamental. Com experiência, conhecimento técnico e acompanhamento estratégico, ajudamos nossos clientes a participarem de processos licitatórios com mais segurança, competitividade e chances reais de sucesso.
+
+            Nossa atuação abrange todas as etapas das licitações, desde a análise de editais e organização documental até a elaboração de propostas e suporte especializado durante os processos. Mais do que assessorar empresas em licitações, trabalhamos para estruturar estratégias comerciais que impulsionam resultados e fortalecem a atuação no setor público.
+
+            Comprometidos com a excelência, transparência e proximidade, construímos relações de confiança e entregamos soluções que transformam oportunidades em crescimento sustentável para nossos clientes.
+            </p>
           </div>
         </div>
         <div style={styleServices} className="flex flex-col justify-center items-center gap-[28px] mx-6 ">

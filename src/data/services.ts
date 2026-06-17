@@ -89,14 +89,14 @@ export const services = [
             `
     },
     {
-        name: "certificados-digitais",
-        title: "Certificados Digitais",
-        titleHero: "Segurança digital",
-        subtitleHero: "Conte conosco para proteger suas transações online.",
-        url_bg: "/services/certificados-digitais-bg.png",
-        icon: "/icons/icon_certificate.svg",
+        name: "consultoria",
+        title: "Consultoria",
+        titleHero: "Gestão Comercial em Licitações",
+        subtitleHero: "Conte conosco para fortalecer sua atuação no mercado público.",
+        url_bg: "/services/consultoria-bg.jpeg",
+        icon: "/icons/icon_briefcase.svg",
         description: `
-        Garanta a segurança das suas transações eletrônicas com nossos certificados digitais, proporcionando autenticação e criptografia de dados de alta confiabilidade. Com um certificado digital, você protege suas informações contra acessos não autorizados, garantindo um ambiente digital mais seguro para suas operações diárias.\n\n Nossos certificados digitais são ideais para empresas e indivíduos que buscam segurança e confiança em suas transações online. Oferecemos uma gama de soluções para autenticação, assinatura digital e criptografia, atendendo às necessidades específicas de cada cliente. Com nossos certificados, você pode realizar transações eletrônicas com total tranquilidade, sabendo que seus dados estão protegidos contra fraudes e violações de privacidade.\n\n As autoridades certificadoras <strong>Serasa Experian, Certisign, Soluti, Valid e Certificados Digitais Digitalsign</strong> são algumas das principais parceiras, oferecendo soluções robustas e confiáveis para garantir a segurança das suas transações eletrônicas.\n\n Não comprometa a segurança das suas operações online. Invista em certificados digitais e tenha a certeza de que suas transações estão protegidas contra ameaças cibernéticas. Com nossos certificados, você garante a integridade e a confidencialidade das suas informações, proporcionando um ambiente digital seguro para você e seus clientes.\n\n Entre em contato conosco agora mesmo e descubra como nossos certificados digitais podem proteger suas transações eletrônicas. Não espere mais para garantir a segurança e a confiança que você precisa em suas operações online.
+        A Arkan Consultoria especializada em Gestão Comercial com foco em licitações públicas. Ao longo de sua trajetória, de <strong>9 anos de atuação no mercado</strong>, consolidou expertise no apoio a empresas que desejam ingressar ou se fortalecer no mercado governamental, oferecendo soluções estratégicas que ampliam a competitividade e aumentam as chances de sucesso em processos licitatórios.\n\n Nossa consultoria atua de forma integrada, desde a <strong>análise de viabilidade e enquadramento da empresa nos editais</strong>, até o acompanhamento completo das etapas do processo licitatório. Isso inclui organização documental, elaboração de propostas, interpretação de editais, estratégias de precificação e suporte durante pregões eletrônicos e presenciais.\n\n Com uma abordagem orientada a resultados, contribuímos também para a <strong>estruturação da área comercial das empresas</strong>, promovendo melhorias nos processos internos, capacitação de equipes e definição de estratégias comerciais alinhadas ao mercado público. Dessa forma, seus clientes não apenas participam de licitações, mas passam a atuar de forma profissional e competitiva nesse segmento.\n\n O diferencial da Arkan está na combinação entre <strong>conhecimento técnico, experiência prática e acompanhamento próximo</strong>, proporcionando segurança e assertividade em um ambiente altamente regulado e competitivo como o das licitações públicas.\n\n Entre em contato conosco e descubra como podemos transformar sua participação em licitações públicas em resultados concretos para o seu negócio.
         `
     }
 ];

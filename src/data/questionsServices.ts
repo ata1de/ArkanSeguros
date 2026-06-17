@@ -139,20 +139,20 @@ export const questionsServices: ServiceQuestions[] = [
         ]
     },
     {
-        name: "certificados-digitais",
-        image: "/questionsServices/certificado-digital.jpg",
+        name: "consultoria",
+        image: "/services/consultoria-bg.jpeg",
         questions: [
             {
-                question: "O que são Certificados Digitais?",
-                answer: "Certificados Digitais garantem a segurança das suas transações eletrônicas através de autenticação e criptografia de dados."
+                question: "O que é uma licitação pública?",
+                answer: "A licitação pública é um processo pelo qual órgãos governamentais selecionam fornecedores de produtos ou serviços, seguindo critérios estabelecidos em lei para garantir a melhor proposta ao poder público."
             },
             {
-                question: "Quais são os benefícios?",
-                answer: "Oferecemos um ambiente digital mais seguro, protegendo suas informações contra acessos não autorizados."
+                question: "Minha empresa pode participar de licitações?",
+                answer: "Sim, empresas de qualquer porte podem participar de licitações. Auxiliamos na análise de viabilidade, organização documental e no enquadramento da sua empresa nos editais."
             },
             {
-                question: "Como adquirir?",
-                answer: "Nossa equipe pode orientar você no processo de aquisição de certificados digitais, adequados para empresas e indivíduos."
+                question: "Como funciona o acompanhamento da consultoria?",
+                answer: "Oferecemos suporte completo em todas as etapas: análise de editais, elaboração de propostas, estratégias de precificação e acompanhamento durante pregões eletrônicos e presenciais."
             }
         ]
     }
